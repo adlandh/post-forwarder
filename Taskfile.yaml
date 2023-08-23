@@ -1,0 +1,23 @@
+version: "3.0"
+tasks:
+    api:
+        description: generating http handlers
+        cmds:
+            - oapi-codegen -old-config-style -generate types,server -o "internal/driver/openapi_gen.go" -package "driver" "api/port-forwarder.yaml"
+    mocks:
+        description: generating mocks
+        dir: "internal/post-forwarder/domain"
+        cmds:
+            - mockery --name ApplicationInterface
+            - mockery --name MessageDestination
+    test:
+        description: running tests
+        dir: "internal/"
+        cmds:
+            - go test -cover -v ./...
+    decorate:
+        description: decorate interfaces
+        dir: "internal/post-forwarder/domain"
+        cmds:
+            - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/ApplicationInterfaceWithZap.go
+            - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/MessageDestinationWithZap.go

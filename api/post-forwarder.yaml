@@ -1,0 +1,41 @@
+openapi: 3.0.3
+info:
+  title: Port Forwarder webhook
+  description: Port Forwarder webhook
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:4321'
+paths:
+  /:
+    get:
+      operationId: healthCheck
+      description: health check endpoint
+      responses:
+        '200':
+          description: ok
+          content:
+            text/plain:
+              schema:
+                type: string
+                default: Ok
+  /api/{token}/{service}:
+    post:
+      operationId: webhook
+      description: POST webhook endpoint
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: api token
+        - in: path
+          name: service
+          required: true
+          schema:
+            type: string
+          description: name of service
+      responses:
+        '200':
+          description: ok
+

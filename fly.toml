@@ -1,0 +1,27 @@
+# fly.toml app configuration file generated for post-forwarder on 2023-08-23T10:35:22+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "post-forwarder"
+primary_region = "ams"
+
+[http_service]
+  internal_port = 4321
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "60s"
+  method = "GET"
+  timeout = "5s"
+  path = "/"
+[build]
+  dockerfile = "docker/Dockerfile"
+[metrics]
+  port = 4321
+  path = "/metrics"
+
