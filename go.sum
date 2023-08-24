@@ -1,6 +1,8 @@
 github.com/RaveNoX/go-jsoncommentstrip v1.0.0/go.mod h1:78ihd09MekBnJnxpICcwzCMzGrKSKYe4AqU6PDYYpjk=
 github.com/adlandh/echo-sentry-middleware v0.1.0 h1:dQC2nwE+T9Yp6u6CTp/uQ4OO/5N6HfwcmLudomPOxcg=
 github.com/adlandh/echo-sentry-middleware v0.1.0/go.mod h1:28zWsf6mBedlQQPrJ2+F+itEJuSKLyMYTlOAOAl87OE=
+github.com/adlandh/echo-sentry-middleware v0.2.0 h1:2drTuUICvCMsE3mFMkjoaotDQL2gQv8KHmCq6hA6BLE=
+github.com/adlandh/echo-sentry-middleware v0.2.0/go.mod h1:2ghgK7Tt29IWWV/j5X2TXRXcz1foP9XNjsZRYxf1o/Y=
 github.com/adlandh/echo-zap-middleware v0.1.0 h1:f8x0aoQ+Pgds9L1nUXMCOM9A+Q4SEwq0iFwiJQxwXh0=
 github.com/adlandh/echo-zap-middleware v0.1.0/go.mod h1:KwP0x1dIbICcOEA57049pGS5pSFceOSVDw8ll3BBMck=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
