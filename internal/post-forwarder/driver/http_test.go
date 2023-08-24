@@ -63,7 +63,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	service := gofakeit.Word()
 	request := gofakeit.SentenceSimple()
 	s.Run("happy case", func() {
-		s.app.On("ProcessRequest", mock.Anything, service, []byte(request)).Return(nil).Once()
+		s.app.On("ProcessRequest", mock.Anything, service, request).Return(nil).Once()
 		s.tester.POST("/api/"+s.token+"/"+service).WithHeader(echo.HeaderContentType, echo.MIMEApplicationJSON).
 			WithText(request).
 			Expect().
@@ -79,7 +79,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ProcessRequest", mock.Anything, service, []byte(request)).Return(errors.New("fake error")).Once()
+		s.app.On("ProcessRequest", mock.Anything, service, request).Return(errors.New("fake error")).Once()
 		s.tester.POST("/api/"+s.token+"/"+service).WithHeader(echo.HeaderContentType, echo.MIMEApplicationJSON).
 			WithText(request).
 			Expect().

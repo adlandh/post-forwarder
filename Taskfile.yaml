@@ -21,3 +21,16 @@ tasks:
         cmds:
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/ApplicationInterfaceWithZap.go
             - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/MessageDestinationWithZap.go
+    deploy:
+        description: Deploy to gcp
+        cmds:
+            - gcloud app deploy --quiet
+    logs:
+        description: Show logs
+        cmds:
+            - gcloud app logs tail
+    inf:
+        description: Pulumi Up
+        dir: "inf"
+        cmds:
+            - pulumi up -y

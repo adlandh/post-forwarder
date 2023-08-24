@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 
+	"github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/wrappers"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driven"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driver"
-	"github.com/labstack/echo-contrib/echoprometheus"
-
-	"github.com/adlandh/echo-zap-middleware"
+	"github.com/getsentry/sentry-go"
+	sentryecho "github.com/getsentry/sentry-go/echo"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	_ "go.uber.org/automaxprocs"
@@ -20,6 +20,20 @@ import (
 	"go.uber.org/zap"
 )
 
+func NewSentry(cfg *config.Config) error {
+	if cfg.SentryDSN == "" {
+		return nil
+	}
+	return sentry.Init(sentry.ClientOptions{
+		Dsn: cfg.SentryDSN,
+		// Set TracesSampleRate to 1.0 to capture 100%
+		// of transactions for performance monitoring.
+		// We recommend adjusting this value in production,
+		TracesSampleRate:   0.1,
+		ProfilesSampleRate: 0.1,
+	})
+}
+
 func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.Secure())
@@ -27,11 +41,13 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.Use(middleware.BodyLimit("1M"))
 	e.Use(echo_zap_middleware.Middleware(log))
 	e.Use(middleware.RequestID())
-	e.Use(echoprometheus.NewMiddleware("app"))
+	if cfg.SentryDSN != "" {
+		e.Use(sentryecho.New(sentryecho.Options{}))
+	}
+
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) (err error) {
 			driver.RegisterHandlers(e, server)
-			e.GET("/metrics", echoprometheus.NewHandler())
 			go func() {
 				err = e.Start(":" + cfg.Port)
 			}()
@@ -77,6 +93,7 @@ func CreateService() fx.Option {
 			),
 		),
 		fx.Invoke(
+			NewSentry,
 			NewEcho,
 		),
 	)

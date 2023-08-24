@@ -3,10 +3,11 @@ package config
 import "github.com/caarlos0/env/v9"
 
 type Config struct {
-	Port      string `env:"PORT" envDefault:"4321"`
+	Port      string `env:"PORT" envDefault:"8080"`
 	AuthToken string `env:"AUTH_TOKEN,notEmpty"`
 	BotToken  string `env:"BOT_TOKEN,notEmpty"`
 	BotChatID int64  `env:"BOT_CHAT_ID,notEmpty"`
+	SentryDSN string `env:"SENTRY_DSN"`
 }
 
 func NewConfig() (*Config, error) {

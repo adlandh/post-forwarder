@@ -1,0 +1,6 @@
+*
+!/internal
+!/go.mod
+!/go.sum
+!/app.yaml
+!/secrets.yaml
