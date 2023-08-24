@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"time"
 
+	"github.com/adlandh/echo-sentry-middleware"
 	"github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
@@ -20,29 +22,45 @@ import (
 	"go.uber.org/zap"
 )
 
-func NewSentry(cfg *config.Config) error {
+func NewSentry(lc fx.Lifecycle, cfg *config.Config, log *zap.Logger) error {
 	if cfg.SentryDSN == "" {
 		return nil
 	}
-	return sentry.Init(sentry.ClientOptions{
-		Dsn: cfg.SentryDSN,
-		// Set TracesSampleRate to 1.0 to capture 100%
-		// of transactions for performance monitoring.
-		// We recommend adjusting this value in production,
-		TracesSampleRate:   0.1,
-		ProfilesSampleRate: 0.1,
+
+	lc.Append(fx.Hook{
+		OnStart: func(_ context.Context) error {
+			return sentry.Init(sentry.ClientOptions{
+				Dsn:                cfg.SentryDSN,
+				EnableTracing:      true,
+				TracesSampleRate:   cfg.SentryTracesSampleRate,
+				ProfilesSampleRate: cfg.SentryProfilesSampleRate,
+			})
+		},
+		OnStop: func(ctx context.Context) error {
+			sentry.Flush(2 * time.Second)
+
+			return nil
+		},
 	})
+
+	return nil
 }
 
 func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
+	e.Use(echo_zap_middleware.Middleware(log))
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
-	e.Use(echo_zap_middleware.Middleware(log))
 	e.Use(middleware.RequestID())
 	if cfg.SentryDSN != "" {
-		e.Use(sentryecho.New(sentryecho.Options{}))
+		e.Use(sentryecho.New(sentryecho.Options{
+			Repanic: true,
+		}))
+		e.Use(echo_sentry_middleware.MiddlewareWithConfig(echo_sentry_middleware.SentryConfig{
+			AreHeadersDump: true,
+			IsBodyDump:     true,
+		}))
 	}
 
 	lc.Append(fx.Hook{
@@ -59,6 +77,33 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	})
 
 	return e
+}
+
+func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface, log *zap.Logger) driver.ServerInterface {
+	srv = driver.NewServerInterfaceWithZap(srv, log)
+	if cfg.SentryDSN != "" {
+		srv = driver.NewServerInterfaceWithSentry(srv, "handlers")
+	}
+
+	return srv
+}
+
+func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface, log *zap.Logger) domain.ApplicationInterface {
+	app = wrappers.NewApplicationInterfaceWithZap(app, log)
+	if cfg.SentryDSN != "" {
+		app = wrappers.NewApplicationInterfaceWithSentry(app, "application")
+	}
+
+	return app
+}
+
+func DecorateMessageDestination(cfg *config.Config, md domain.MessageDestination, log *zap.Logger) domain.MessageDestination {
+	md = wrappers.NewMessageDestinationWithZap(md, log)
+	if cfg.SentryDSN != "" {
+		md = wrappers.NewMessageDestinationWithSentry(md, "bot")
+	}
+
+	return md
 }
 
 func CreateService() fx.Option {
@@ -83,14 +128,9 @@ func CreateService() fx.Option {
 			),
 		),
 		fx.Decorate(
-			fx.Annotate(
-				wrappers.NewApplicationInterfaceWithZap,
-				fx.As(new(domain.ApplicationInterface)),
-			),
-			fx.Annotate(
-				wrappers.NewMessageDestinationWithZap,
-				fx.As(new(domain.MessageDestination)),
-			),
+			DecorateServerInterface,
+			DecorateApplicationInterface,
+			DecorateMessageDestination,
 		),
 		fx.Invoke(
 			NewSentry,
