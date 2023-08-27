@@ -40,22 +40,33 @@ tasks:
         description: Deploy to gcp
         cmds:
             - gcloud app deploy --quiet
+    namespace:
+        description: create new namespace in kubernetes
+        cmds:
+            - kubectl apply -f docker/namespace.yaml
     secrets:
         description: create  kubernetes secrets
+        deps:
+            - namespace
         cmds:
-            - kubectl create secret generic post-forwarder --from-env-file=local-secrets.env
+            - kubectl create secret generic post-forwarder --from-env-file=local-secrets.env --namespace=post-forwarder
     run:
         description: run app locally in kubernetes
+        deps:
+            - namespace
         cmds:
             - skaffold run --tail
     dev:
         description: run app locally in kubernetes with auto build when code is changed
+        deps:
+            - namespace
         cmds:
             - skaffold dev --tail
     stop:
         description: stop app running locally
         cmds:
             - kubectl delete -f docker/deployment.yaml
+            - kubectl delete -f docker/namespace.yaml
     logs:
         description: Show logs
         cmds:
