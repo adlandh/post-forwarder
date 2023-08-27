@@ -5,14 +5,8 @@ metadata:
 build:
   artifacts:
     - image: post-forwarder
-      context: .
-      docker:
-        dockerfile: docker/Dockerfile
-        cacheFrom:
-          - post-forwarder
-  local:
-    push: false
-    useDockerCLI: true
+      ko:
+        main: ./internal/post-forwarder
 manifests:
   rawYaml:
     - docker/deployment.yaml

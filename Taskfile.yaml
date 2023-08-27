@@ -1,78 +1,106 @@
 version: "3.0"
 tasks:
     api:
-        description: generating http handlers
+        desc: generating http handlers
+        sources:
+            -  api/post-forwarder.yaml
+        generates:
+            - internal/post-forwarder/driver/openapi_gen.go
         cmds:
-            - oapi-codegen -old-config-style -generate types,server -o "internal/driver/openapi_gen.go" -package "driver" "api/port-forwarder.yaml"
+            - oapi-codegen -old-config-style -generate types,server -o "internal/post-forwarder/driver/openapi_gen.go" -package "driver" "api/post-forwarder.yaml"
     mocks:
-        description: generating mocks
+        desc: generating mocks
+        sources:
+            - interfaces.go
+        generates:
+            - mocks/*.go
         dir: "internal/post-forwarder/domain"
         cmds:
             - mockery --name ApplicationInterface
             - mockery --name MessageDestination
     test:
-        description: running tests
+        desc: running tests
         dir: "internal/"
+        deps:
+            - decorate
+            - mocks
         cmds:
             - go test -cover -v ./...
     lint:
-        description: running linter
+        desc: running linter
         dir: "internal/"
         cmds:
             - golangci-lint run
     decorate-handlers:
-        description: decorate handlers
+        deps:
+            - api
+        desc: decorate handlers
         dir: "internal/post-forwarder/driver"
+        sources:
+            - openapi_gen.go
+        generates:
+            - open_api_zap_gen.go
+            - open_api_sentry_gen.go
         cmds:
             - gowrap gen -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o open_api_zap_gen.go
             - gowrap gen -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go
     decorate:
-        description: decorate interfaces
+        desc: decorate interfaces
         deps:
             - decorate-handlers
         dir: "internal/post-forwarder/domain"
+        sources:
+            - interfaces.go
+        generates:
+            - wrappers/*.go
         cmds:
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/ApplicationInterfaceWithZap.go
             - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/MessageDestinationWithZap.go
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/ApplicationInterfaceWithSentry.go
             - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/MessageDestinationWithSentry.go
     deploy:
-        description: Deploy to gcp
+        desc: Deploy to gcp
         cmds:
             - gcloud app deploy --quiet
     namespace:
-        description: create new namespace in kubernetes
+        desc: create new namespace in kubernetes
         cmds:
             - kubectl apply -f docker/namespace.yaml
     secrets:
-        description: create  kubernetes secrets
+        desc: create  kubernetes secrets
         deps:
             - namespace
         cmds:
             - kubectl create secret generic post-forwarder --from-env-file=local-secrets.env --namespace=post-forwarder
     run:
-        description: run app locally in kubernetes
+        desc: run app locally in kubernetes
         deps:
+            - decorate
             - namespace
         cmds:
             - skaffold run --tail
     dev:
-        description: run app locally in kubernetes with auto build when code is changed
+        desc: run app locally in kubernetes with auto build when code is changed
         deps:
+            - decorate
             - namespace
         cmds:
             - skaffold dev --tail
     stop:
-        description: stop app running locally
+        desc: stop app running locally
         cmds:
             - kubectl delete -f docker/deployment.yaml
             - kubectl delete -f docker/namespace.yaml
     logs:
-        description: Show logs
+        desc: Show logs
         cmds:
             - gcloud app logs tail
     inf:
-        description: Pulumi Up
+        desc: Pulumi Up
         dir: "inf"
         cmds:
             - pulumi up -y
+    registry:
+        cmds:
+            - docker run -d -p 5000:5000 --restart=always --name registry registry:2
+            - skaffold config set default-repo localhost:5000
