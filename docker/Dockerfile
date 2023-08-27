@@ -1,9 +1,9 @@
 FROM golang:1.21 as builder
 
-ENV WORKDIR /go/src
 WORKDIR /go/src
 COPY . .
-RUN cd ${WORKDIR}/internal/post-forwarder && CGO_ENABLED=0 go build -o "/go/bin/pf" -ldflags="-w -s"
+RUN ls
+RUN cd internal/post-forwarder && CGO_ENABLED=0 go build -o "/go/bin/pf" -ldflags="-w -s"
 
 FROM alpine:3.18.2
 RUN adduser -S -D -H -h /app appuser

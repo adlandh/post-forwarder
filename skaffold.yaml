@@ -1,0 +1,18 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: post-forwarder
+build:
+  artifacts:
+    - image: post-forwarder
+      context: .
+      docker:
+        dockerfile: docker/Dockerfile
+        cacheFrom:
+          - post-forwarder
+  local:
+    push: false
+    useDockerCLI: true
+manifests:
+  rawYaml:
+    - docker/deployment.yaml

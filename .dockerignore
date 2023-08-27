@@ -2,5 +2,3 @@
 !/internal
 !/go.mod
 !/go.sum
-!/app.yaml
-!/app-secrets.yaml

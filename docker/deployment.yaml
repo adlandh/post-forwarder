@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-forwarder
+spec:
+  selector:
+    app: post-forwarder
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: post-forwarder
+  labels:
+    app: post-forwarder
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: post-forwarder
+  template:
+    metadata:
+      labels:
+        app: post-forwarder
+    spec:
+      containers:
+      - name: post-forwarder
+        image: post-forwarder
+        envFrom:
+          - secretRef:
+              name: post-forwarder

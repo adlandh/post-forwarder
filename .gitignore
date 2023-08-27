@@ -1,3 +1,4 @@
 /TODO.md
 /inf/Pulumi.prod.yaml
-/secrets.yaml
+/app-secrets.yaml
+/local-secrets.env
