@@ -22,7 +22,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func NewSentry(lc fx.Lifecycle, cfg *config.Config, log *zap.Logger) error {
+func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	if cfg.SentryDSN == "" {
 		return nil
 	}
@@ -48,7 +48,12 @@ func NewSentry(lc fx.Lifecycle, cfg *config.Config, log *zap.Logger) error {
 
 func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
-	e.Use(echo_zap_middleware.Middleware(log))
+	e.Use(echo_zap_middleware.MiddlewareWithConfig(log, echo_zap_middleware.ZapConfig{
+		AreHeadersDump: true,
+		IsBodyDump:     true,
+		LimitHTTPBody:  true,
+		LimitSize:      1024,
+	}))
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
