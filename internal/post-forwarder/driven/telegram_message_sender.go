@@ -9,6 +9,8 @@ import (
 	"github.com/go-telegram/bot"
 )
 
+const MaxMessageLength = 4_096
+
 var _ domain.MessageDestination = (*TelegramMessageSender)(nil)
 
 type TelegramMessageSender struct {
@@ -34,9 +36,14 @@ func NewTelegramMessageSender(cfg *config.Config) (*TelegramMessageSender, error
 }
 
 func (t TelegramMessageSender) Send(ctx context.Context, service, msg string) error {
+	fullMessage := fmt.Sprintf("Message from %s: %s", service, msg)
+	if len(fullMessage) > MaxMessageLength {
+		fullMessage = fullMessage[:MaxMessageLength]
+	}
+
 	_, err := t.bot.SendMessage(ctx, &bot.SendMessageParams{
 		ChatID: t.chatId,
-		Text:   fmt.Sprintf("Message from %s: %s", service, msg),
+		Text:   fullMessage,
 	})
 
 	return err
