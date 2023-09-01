@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/adlandh/echo-sentry-middleware"
@@ -20,7 +21,30 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
+
+func NewLogger(cfg *config.Config) (*zap.Logger, error) {
+	logger, err := zap.NewDevelopment()
+	if err != nil {
+		return nil, err
+	}
+
+	if cfg.SentryDSN == "" {
+		return logger, nil
+	}
+
+	return logger.WithOptions(zap.Hooks(
+		func(entry zapcore.Entry) error {
+			if entry.Level == zapcore.ErrorLevel {
+				defer sentry.Flush(2 * time.Second)
+				sentry.CaptureMessage(fmt.Sprintf("%s, Line No: %d :: %s", entry.Caller.File, entry.Caller.Line, entry.Message))
+			}
+			return nil
+		},
+	)), nil
+
+}
 
 func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	if cfg.SentryDSN == "" {
@@ -117,8 +141,8 @@ func CreateService() fx.Option {
 			return &fxevent.ZapLogger{Logger: log}
 		}),
 		fx.Provide(
-			zap.NewDevelopment,
 			config.NewConfig,
+			NewLogger,
 			fx.Annotate(
 				driven.NewTelegramMessageSender,
 				fx.As(new(domain.MessageDestination)),
