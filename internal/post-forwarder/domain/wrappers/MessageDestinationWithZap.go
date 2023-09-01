@@ -15,8 +15,8 @@ import (
 
 // MessageDestinationWithZap implements domain.MessageDestination that is instrumented with zap logger
 type MessageDestinationWithZap struct {
-	_log  *zap.Logger
 	_base domain.MessageDestination
+	_log  *zap.Logger
 }
 
 // NewMessageDestinationWithZap instruments an implementation of the domain.MessageDestination with simple logging

@@ -17,8 +17,11 @@ type ServerInterface interface {
 	// (GET /)
 	HealthCheck(ctx echo.Context) error
 
+	// (GET /api/{token}/{service})
+	GetWebhook(ctx echo.Context, token string, service string) error
+
 	// (POST /api/{token}/{service})
-	Webhook(ctx echo.Context, token string, service string) error
+	PostWebhook(ctx echo.Context, token string, service string) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
@@ -35,8 +38,8 @@ func (w *ServerInterfaceWrapper) HealthCheck(ctx echo.Context) error {
 	return err
 }
 
-// Webhook converts echo context to params.
-func (w *ServerInterfaceWrapper) Webhook(ctx echo.Context) error {
+// GetWebhook converts echo context to params.
+func (w *ServerInterfaceWrapper) GetWebhook(ctx echo.Context) error {
 	var err error
 	// ------------- Path parameter "token" -------------
 	var token string
@@ -55,7 +58,31 @@ func (w *ServerInterfaceWrapper) Webhook(ctx echo.Context) error {
 	}
 
 	// Invoke the callback with all the unmarshaled arguments
-	err = w.Handler.Webhook(ctx, token, service)
+	err = w.Handler.GetWebhook(ctx, token, service)
+	return err
+}
+
+// PostWebhook converts echo context to params.
+func (w *ServerInterfaceWrapper) PostWebhook(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "token" -------------
+	var token string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "token", runtime.ParamLocationPath, ctx.Param("token"), &token)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter token: %s", err))
+	}
+
+	// ------------- Path parameter "service" -------------
+	var service string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "service", runtime.ParamLocationPath, ctx.Param("service"), &service)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter service: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.PostWebhook(ctx, token, service)
 	return err
 }
 
@@ -88,6 +115,7 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	}
 
 	router.GET(baseURL+"/", wrapper.HealthCheck)
-	router.POST(baseURL+"/api/:token/:service", wrapper.Webhook)
+	router.GET(baseURL+"/api/:token/:service", wrapper.GetWebhook)
+	router.POST(baseURL+"/api/:token/:service", wrapper.PostWebhook)
 
 }

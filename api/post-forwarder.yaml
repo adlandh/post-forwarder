@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Port Forwarder webhook
   description: Port Forwarder webhook
-  version: 1.0.0
+  version: 1.1.0
 servers:
   - url: 'http://localhost:8080'
 paths:
@@ -20,8 +20,27 @@ paths:
                 default: Ok
   /api/{token}/{service}:
     post:
-      operationId: webhook
+      operationId: postWebhook
       description: POST webhook endpoint
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: api token
+        - in: path
+          name: service
+          required: true
+          schema:
+            type: string
+          description: name of service
+      responses:
+        '200':
+          description: ok
+    get:
+      operationId: getWebhook
+      description: GET webhook endpoint
       parameters:
         - in: path
           name: token

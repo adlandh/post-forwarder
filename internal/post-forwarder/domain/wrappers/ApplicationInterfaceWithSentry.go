@@ -9,7 +9,6 @@ package wrappers
 import (
 	"context"
 	"encoding/json"
-	"net/http"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/getsentry/sentry-go"
@@ -51,9 +50,6 @@ func (_d ApplicationInterfaceWithSentry) _defaultSpanDecorator(span *sentry.Span
 	for p := range results {
 		switch results[p].(type) {
 		case context.Context:
-		case *http.Response:
-			val, _ := json.Marshal(results[p].(*http.Response).Header)
-			span.SetTag("result."+p+".headers", string(val))
 		default:
 			val, _ := json.Marshal(results[p])
 			span.SetTag("result."+p, string(val))

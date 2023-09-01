@@ -69,6 +69,30 @@ func (_d ServerInterfaceWithSentry) _defaultSpanDecorator(span *sentry.Span, par
 	}
 }
 
+// GetWebhook implements ServerInterface
+func (_d ServerInterfaceWithSentry) GetWebhook(ctx echo.Context, token string, service string) (err error) {
+	request := ctx.Request()
+	savedCtx := request.Context()
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.GetWebhook", sentry.TransactionName("ServerInterface.GetWebhook"))
+	ctxNew := span.Context()
+
+	defer func() {
+		_d._spanDecorator(span, map[string]interface{}{
+			"ctx":     ctx,
+			"token":   token,
+			"service": service}, map[string]interface{}{
+			"err": err})
+		if err != nil {
+			span.SetTag("event", "error")
+			span.SetTag("message", err.Error())
+		}
+
+		span.Finish()
+	}()
+	ctx.SetRequest(request.WithContext(ctxNew))
+	return _d.ServerInterface.GetWebhook(ctx, token, service)
+}
+
 // HealthCheck implements ServerInterface
 func (_d ServerInterfaceWithSentry) HealthCheck(ctx echo.Context) (err error) {
 	request := ctx.Request()
@@ -91,11 +115,11 @@ func (_d ServerInterfaceWithSentry) HealthCheck(ctx echo.Context) (err error) {
 	return _d.ServerInterface.HealthCheck(ctx)
 }
 
-// Webhook implements ServerInterface
-func (_d ServerInterfaceWithSentry) Webhook(ctx echo.Context, token string, service string) (err error) {
+// PostWebhook implements ServerInterface
+func (_d ServerInterfaceWithSentry) PostWebhook(ctx echo.Context, token string, service string) (err error) {
 	request := ctx.Request()
 	savedCtx := request.Context()
-	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.Webhook", sentry.TransactionName("ServerInterface.Webhook"))
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.PostWebhook", sentry.TransactionName("ServerInterface.PostWebhook"))
 	ctxNew := span.Context()
 
 	defer func() {
@@ -112,5 +136,5 @@ func (_d ServerInterfaceWithSentry) Webhook(ctx echo.Context, token string, serv
 		span.Finish()
 	}()
 	ctx.SetRequest(request.WithContext(ctxNew))
-	return _d.ServerInterface.Webhook(ctx, token, service)
+	return _d.ServerInterface.PostWebhook(ctx, token, service)
 }

@@ -15,8 +15,8 @@ import (
 
 // ApplicationInterfaceWithZap implements domain.ApplicationInterface that is instrumented with zap logger
 type ApplicationInterfaceWithZap struct {
-	_log  *zap.Logger
 	_base domain.ApplicationInterface
+	_log  *zap.Logger
 }
 
 // NewApplicationInterfaceWithZap instruments an implementation of the domain.ApplicationInterface with simple logging

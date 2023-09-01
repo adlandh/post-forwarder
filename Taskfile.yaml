@@ -71,6 +71,7 @@ tasks:
         deps:
             - namespace
         cmds:
+            - kubectl delete secret post-forwarder --namespace=post-forwarder || true
             - kubectl create secret generic post-forwarder --from-env-file=local-secrets.env --namespace=post-forwarder
     run:
         desc: run app locally in kubernetes
