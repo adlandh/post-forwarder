@@ -111,5 +111,5 @@ tasks:
         dotenv:
             - local-secrets.env
         cmds:
-            - http GET http://localhost:8080/api/${AUTH_TOKEN}/test?msg=test --raw="test body"
+            - http GET "http://localhost:8080/api/${AUTH_TOKEN}/test?msg=<b>test</b>" --raw="test<br>body"
 
