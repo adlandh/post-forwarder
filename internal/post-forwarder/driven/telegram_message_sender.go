@@ -7,6 +7,7 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/go-telegram/bot"
+	"github.com/go-telegram/bot/models"
 )
 
 const MaxMessageLength = 4_096
@@ -36,14 +37,15 @@ func NewTelegramMessageSender(cfg *config.Config) (*TelegramMessageSender, error
 }
 
 func (t TelegramMessageSender) Send(ctx context.Context, service, msg string) error {
-	fullMessage := fmt.Sprintf("Message from %s: %s", service, msg)
-	if len(fullMessage) > MaxMessageLength {
+	fullMessage := fmt.Sprintf("<b>%s</b>:\n%s", service, msg)
+	if len([]rune(fullMessage)) > MaxMessageLength {
 		fullMessage = fullMessage[:MaxMessageLength]
 	}
 
 	_, err := t.bot.SendMessage(ctx, &bot.SendMessageParams{
-		ChatID: t.chatId,
-		Text:   fullMessage,
+		ChatID:    t.chatId,
+		Text:      fullMessage,
+		ParseMode: models.ParseModeHTML,
 	})
 
 	return err

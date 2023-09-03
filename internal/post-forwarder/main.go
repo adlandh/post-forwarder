@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/adlandh/echo-sentry-middleware"
@@ -38,7 +38,14 @@ func NewLogger(cfg *config.Config) (*zap.Logger, error) {
 		func(entry zapcore.Entry) error {
 			if entry.Level == zapcore.ErrorLevel {
 				defer sentry.Flush(2 * time.Second)
-				sentry.CaptureMessage(fmt.Sprintf("%s, Line No: %d :: %s", entry.Caller.File, entry.Caller.Line, entry.Message))
+				localHub := sentry.CurrentHub().Clone()
+				localHub.ConfigureScope(func(scope *sentry.Scope) {
+					scope.SetTag("File", entry.Caller.File)
+					scope.SetTag("Line", strconv.Itoa(entry.Caller.Line))
+					scope.SetTag("message", entry.Message)
+					scope.SetLevel(sentry.LevelError)
+				})
+				localHub.CaptureMessage("error")
 			}
 			return nil
 		},
@@ -58,6 +65,7 @@ func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
 				EnableTracing:      true,
 				TracesSampleRate:   cfg.SentryTracesSampleRate,
 				ProfilesSampleRate: cfg.SentryProfilesSampleRate,
+				MaxErrorDepth:      1,
 			})
 		},
 		OnStop: func(ctx context.Context) error {

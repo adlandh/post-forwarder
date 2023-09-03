@@ -102,6 +102,14 @@ tasks:
         cmds:
             - pulumi up -y
     registry:
+        desc: Run registry locally
         cmds:
             - docker run -d -p 5000:5000 --restart=always --name registry registry:2
             - skaffold config set default-repo localhost:5000
+    send-test-string:
+        desc: Send test string
+        dotenv:
+            - local-secrets.env
+        cmds:
+            - http GET http://localhost:8080/api/${AUTH_TOKEN}/test?msg=test --raw="test body"
+
