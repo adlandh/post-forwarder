@@ -37,7 +37,7 @@ func NewTelegramMessageSender(cfg *config.Config) (*TelegramMessageSender, error
 }
 
 func (t TelegramMessageSender) Send(ctx context.Context, service, msg string) error {
-	fullMessage := fmt.Sprintf("*%s*:\n%s", bot.EscapeMarkdown(service), bot.EscapeMarkdownUnescaped(msg))
+	fullMessage := fmt.Sprintf("*%s*:\n%s", bot.EscapeMarkdown(service), bot.EscapeMarkdown(msg))
 	if len([]rune(fullMessage)) > MaxMessageLength {
 		fullMessage = fullMessage[:MaxMessageLength]
 	}
