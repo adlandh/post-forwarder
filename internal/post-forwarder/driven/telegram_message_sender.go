@@ -16,7 +16,7 @@ var _ domain.MessageDestination = (*TelegramMessageSender)(nil)
 
 type TelegramMessageSender struct {
 	bot    *bot.Bot
-	chatId int64
+	chatId string
 	token  string
 }
 
