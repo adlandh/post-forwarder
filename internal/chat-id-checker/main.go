@@ -32,10 +32,20 @@ func main() {
 }
 
 func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
-	if update.Message.Text == "/id" {
+	if update.Message != nil && update.Message.Text == "/id" {
 		_, err := b.SendMessage(ctx, &bot.SendMessageParams{
 			ChatID: update.Message.Chat.ID,
 			Text:   fmt.Sprintf("%s: %d", update.Message.Chat.Username, update.Message.Chat.ID),
+		})
+		if err != nil {
+			log.Println("Error", err)
+		}
+	}
+
+	if update.ChannelPost != nil {
+		_, err := b.SendMessage(ctx, &bot.SendMessageParams{
+			ChatID: update.ChannelPost.Chat.ID,
+			Text:   fmt.Sprintf("%d", update.ChannelPost.Chat.ID),
 		})
 		if err != nil {
 			log.Println("Error", err)
