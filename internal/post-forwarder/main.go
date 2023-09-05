@@ -66,6 +66,7 @@ func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
 				TracesSampleRate:   cfg.SentryTracesSampleRate,
 				ProfilesSampleRate: cfg.SentryProfilesSampleRate,
 				MaxErrorDepth:      1,
+				Environment:        cfg.SentryEnvironment,
 			})
 		},
 		OnStop: func(ctx context.Context) error {

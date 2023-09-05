@@ -112,4 +112,12 @@ tasks:
             - local-secrets.env
         cmds:
             - http GET "http://localhost:8080/api/${AUTH_TOKEN}/test?msg=<b>test</b>" --raw="test<br>body"
+    purge-old-versions:
+        desc: Delete old versions of service in gcp
+        cmds:
+            - |
+                VERSIONS=$(gcloud app versions list --service default --sort-by '~VERSION.ID' --format 'value(VERSION.ID)' | sed 1,3d)
+                for version in $VERSIONS
+                    do gcloud app versions delete "$version" --service default --quiet
+                done
 

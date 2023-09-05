@@ -42,7 +42,7 @@ func handler(ctx context.Context, b *bot.Bot, update *models.Update) {
 		}
 	}
 
-	if update.ChannelPost != nil {
+	if update.ChannelPost != nil && update.ChannelPost.Text == "/id" {
 		_, err := b.SendMessage(ctx, &bot.SendMessageParams{
 			ChatID: update.ChannelPost.Chat.ID,
 			Text:   fmt.Sprintf("%d", update.ChannelPost.Chat.ID),

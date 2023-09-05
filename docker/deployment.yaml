@@ -35,3 +35,27 @@ spec:
         envFrom:
           - secretRef:
               name: post-forwarder
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-id-checker
+  namespace: post-forwarder
+  labels:
+    app: chat-id-checker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chat-id-checker
+  template:
+    metadata:
+      labels:
+        app: chat-id-checker
+    spec:
+      containers:
+        - name: chat-id-checker
+          image: chat-id-checker
+          envFrom:
+            - secretRef:
+                name: post-forwarder

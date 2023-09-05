@@ -10,6 +10,7 @@ type Config struct {
 	SentryDSN                string  `env:"SENTRY_DSN"`
 	SentryTracesSampleRate   float64 `env:"SENTRY_TRACES_SAMPLE_RATE" envDefault:"1.0"`
 	SentryProfilesSampleRate float64 `env:"SENTRY_PROFILES_SAMPLE_RATE" envDefault:"1.0"`
+	SentryEnvironment        string  `env:"SENTRY_ENVIRONMENT"`
 }
 
 func NewConfig() (*Config, error) {

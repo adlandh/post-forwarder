@@ -7,6 +7,9 @@ build:
     - image: post-forwarder
       ko:
         main: ./internal/post-forwarder
+    - image: chat-id-checker
+      ko:
+        main: ./internal/chat-id-checker
 manifests:
   rawYaml:
     - docker/deployment.yaml
