@@ -11,6 +11,7 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+      name: http
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -35,6 +36,8 @@ spec:
         envFrom:
           - secretRef:
               name: post-forwarder
+        ports:
+          - containerPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
