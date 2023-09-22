@@ -39,7 +39,7 @@ func NewMessageDestinationWithSentry(base domain.MessageDestination, instance st
 
 // Send implements domain.MessageDestination
 func (_d MessageDestinationWithSentry) Send(ctx context.Context, service string, msg string) (err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.MessageDestination.Send", sentry.TransactionName("domain.MessageDestination.Send"))
+	span := sentry.StartSpan(ctx, _d._instance+".domain.MessageDestination.Send", sentry.WithTransactionName("domain.MessageDestination.Send"))
 	ctx = span.Context()
 
 	defer func() {

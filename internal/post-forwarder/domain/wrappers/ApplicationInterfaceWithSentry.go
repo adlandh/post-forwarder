@@ -39,7 +39,7 @@ func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instanc
 
 // ProcessRequest implements domain.ApplicationInterface
 func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, service string, msg string) (err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ProcessRequest", sentry.TransactionName("domain.ApplicationInterface.ProcessRequest"))
+	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ProcessRequest", sentry.WithTransactionName("domain.ApplicationInterface.ProcessRequest"))
 	ctx = span.Context()
 
 	defer func() {

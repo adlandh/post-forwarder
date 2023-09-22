@@ -39,7 +39,7 @@ func NewServerInterfaceWithSentry(base ServerInterface, instance string, spanDec
 func (_d ServerInterfaceWithSentry) GetWebhook(ctx echo.Context, token string, service string) (err error) {
 	request := ctx.Request()
 	savedCtx := request.Context()
-	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.GetWebhook", sentry.TransactionName("ServerInterface.GetWebhook"))
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.GetWebhook", sentry.WithTransactionName("ServerInterface.GetWebhook"))
 	ctxNew := span.Context()
 
 	defer func() {
@@ -58,7 +58,7 @@ func (_d ServerInterfaceWithSentry) GetWebhook(ctx echo.Context, token string, s
 func (_d ServerInterfaceWithSentry) HealthCheck(ctx echo.Context) (err error) {
 	request := ctx.Request()
 	savedCtx := request.Context()
-	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.HealthCheck", sentry.TransactionName("ServerInterface.HealthCheck"))
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.HealthCheck", sentry.WithTransactionName("ServerInterface.HealthCheck"))
 	ctxNew := span.Context()
 
 	defer func() {
@@ -75,7 +75,7 @@ func (_d ServerInterfaceWithSentry) HealthCheck(ctx echo.Context) (err error) {
 func (_d ServerInterfaceWithSentry) PostWebhook(ctx echo.Context, token string, service string) (err error) {
 	request := ctx.Request()
 	savedCtx := request.Context()
-	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.PostWebhook", sentry.TransactionName("ServerInterface.PostWebhook"))
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.PostWebhook", sentry.WithTransactionName("ServerInterface.PostWebhook"))
 	ctxNew := span.Context()
 
 	defer func() {
