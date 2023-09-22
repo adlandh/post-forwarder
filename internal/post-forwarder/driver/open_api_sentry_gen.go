@@ -7,10 +7,7 @@ package driver
 //go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/driver -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go -l ""
 
 import (
-	"context"
-	"encoding/json"
-	"net/http"
-
+	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
 	"github.com/getsentry/sentry-go"
 	"github.com/labstack/echo/v4"
 )
@@ -32,41 +29,10 @@ func NewServerInterfaceWithSentry(base ServerInterface, instance string, spanDec
 	if len(spanDecorator) > 0 && spanDecorator[0] != nil {
 		d._spanDecorator = spanDecorator[0]
 	} else {
-		d._spanDecorator = d._defaultSpanDecorator
+		d._spanDecorator = helpers.SpanDecorator
 	}
 
 	return d
-}
-
-func (_d ServerInterfaceWithSentry) _defaultSpanDecorator(span *sentry.Span, params, results map[string]interface{}) {
-	for p := range params {
-		switch params[p].(type) {
-		case context.Context:
-		case *http.Request:
-			span.SetTag("param."+p+".method", params[p].(*http.Request).Method)
-			val, _ := json.Marshal(params[p].(*http.Request).Header)
-			span.SetTag("param."+p+".headers", string(val))
-		case *http.Response:
-			val, _ := json.Marshal(params[p].(*http.Response).Header)
-			span.SetTag("param."+p+".headers", string(val))
-		case echo.Context:
-		default:
-			val, _ := json.Marshal(params[p])
-			span.SetTag("param."+p, string(val))
-		}
-	}
-
-	for p := range results {
-		switch results[p].(type) {
-		case context.Context:
-		case *http.Response:
-			val, _ := json.Marshal(results[p].(*http.Response).Header)
-			span.SetTag("result."+p+".headers", string(val))
-		default:
-			val, _ := json.Marshal(results[p])
-			span.SetTag("result."+p, string(val))
-		}
-	}
 }
 
 // GetWebhook implements ServerInterface
@@ -82,11 +48,6 @@ func (_d ServerInterfaceWithSentry) GetWebhook(ctx echo.Context, token string, s
 			"token":   token,
 			"service": service}, map[string]interface{}{
 			"err": err})
-		if err != nil {
-			span.SetTag("event", "error")
-			span.SetTag("message", err.Error())
-		}
-
 		span.Finish()
 	}()
 	ctx.SetRequest(request.WithContext(ctxNew))
@@ -104,11 +65,6 @@ func (_d ServerInterfaceWithSentry) HealthCheck(ctx echo.Context) (err error) {
 		_d._spanDecorator(span, map[string]interface{}{
 			"ctx": ctx}, map[string]interface{}{
 			"err": err})
-		if err != nil {
-			span.SetTag("event", "error")
-			span.SetTag("message", err.Error())
-		}
-
 		span.Finish()
 	}()
 	ctx.SetRequest(request.WithContext(ctxNew))
@@ -128,11 +84,6 @@ func (_d ServerInterfaceWithSentry) PostWebhook(ctx echo.Context, token string, 
 			"token":   token,
 			"service": service}, map[string]interface{}{
 			"err": err})
-		if err != nil {
-			span.SetTag("event", "error")
-			span.SetTag("message", err.Error())
-		}
-
 		span.Finish()
 	}()
 	ctx.SetRequest(request.WithContext(ctxNew))

@@ -42,10 +42,9 @@ func NewLogger(cfg *config.Config) (*zap.Logger, error) {
 				localHub.ConfigureScope(func(scope *sentry.Scope) {
 					scope.SetTag("File", entry.Caller.File)
 					scope.SetTag("Line", strconv.Itoa(entry.Caller.Line))
-					scope.SetTag("message", entry.Message)
 					scope.SetLevel(sentry.LevelError)
 				})
-				localHub.CaptureMessage("error")
+				localHub.CaptureMessage(entry.Message)
 			}
 			return nil
 		},

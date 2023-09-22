@@ -35,7 +35,7 @@ func (_d ApplicationInterfaceWithZap) ProcessRequest(ctx context.Context, servic
 		"msg":     msg}))
 	defer func() {
 		if err != nil {
-			_d._log.Error("ApplicationInterfaceWithZap: method ProcessRequest returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
+			_d._log.Warn("ApplicationInterfaceWithZap: method ProcessRequest returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
 				"err": err}))
 		} else {
 			_d._log.Debug("ApplicationInterfaceWithZap: method ProcessRequest finished", zap.Any("result", map[string]interface{}{

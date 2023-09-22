@@ -35,7 +35,7 @@ func (_d MessageDestinationWithZap) Send(ctx context.Context, service string, ms
 		"msg":     msg}))
 	defer func() {
 		if err != nil {
-			_d._log.Error("MessageDestinationWithZap: method Send returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
+			_d._log.Warn("MessageDestinationWithZap: method Send returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
 				"err": err}))
 		} else {
 			_d._log.Debug("MessageDestinationWithZap: method Send finished", zap.Any("result", map[string]interface{}{

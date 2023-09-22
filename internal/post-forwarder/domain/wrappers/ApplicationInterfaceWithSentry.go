@@ -8,8 +8,8 @@ package wrappers
 
 import (
 	"context"
-	"encoding/json"
 
+	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/getsentry/sentry-go"
 )
@@ -31,30 +31,10 @@ func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instanc
 	if len(spanDecorator) > 0 && spanDecorator[0] != nil {
 		d._spanDecorator = spanDecorator[0]
 	} else {
-		d._spanDecorator = d._defaultSpanDecorator
+		d._spanDecorator = helpers.SpanDecorator
 	}
 
 	return d
-}
-
-func (_d ApplicationInterfaceWithSentry) _defaultSpanDecorator(span *sentry.Span, params, results map[string]interface{}) {
-	for p := range params {
-		switch params[p].(type) {
-		case context.Context:
-		default:
-			val, _ := json.Marshal(params[p])
-			span.SetTag("param."+p, string(val))
-		}
-	}
-
-	for p := range results {
-		switch results[p].(type) {
-		case context.Context:
-		default:
-			val, _ := json.Marshal(results[p])
-			span.SetTag("result."+p, string(val))
-		}
-	}
 }
 
 // ProcessRequest implements domain.ApplicationInterface
@@ -68,11 +48,6 @@ func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, ser
 			"service": service,
 			"msg":     msg}, map[string]interface{}{
 			"err": err})
-		if err != nil {
-			span.SetTag("event", "error")
-			span.SetTag("message", err.Error())
-		}
-
 		span.Finish()
 	}()
 	return _d.ApplicationInterface.ProcessRequest(ctx, service, msg)

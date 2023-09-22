@@ -1,4 +1,4 @@
-version: "3.0"
+version: 3
 tasks:
     api:
         desc: generating http handlers
@@ -98,6 +98,11 @@ tasks:
             - gcloud app logs tail
     inf:
         desc: Pulumi Up
+        dir: "inf"
+        cmds:
+            - pulumi up
+    inf-y:
+        desc: Pulumi Up -y
         dir: "inf"
         cmds:
             - pulumi up -y

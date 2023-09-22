@@ -33,7 +33,7 @@ func (_d ServerInterfaceWithZap) GetWebhook(ctx echo.Context, token string, serv
 		"service": service}))
 	defer func() {
 		if err != nil {
-			_d._log.Error("ServerInterfaceWithZap: method GetWebhook returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
+			_d._log.Warn("ServerInterfaceWithZap: method GetWebhook returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
 				"err": err}))
 		} else {
 			_d._log.Debug("ServerInterfaceWithZap: method GetWebhook finished", zap.Any("result", map[string]interface{}{
@@ -49,7 +49,7 @@ func (_d ServerInterfaceWithZap) HealthCheck(ctx echo.Context) (err error) {
 		"ctx": ctx}))
 	defer func() {
 		if err != nil {
-			_d._log.Error("ServerInterfaceWithZap: method HealthCheck returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
+			_d._log.Warn("ServerInterfaceWithZap: method HealthCheck returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
 				"err": err}))
 		} else {
 			_d._log.Debug("ServerInterfaceWithZap: method HealthCheck finished", zap.Any("result", map[string]interface{}{
@@ -67,7 +67,7 @@ func (_d ServerInterfaceWithZap) PostWebhook(ctx echo.Context, token string, ser
 		"service": service}))
 	defer func() {
 		if err != nil {
-			_d._log.Error("ServerInterfaceWithZap: method PostWebhook returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
+			_d._log.Warn("ServerInterfaceWithZap: method PostWebhook returned an error", zap.Error(err), zap.Any("result", map[string]interface{}{
 				"err": err}))
 		} else {
 			_d._log.Debug("ServerInterfaceWithZap: method PostWebhook finished", zap.Any("result", map[string]interface{}{
