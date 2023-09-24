@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/adlandh/echo-sentry-middleware"
-	"github.com/adlandh/echo-zap-middleware"
+	echo_sentry_middleware "github.com/adlandh/echo-sentry-middleware"
+	echo_zap_middleware "github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
