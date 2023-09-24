@@ -13,8 +13,8 @@ import (
 )
 
 type HttpServer struct {
-	token string
 	app   domain.ApplicationInterface
+	token string
 }
 
 var _ ServerInterface = (*HttpServer)(nil)

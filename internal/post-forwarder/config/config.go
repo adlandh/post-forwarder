@@ -12,9 +12,9 @@ const SlackService = "slack"
 
 type SentryConfig struct {
 	DSN                string  `env:"DSN"`
+	Environment        string  `env:"ENVIRONMENT"`
 	TracesSampleRate   float64 `env:"TRACES_SAMPLE_RATE" envDefault:"1.0"`
 	ProfilesSampleRate float64 `env:"PROFILES_SAMPLE_RATE" envDefault:"1.0"`
-	Environment        string  `env:"ENVIRONMENT"`
 }
 
 type TelegramConfig struct {
@@ -30,9 +30,9 @@ type SlackConfig struct {
 type Config struct {
 	Port      string         `env:"PORT" envDefault:"8080"`
 	AuthToken string         `env:"AUTH_TOKEN,notEmpty"`
-	Notifiers []string       `env:"NOTIFIERS" envSeparator:"," envDefault:"TELEGRAM"`
 	Telegram  TelegramConfig `envPrefix:"TELEGRAM_"`
 	Slack     SlackConfig    `envPrefix:"SLACK_"`
+	Notifiers []string       `env:"NOTIFIERS" envSeparator:"," envDefault:"TELEGRAM"`
 	Sentry    SentryConfig   `envPrefix:"SENTRY_"`
 }
 
