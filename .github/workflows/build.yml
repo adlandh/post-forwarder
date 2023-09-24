@@ -18,3 +18,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Generate and upload release.yaml
+        env:
+          KO_DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: |
+          tag=$(echo ${{ github.ref }} | cut -c11-) 
+          echo $tag $KO_DOCKER_REPO
+          echo 
+          
