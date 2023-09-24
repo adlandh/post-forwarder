@@ -1,8 +1,8 @@
 name: "Test app"
 
 on:
-  push:
-    branches-ignore: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 jobs:
   test:
