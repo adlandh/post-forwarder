@@ -3,6 +3,7 @@ package application
 import (
 	"context"
 	"errors"
+	"strings"
 	"testing"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
@@ -11,26 +12,38 @@ import (
 )
 
 func TestProcessRequest(t *testing.T) {
-	messageDestination := new(mocks.MessageDestination)
-	app := NewApplication(messageDestination)
+	notifiers := new(mocks.Notifier)
+	app := NewApplication(notifiers)
 	service := gofakeit.Word()
 	msg := gofakeit.SentenceSimple()
 	ctx := context.Background()
 
+	subject := genSubject(service)
+
 	t.Run("happy case", func(t *testing.T) {
-		messageDestination.On("Send", ctx, service, msg).Return(nil).Once()
+		notifiers.On("Send", ctx, subject, msg).Return(nil).Once()
 		err := app.ProcessRequest(ctx, service, msg)
+		require.NoError(t, err)
+	})
+
+	t.Run("happy case with long string", func(t *testing.T) {
+		longMsg := strings.Repeat("A", MaxMessageLength+1)
+		require.Greater(t, len(longMsg), MaxMessageLength)
+		shortenMsg := limitMessageLength(subject, longMsg)
+		require.LessOrEqual(t, len(subject+"\n"+shortenMsg), MaxMessageLength)
+		notifiers.On("Send", ctx, subject, shortenMsg).Return(nil).Once()
+		err := app.ProcessRequest(ctx, service, longMsg)
 		require.NoError(t, err)
 	})
 
 	t.Run("error case", func(t *testing.T) {
 		fakeErr := errors.New(gofakeit.SentenceSimple())
-		messageDestination.On("Send", ctx, service, msg).Return(fakeErr).Once()
+		notifiers.On("Send", ctx, subject, msg).Return(fakeErr).Once()
 		err := app.ProcessRequest(ctx, service, msg)
 		require.Error(t, err)
 		require.True(t, errors.Is(err, fakeErr))
 	})
 
-	messageDestination.AssertExpectations(t)
+	notifiers.AssertExpectations(t)
 
 }

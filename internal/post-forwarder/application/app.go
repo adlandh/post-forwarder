@@ -2,22 +2,41 @@ package application
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 )
 
+const MaxMessageLength = 4_096
+
 var _ domain.ApplicationInterface = (*Application)(nil)
 
 type Application struct {
-	dst domain.MessageDestination
+	notifier domain.Notifier
 }
 
-func NewApplication(dst domain.MessageDestination) *Application {
+func NewApplication(notifier domain.Notifier) *Application {
 	return &Application{
-		dst: dst,
+		notifier: notifier,
 	}
 }
 
-func (a Application) ProcessRequest(ctx context.Context, service string, msg string) (err error) {
-	return a.dst.Send(ctx, service, msg)
+func (a Application) ProcessRequest(ctx context.Context, service string, msg string) error {
+	subject := genSubject(service)
+
+	msg = limitMessageLength(subject, msg)
+
+	return a.notifier.Send(ctx, subject, msg)
+}
+
+func genSubject(service string) string {
+	return fmt.Sprintf("Message from *%s*:", service)
+}
+
+func limitMessageLength(subject, msg string) string {
+	if len([]rune(subject+"\n"+msg)) <= MaxMessageLength {
+		return msg
+	}
+
+	return msg[:MaxMessageLength-len(subject)-1]
 }

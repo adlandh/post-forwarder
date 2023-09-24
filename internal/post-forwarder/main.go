@@ -30,7 +30,7 @@ func NewLogger(cfg *config.Config) (*zap.Logger, error) {
 		return nil, err
 	}
 
-	if cfg.SentryDSN == "" {
+	if cfg.Sentry.DSN == "" {
 		return logger, nil
 	}
 
@@ -53,19 +53,19 @@ func NewLogger(cfg *config.Config) (*zap.Logger, error) {
 }
 
 func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
-	if cfg.SentryDSN == "" {
+	if cfg.Sentry.DSN == "" {
 		return nil
 	}
 
 	lc.Append(fx.Hook{
 		OnStart: func(_ context.Context) error {
 			return sentry.Init(sentry.ClientOptions{
-				Dsn:                cfg.SentryDSN,
+				Dsn:                cfg.Sentry.DSN,
 				EnableTracing:      true,
-				TracesSampleRate:   cfg.SentryTracesSampleRate,
-				ProfilesSampleRate: cfg.SentryProfilesSampleRate,
+				TracesSampleRate:   cfg.Sentry.TracesSampleRate,
+				ProfilesSampleRate: cfg.Sentry.ProfilesSampleRate,
 				MaxErrorDepth:      1,
-				Environment:        cfg.SentryEnvironment,
+				Environment:        cfg.Sentry.Environment,
 			})
 		},
 		OnStop: func(ctx context.Context) error {
@@ -90,7 +90,7 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
 	e.Use(middleware.RequestID())
-	if cfg.SentryDSN != "" {
+	if cfg.Sentry.DSN != "" {
 		e.Use(sentryecho.New(sentryecho.Options{
 			Repanic: true,
 		}))
@@ -118,7 +118,7 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 
 func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface, log *zap.Logger) driver.ServerInterface {
 	srv = driver.NewServerInterfaceWithZap(srv, log)
-	if cfg.SentryDSN != "" {
+	if cfg.Sentry.DSN != "" {
 		srv = driver.NewServerInterfaceWithSentry(srv, "handlers")
 	}
 
@@ -127,20 +127,24 @@ func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface, log
 
 func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface, log *zap.Logger) domain.ApplicationInterface {
 	app = wrappers.NewApplicationInterfaceWithZap(app, log)
-	if cfg.SentryDSN != "" {
+	if cfg.Sentry.DSN != "" {
 		app = wrappers.NewApplicationInterfaceWithSentry(app, "application")
 	}
 
 	return app
 }
 
-func DecorateMessageDestination(cfg *config.Config, md domain.MessageDestination, log *zap.Logger) domain.MessageDestination {
-	md = wrappers.NewMessageDestinationWithZap(md, log)
-	if cfg.SentryDSN != "" {
-		md = wrappers.NewMessageDestinationWithSentry(md, "bot")
+func DecorateNotifier(cfg *config.Config, md domain.Notifier, log *zap.Logger) domain.Notifier {
+	md = wrappers.NewNotifierWithZap(md, log)
+	if cfg.Sentry.DSN != "" {
+		md = wrappers.NewNotifierWithSentry(md, "notifier")
 	}
 
 	return md
+}
+
+func main() {
+	fx.New(CreateService()).Run()
 }
 
 func CreateService() fx.Option {
@@ -152,8 +156,8 @@ func CreateService() fx.Option {
 			config.NewConfig,
 			NewLogger,
 			fx.Annotate(
-				driven.NewTelegramMessageSender,
-				fx.As(new(domain.MessageDestination)),
+				driven.NewNotifiers,
+				fx.As(new(domain.Notifier)),
 			),
 			fx.Annotate(
 				application.NewApplication,
@@ -167,15 +171,11 @@ func CreateService() fx.Option {
 		fx.Decorate(
 			DecorateServerInterface,
 			DecorateApplicationInterface,
-			DecorateMessageDestination,
+			DecorateNotifier,
 		),
 		fx.Invoke(
 			NewSentry,
 			NewEcho,
 		),
 	)
-}
-
-func main() {
-	fx.New(CreateService()).Run()
 }

@@ -17,7 +17,7 @@ tasks:
         dir: "internal/post-forwarder/domain"
         cmds:
             - mockery --name ApplicationInterface
-            - mockery --name MessageDestination
+            - mockery --name Notifier
     test:
         desc: running tests
         dir: "internal/"
@@ -55,9 +55,9 @@ tasks:
             - wrappers/*.go
         cmds:
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/ApplicationInterfaceWithZap.go
-            - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/MessageDestinationWithZap.go
+            - gowrap gen -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/NotifierWithZap.go
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/ApplicationInterfaceWithSentry.go
-            - gowrap gen -i MessageDestination -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/MessageDestinationWithSentry.go
+            - gowrap gen -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/NotifierWithSentry.go
     deploy:
         desc: Deploy to gcp
         cmds:
