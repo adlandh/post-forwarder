@@ -2,8 +2,6 @@ on:
   release:
     types:
       - created
-      - edited
-  push:
 
 jobs:
   publish-release-to-docker:
@@ -23,6 +21,5 @@ jobs:
           KO_DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           tag=$(echo ${{ github.ref }} | cut -c11-) 
-          echo $tag $KO_DOCKER_REPO
-          echo 
+          ko build -B -t $tag --platform linux/amd64,linux/arm64 ./internal/post-forwarder
           
