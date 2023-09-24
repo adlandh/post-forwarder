@@ -16,7 +16,8 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Generate and upload release.yaml
+      - uses: ko-build/setup-ko@v0.6
+      - name: Build Release and Push to Docker Hub
         env:
           KO_DOCKER_REPO: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
