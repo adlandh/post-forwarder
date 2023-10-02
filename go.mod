@@ -10,7 +10,7 @@ require (
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/gavv/httpexpect/v2 v2.15.0
 	github.com/getsentry/sentry-go v0.24.1
-	github.com/go-telegram/bot v0.7.15
+	github.com/go-telegram/bot v0.8.0
 	github.com/labstack/echo/v4 v4.11.1
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.0.0
