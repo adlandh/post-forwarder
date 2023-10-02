@@ -3,8 +3,8 @@ github.com/adlandh/echo-sentry-middleware v0.2.2 h1:VJ0FWm52LLRdwh48sN/H3gct6z8Y
 github.com/adlandh/echo-sentry-middleware v0.2.2/go.mod h1:aSCwFrcDo3m8R059IW5csZp9t6Y+iJNoeB46hcq6/Bk=
 github.com/adlandh/echo-zap-middleware v0.2.1 h1:jBbuBPnizobiV+SToUWdgfZa619S3LB7+e7gtC+wb28=
 github.com/adlandh/echo-zap-middleware v0.2.1/go.mod h1:bNqBylL8bmtPys9PWM9KA145oxJs2uf6HWG3nZcgkdk=
-github.com/adlandh/gowrap-templates v0.1.0 h1:jU4qLMguInOihYcO7Y9e56wKLLLjzMynau37CXodQVo=
-github.com/adlandh/gowrap-templates v0.1.0/go.mod h1:HlC7oJhY3bzBUpeJr/gnjC0gzThGUl9T0QJrsVglNuk=
+github.com/adlandh/gowrap-templates v0.1.1 h1:nKf3F6qXk+zE4Fdg/MgsoErpVEh4qZyQc3gPfj7QGQQ=
+github.com/adlandh/gowrap-templates v0.1.1/go.mod h1:HlC7oJhY3bzBUpeJr/gnjC0gzThGUl9T0QJrsVglNuk=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.0.5 h1:8uQZIdzKmjc/iuPu7O2ioW48L81FgatrcpfFmiq/cCs=
