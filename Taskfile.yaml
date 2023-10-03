@@ -61,6 +61,7 @@ tasks:
     deploy:
         desc: Deploy to gcp
         cmds:
+            - doppler secrets substitute --config prd app-secrets.yaml.gotmpl >app-secrets.yaml
             - gcloud app deploy --quiet
     namespace:
         desc: create new namespace in kubernetes
@@ -71,8 +72,7 @@ tasks:
         deps:
             - namespace
         cmds:
-            - kubectl delete secret post-forwarder --namespace=post-forwarder || true
-            - kubectl create secret generic post-forwarder --from-env-file=local-secrets.env --namespace=post-forwarder
+            - kubectl apply -f docker/secrets.yaml
     run:
         desc: run app locally in kubernetes
         deps:
@@ -113,10 +113,8 @@ tasks:
             - skaffold config set default-repo localhost:5000
     send-test-string:
         desc: Send test string
-        dotenv:
-            - local-secrets.env
         cmds:
-            - http GET "http://localhost:8080/api/${AUTH_TOKEN}/test?msg=<b>test</b>" --raw="test<br>body"
+            - doppler run --config dev --command 'http GET "http://localhost:8080/api/${AUTH_TOKEN}/test?msg=<b>test</b>" --raw="test<br>body"'
     purge-old-versions:
         desc: Delete old versions of service in gcp
         cmds:
@@ -125,4 +123,10 @@ tasks:
                 for version in $VERSIONS
                     do gcloud app versions delete "$version" --service default --quiet
                 done
+    doppler:
+        desc: install and setup doppler
+        cmds:
+            - kubectl apply -f https://github.com/DopplerHQ/kubernetes-operator/releases/latest/download/recommended.yaml
+            - kubectl create secret generic doppler-token-secret --namespace doppler-operator-system --from-literal=serviceToken=$(doppler configs tokens create doppler-kubernetes-operator --plain --config dev)
+
 
