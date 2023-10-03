@@ -77,14 +77,14 @@ tasks:
         desc: run app locally in kubernetes
         deps:
             - decorate
-            - namespace
+            - secrets
         cmds:
-            - skaffold run --tail
+            - skaffold run
     dev:
         desc: run app locally in kubernetes with auto build when code is changed
         deps:
             - decorate
-            - namespace
+            - secrets
         cmds:
             - skaffold dev --tail
     stop:
