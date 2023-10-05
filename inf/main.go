@@ -49,6 +49,8 @@ func main() {
 				Platform:     pulumi.String("go"),
 				Organization: pulumi.String(org),
 				Team:         pulumi.String(team),
+				Name:         pulumi.String(project),
+				Slug:         pulumi.String(project),
 			})
 			if err != nil {
 				return err
@@ -57,15 +59,17 @@ func main() {
 			ctx.Export("Sentry Project Name", sentryProject.ID())
 			ctx.Export("Sentry Project ID", sentryProject.ProjectId)
 
-			key, err := sentry.NewSentryKey(ctx, "default", &sentry.SentryKeyArgs{
-				Organization: pulumi.String(org),
-				Project:      sentryProject.ID(),
+			key, err := sentry.LookupSentryKey(ctx, &sentry.LookupSentryKeyArgs{
+				First:        pulumi.BoolRef(true),
+				Organization: org,
+				Project:      project,
 			})
+
 			if err != nil {
 				return err
 			}
 
-			ctx.Export("Sentry Project DSN", key.DsnPublic)
+			ctx.Export("Sentry Project DSN", pulumi.String(key.DsnPublic))
 		}
 
 		return nil
