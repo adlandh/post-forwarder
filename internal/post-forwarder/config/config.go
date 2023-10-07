@@ -45,27 +45,33 @@ func NewConfig() (*Config, error) {
 		return nil, err
 	}
 
-	// check notifiers
+	err = checkNotifiers(cfg)
+	if err != nil {
+		return nil, err
+	}
+
+	return &cfg, nil
+}
+
+func checkNotifiers(cfg Config) error {
 	for i := range cfg.Notifiers {
 		cfg.Notifiers[i] = strings.ToLower(cfg.Notifiers[i])
 		switch cfg.Notifiers[i] {
 		case TelegramService:
 			if cfg.Telegram.Token == "" {
-				return nil, fmt.Errorf("empty telegram token")
+				return fmt.Errorf("empty telegram token")
 			}
 			if len(cfg.Telegram.ChatIDs) == 0 {
-				return nil, fmt.Errorf("no chat id provided")
+				return fmt.Errorf("no chat id provided")
 			}
 		case SlackService:
 			if cfg.Slack.Token == "" {
-				return nil, fmt.Errorf("empty slack api token")
+				return fmt.Errorf("empty slack api token")
 			}
 			if len(cfg.Slack.ChannelIDs) == 0 {
-				return nil, fmt.Errorf("no channel id provided")
+				return fmt.Errorf("no channel id provided")
 			}
 		}
-
 	}
-
-	return &cfg, nil
+	return nil
 }
