@@ -8,7 +8,7 @@ require (
 	github.com/adlandh/gowrap-templates v0.1.1
 	github.com/brianvoe/gofakeit/v6 v6.23.2
 	github.com/caarlos0/env/v9 v9.0.0
-	github.com/gavv/httpexpect/v2 v2.15.0
+	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.24.1
 	github.com/go-telegram/bot v0.8.0
 	github.com/labstack/echo/v4 v4.11.1
@@ -22,6 +22,7 @@ require (
 )
 
 require (
+	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
