@@ -22,8 +22,6 @@ func NewNotifiers(cfg *config.Config) (*notify.Notify, error) {
 				return nil, fmt.Errorf("error creating telegram service: %w", err)
 			}
 
-			telegramService.SetParseMode(telegram.ModeMarkdown)
-
 			for _, chatID := range cfg.Telegram.ChatIDs {
 				telegramService.AddReceivers(chatID)
 			}
