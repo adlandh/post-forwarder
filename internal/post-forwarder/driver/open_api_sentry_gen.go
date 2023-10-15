@@ -15,8 +15,8 @@ import (
 // ServerInterfaceWithSentry implements ServerInterface interface instrumented with opentracing spans
 type ServerInterfaceWithSentry struct {
 	ServerInterface
-	_instance      string
 	_spanDecorator func(span *sentry.Span, params, results map[string]interface{})
+	_instance      string
 }
 
 // NewServerInterfaceWithSentry returns ServerInterfaceWithSentry

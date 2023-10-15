@@ -6,12 +6,13 @@ require (
 	github.com/adlandh/echo-sentry-middleware v0.2.2
 	github.com/adlandh/echo-zap-middleware v0.2.1
 	github.com/adlandh/gowrap-templates v0.1.1
+	github.com/adlandh/sentry-zapcore v1.0.0
 	github.com/brianvoe/gofakeit/v6 v6.23.2
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.25.0
-	github.com/go-telegram/bot v0.8.0
-	github.com/labstack/echo/v4 v4.11.1
+	github.com/go-telegram/bot v0.8.1
+	github.com/labstack/echo/v4 v4.11.2
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.0.0
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
@@ -49,7 +50,7 @@ require (
 	github.com/rogpeppe/go-internal v1.11.0 // indirect
 	github.com/sanity-io/litter v1.5.5 // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect
-	github.com/slack-go/slack v0.12.2 // indirect
+	github.com/slack-go/slack v0.12.3 // indirect
 	github.com/stretchr/objx v0.5.1 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -66,7 +67,7 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/sync v0.3.0 // indirect
+	golang.org/x/sync v0.4.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/time v0.3.0 // indirect

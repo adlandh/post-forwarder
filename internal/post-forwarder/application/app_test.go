@@ -9,11 +9,13 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
+	"go.uber.org/zap/zaptest"
 )
 
 func TestProcessRequest(t *testing.T) {
 	notifiers := new(mocks.Notifier)
-	app := NewApplication(notifiers)
+	logger := zaptest.NewLogger(t)
+	app := NewApplication(notifiers, logger)
 	service := gofakeit.Word()
 	msg := gofakeit.SentenceSimple()
 	ctx := context.Background()
@@ -41,7 +43,7 @@ func TestProcessRequest(t *testing.T) {
 		notifiers.On("Send", ctx, subject, msg).Return(fakeErr).Once()
 		err := app.ProcessRequest(ctx, service, msg)
 		require.Error(t, err)
-		require.True(t, errors.Is(err, fakeErr))
+		require.Equal(t, err.Error(), ErrorSendingMessage)
 	})
 
 	notifiers.AssertExpectations(t)
