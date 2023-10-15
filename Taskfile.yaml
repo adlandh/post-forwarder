@@ -42,7 +42,6 @@ tasks:
             - open_api_zap_gen.go
             - open_api_sentry_gen.go
         cmds:
-            - gowrap gen -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o open_api_zap_gen.go
             - gowrap gen -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go
     decorate:
         desc: decorate interfaces
@@ -54,8 +53,6 @@ tasks:
         generates:
             - wrappers/*.go
         cmds:
-            - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/ApplicationInterfaceWithZap.go
-            - gowrap gen -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/zap.gotmpl -o wrappers/NotifierWithZap.go
             - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/ApplicationInterfaceWithSentry.go
             - gowrap gen -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/NotifierWithSentry.go
     deploy:

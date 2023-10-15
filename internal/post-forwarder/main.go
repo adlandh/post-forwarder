@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"strconv"
 	"time"
 
 	echo_sentry_middleware "github.com/adlandh/echo-sentry-middleware"
@@ -13,6 +12,7 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/wrappers"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driven"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driver"
+	sentry_zapcore "github.com/adlandh/sentry-zapcore"
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
 	"github.com/labstack/echo/v4"
@@ -21,35 +21,14 @@ import (
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 )
 
-func NewLogger(cfg *config.Config) (*zap.Logger, error) {
-	logger, err := zap.NewDevelopment()
-	if err != nil {
-		return nil, err
+func NewApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger) *application.Application {
+	if cfg.Sentry.DSN != "" {
+		logger = logger.WithOptions(sentry_zapcore.WithSentryOption(sentry_zapcore.WithStackTrace()))
 	}
 
-	if cfg.Sentry.DSN == "" {
-		return logger, nil
-	}
-
-	return logger.WithOptions(zap.Hooks(
-		func(entry zapcore.Entry) error {
-			if entry.Level == zapcore.ErrorLevel {
-				defer sentry.Flush(2 * time.Second)
-				localHub := sentry.CurrentHub().Clone()
-				localHub.ConfigureScope(func(scope *sentry.Scope) {
-					scope.SetTag("File", entry.Caller.File)
-					scope.SetTag("Line", strconv.Itoa(entry.Caller.Line))
-					scope.SetLevel(sentry.LevelError)
-				})
-				localHub.CaptureMessage(entry.Message)
-			}
-			return nil
-		},
-	)), nil
-
+	return application.NewApplication(notifier, logger)
 }
 
 func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
@@ -116,8 +95,7 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	return e
 }
 
-func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface, log *zap.Logger) driver.ServerInterface {
-	srv = driver.NewServerInterfaceWithZap(srv, log)
+func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface) driver.ServerInterface {
 	if cfg.Sentry.DSN != "" {
 		srv = driver.NewServerInterfaceWithSentry(srv, "handlers")
 	}
@@ -125,8 +103,7 @@ func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface, log
 	return srv
 }
 
-func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface, log *zap.Logger) domain.ApplicationInterface {
-	app = wrappers.NewApplicationInterfaceWithZap(app, log)
+func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface) domain.ApplicationInterface {
 	if cfg.Sentry.DSN != "" {
 		app = wrappers.NewApplicationInterfaceWithSentry(app, "application")
 	}
@@ -134,8 +111,7 @@ func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInte
 	return app
 }
 
-func DecorateNotifier(cfg *config.Config, md domain.Notifier, log *zap.Logger) domain.Notifier {
-	md = wrappers.NewNotifierWithZap(md, log)
+func DecorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
 	if cfg.Sentry.DSN != "" {
 		md = wrappers.NewNotifierWithSentry(md, "notifier")
 	}
@@ -149,18 +125,22 @@ func main() {
 
 func CreateService() fx.Option {
 	return fx.Options(
-		fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
-			return &fxevent.ZapLogger{Logger: log}
-		}),
+		fx.WithLogger(
+			func(log *zap.Logger) fxevent.Logger {
+				return &fxevent.ZapLogger{Logger: log}
+			},
+		),
 		fx.Provide(
 			config.NewConfig,
-			NewLogger,
+			fx.Annotate(
+				zap.NewDevelopment,
+			),
 			fx.Annotate(
 				driven.NewNotifiers,
 				fx.As(new(domain.Notifier)),
 			),
 			fx.Annotate(
-				application.NewApplication,
+				NewApplication,
 				fx.As(new(domain.ApplicationInterface)),
 			),
 			fx.Annotate(

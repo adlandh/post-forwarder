@@ -57,7 +57,7 @@ func (h HttpServer) webhook(ctx echo.Context, token string, service string) erro
 	if err != nil {
 		// if parameters were empty, just throw error
 		if msg == "" {
-			return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 		} else { // add error to msg
 			msg += fmt.Sprintf("error reading body: %s", err.Error())
 		}

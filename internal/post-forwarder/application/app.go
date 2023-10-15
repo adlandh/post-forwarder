@@ -2,13 +2,18 @@ package application
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"regexp"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+	"go.uber.org/zap"
 )
 
-const MaxMessageLength = 4_096
+const (
+	MaxMessageLength    = 4_096
+	ErrorSendingMessage = "error sending message"
+)
 
 var r = regexp.MustCompile(`<.*?>`)
 
@@ -16,11 +21,13 @@ var _ domain.ApplicationInterface = (*Application)(nil)
 
 type Application struct {
 	notifier domain.Notifier
+	logger   *zap.Logger
 }
 
-func NewApplication(notifier domain.Notifier) *Application {
+func NewApplication(notifier domain.Notifier, logger *zap.Logger) *Application {
 	return &Application{
 		notifier: notifier,
+		logger:   logger,
 	}
 }
 
@@ -31,7 +38,13 @@ func (a Application) ProcessRequest(ctx context.Context, service string, msg str
 
 	msg = limitMessageLength(subject, msg)
 
-	return a.notifier.Send(ctx, subject, msg)
+	err := a.notifier.Send(ctx, subject, msg)
+	if err != nil {
+		a.logger.Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
+		return errors.New(ErrorSendingMessage)
+	}
+
+	return nil
 }
 
 func genSubject(service string) string {
