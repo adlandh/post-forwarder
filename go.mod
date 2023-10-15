@@ -3,8 +3,8 @@ module github.com/adlandh/post-forwarder
 go 1.21
 
 require (
-	github.com/adlandh/echo-sentry-middleware v0.2.2
-	github.com/adlandh/echo-zap-middleware v0.2.1
+	github.com/adlandh/echo-sentry-middleware v0.2.3
+	github.com/adlandh/echo-zap-middleware v0.2.2
 	github.com/adlandh/gowrap-templates v0.1.1
 	github.com/adlandh/sentry-zapcore v1.0.0
 	github.com/brianvoe/gofakeit/v6 v6.23.2
