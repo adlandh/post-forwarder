@@ -132,6 +132,14 @@ tasks:
                 for version in $VERSIONS
                     do gcloud app versions delete "$version" --service default --quiet
                 done
+    list-buckets:
+        desc: List buckets with lifecycle rules
+        cmds:
+            - |
+              for gs in $(gsutil ls); do
+                echo -n "${gs}: "
+                gsutil lifecycle get ${gs}
+              done
     doppler:
         desc: install and setup doppler
         cmds:
