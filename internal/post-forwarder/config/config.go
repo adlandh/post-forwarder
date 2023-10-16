@@ -39,15 +39,14 @@ type Config struct {
 
 func NewConfig() (*Config, error) {
 	var cfg Config
-	err := env.ParseWithOptions(&cfg, env.Options{
+
+	if err := env.ParseWithOptions(&cfg, env.Options{
 		RequiredIfNoDef: false,
-	})
-	if err != nil {
+	}); err != nil {
 		return nil, fmt.Errorf("error parsing config: %w", err)
 	}
 
-	err = checkNotifiers(cfg)
-	if err != nil {
+	if err := checkNotifiers(cfg); err != nil {
 		return nil, fmt.Errorf("error checking notifiers: %w", err)
 	}
 
@@ -62,6 +61,7 @@ func checkNotifiers(cfg Config) error {
 			if cfg.Telegram.Token == "" {
 				return fmt.Errorf("empty telegram token")
 			}
+
 			if len(cfg.Telegram.ChatIDs) == 0 {
 				return fmt.Errorf("no chat id provided")
 			}
@@ -69,10 +69,12 @@ func checkNotifiers(cfg Config) error {
 			if cfg.Slack.Token == "" {
 				return fmt.Errorf("empty slack api token")
 			}
+
 			if len(cfg.Slack.ChannelIDs) == 0 {
 				return fmt.Errorf("no channel id provided")
 			}
 		}
 	}
+
 	return nil
 }

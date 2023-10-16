@@ -78,6 +78,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
 	e.Use(middleware.RequestID())
+
 	if cfg.Sentry.DSN != "" {
 		e.Use(sentryecho.New(sentryecho.Options{
 			Repanic: true,

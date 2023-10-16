@@ -15,6 +15,7 @@ var _ domain.Notifier = (*notify.Notify)(nil)
 
 func NewNotifiers(cfg *config.Config) (*notify.Notify, error) {
 	notifier := notify.Default()
+
 	for _, service := range cfg.Notifiers {
 		switch service {
 		case config.TelegramService:
@@ -38,5 +39,6 @@ func NewNotifiers(cfg *config.Config) (*notify.Notify, error) {
 			notify.UseServices(slackService)
 		}
 	}
+
 	return notifier, nil
 }
