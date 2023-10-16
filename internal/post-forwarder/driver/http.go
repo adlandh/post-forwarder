@@ -12,33 +12,33 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type HttpServer struct {
+type HTTPServer struct {
 	app   domain.ApplicationInterface
 	token string
 }
 
-var _ ServerInterface = (*HttpServer)(nil)
+var _ ServerInterface = (*HTTPServer)(nil)
 
-func NewHttpServer(cfg *config.Config, app domain.ApplicationInterface) *HttpServer {
-	return &HttpServer{
+func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPServer {
+	return &HTTPServer{
 		token: cfg.AuthToken,
 		app:   app,
 	}
 }
 
-func (h HttpServer) HealthCheck(ctx echo.Context) error {
-	return ctx.String(http.StatusOK, "Ok")
+func (h HTTPServer) HealthCheck(ctx echo.Context) error {
+	return fmt.Errorf("error sending response: %w", ctx.String(http.StatusOK, "Ok"))
 }
 
-func (h HttpServer) PostWebhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) PostWebhook(ctx echo.Context, token string, service string) error {
 	return h.webhook(ctx, token, service)
 }
 
-func (h HttpServer) GetWebhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) GetWebhook(ctx echo.Context, token string, service string) error {
 	return h.webhook(ctx, token, service)
 }
 
-func (h HttpServer) webhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) webhook(ctx echo.Context, token string, service string) error {
 	// checking if the token is valid
 	if token != h.token {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid auth token")
@@ -70,5 +70,5 @@ func (h HttpServer) webhook(ctx echo.Context, token string, service string) erro
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return ctx.NoContent(http.StatusOK)
+	return fmt.Errorf("error sending response: %w", ctx.NoContent(http.StatusOK))
 }

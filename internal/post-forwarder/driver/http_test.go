@@ -30,7 +30,7 @@ func (s *HttpServerTestSuite) SetupSuite() {
 	s.token = gofakeit.UUID()
 	s.app = new(mocks.ApplicationInterface)
 	s.e = echo.New()
-	RegisterHandlers(s.e, NewHttpServer(&config.Config{
+	RegisterHandlers(s.e, NewHTTPServer(&config.Config{
 		AuthToken: s.token,
 	}, s.app))
 	port, err := freeport.GetFreePort()

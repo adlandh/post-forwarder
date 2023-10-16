@@ -1,3 +1,4 @@
+// Package application contains application layer
 package application
 
 import (
