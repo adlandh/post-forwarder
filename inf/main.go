@@ -76,6 +76,7 @@ func setupGCPProject(ctx *pulumi.Context, conf *config.Config) error {
 	}
 
 	ctx.Export("app hostname", app.DefaultHostname)
+	ctx.Export("app id", app.AppId)
 
 	domain := conf.Get("domain")
 	if domain != "" {

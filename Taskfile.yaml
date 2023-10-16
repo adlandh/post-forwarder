@@ -133,10 +133,12 @@ tasks:
                     do gcloud app versions delete "$version" --service default --quiet
                 done
     list-buckets:
-        desc: List buckets with lifecycle rules
+        desc: List app engine buckets with lifecycle rules
+        dir: "inf"
         cmds:
             - |
-              for gs in $(gsutil ls); do
+              filter="$(pulumi stack output "app id").appspot.com"  
+              for gs in $(gsutil ls | grep $filter); do
                 echo -n "${gs}: "
                 gsutil lifecycle get ${gs}
               done
