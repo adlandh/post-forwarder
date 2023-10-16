@@ -17,8 +17,8 @@ import (
 // NotifierWithSentry implements domain.Notifier interface instrumented with opentracing spans
 type NotifierWithSentry struct {
 	domain.Notifier
-	_instance      string
 	_spanDecorator func(span *sentry.Span, params, results map[string]interface{})
+	_instance      string
 }
 
 // NewNotifierWithSentry returns NotifierWithSentry

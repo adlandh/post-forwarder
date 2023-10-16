@@ -8,6 +8,6 @@ import (
 )
 
 func TestCreateService(t *testing.T) {
-	err := fx.ValidateApp(CreateService())
+	err := fx.ValidateApp(createService())
 	require.NoError(t, err)
 }

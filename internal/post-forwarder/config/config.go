@@ -1,3 +1,4 @@
+// Package config contains application configuration
 package config
 
 import (
@@ -42,12 +43,12 @@ func NewConfig() (*Config, error) {
 		RequiredIfNoDef: false,
 	})
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error parsing config: %w", err)
 	}
 
 	err = checkNotifiers(cfg)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("error checking notifiers: %w", err)
 	}
 
 	return &cfg, nil

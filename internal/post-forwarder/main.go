@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	echo_sentry_middleware "github.com/adlandh/echo-sentry-middleware"
@@ -23,7 +24,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func NewApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger) *application.Application {
+func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger) *application.Application {
 	if cfg.Sentry.DSN != "" {
 		logger = logger.WithOptions(sentry_zapcore.WithSentryOption(sentry_zapcore.WithStackTrace()))
 	}
@@ -31,21 +32,21 @@ func NewApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Lo
 	return application.NewApplication(notifier, logger)
 }
 
-func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
+func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	if cfg.Sentry.DSN == "" {
 		return nil
 	}
 
 	lc.Append(fx.Hook{
 		OnStart: func(_ context.Context) error {
-			return sentry.Init(sentry.ClientOptions{
+			return fmt.Errorf("error initializing sentry: %w", sentry.Init(sentry.ClientOptions{
 				Dsn:                cfg.Sentry.DSN,
 				EnableTracing:      true,
 				TracesSampleRate:   cfg.Sentry.TracesSampleRate,
 				ProfilesSampleRate: cfg.Sentry.ProfilesSampleRate,
 				MaxErrorDepth:      1,
 				Environment:        cfg.Sentry.Environment,
-			})
+			}))
 		},
 		OnStop: func(ctx context.Context) error {
 			sentry.Flush(2 * time.Second)
@@ -57,7 +58,7 @@ func NewSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	return nil
 }
 
-func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
+func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
 	e.Use(echo_zap_middleware.MiddlewareWithConfig(log, echo_zap_middleware.ZapConfig{
 		AreHeadersDump: true,
@@ -85,17 +86,17 @@ func NewEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 			go func() {
 				err = e.Start(":" + cfg.Port)
 			}()
-			return err
+			return fmt.Errorf("error starting echo server: %w", err)
 		},
 		OnStop: func(ctx context.Context) error {
-			return e.Shutdown(ctx)
+			return fmt.Errorf("error shutting down echo server: %w", e.Shutdown(ctx))
 		},
 	})
 
 	return e
 }
 
-func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface) driver.ServerInterface {
+func decorateServerInterface(cfg *config.Config, srv driver.ServerInterface) driver.ServerInterface {
 	if cfg.Sentry.DSN != "" {
 		srv = driver.NewServerInterfaceWithSentry(srv, "handlers")
 	}
@@ -103,7 +104,7 @@ func DecorateServerInterface(cfg *config.Config, srv driver.ServerInterface) dri
 	return srv
 }
 
-func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface) domain.ApplicationInterface {
+func decorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface) domain.ApplicationInterface {
 	if cfg.Sentry.DSN != "" {
 		app = wrappers.NewApplicationInterfaceWithSentry(app, "application")
 	}
@@ -111,7 +112,7 @@ func DecorateApplicationInterface(cfg *config.Config, app domain.ApplicationInte
 	return app
 }
 
-func DecorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
+func decorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
 	if cfg.Sentry.DSN != "" {
 		md = wrappers.NewNotifierWithSentry(md, "notifier")
 	}
@@ -120,10 +121,10 @@ func DecorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
 }
 
 func main() {
-	fx.New(CreateService()).Run()
+	fx.New(createService()).Run()
 }
 
-func CreateService() fx.Option {
+func createService() fx.Option {
 	return fx.Options(
 		fx.WithLogger(
 			func(log *zap.Logger) fxevent.Logger {
@@ -140,22 +141,22 @@ func CreateService() fx.Option {
 				fx.As(new(domain.Notifier)),
 			),
 			fx.Annotate(
-				NewApplication,
+				newApplication,
 				fx.As(new(domain.ApplicationInterface)),
 			),
 			fx.Annotate(
-				driver.NewHttpServer,
+				driver.NewHTTPServer,
 				fx.As(new(driver.ServerInterface)),
 			),
 		),
 		fx.Decorate(
-			DecorateServerInterface,
-			DecorateApplicationInterface,
-			DecorateNotifier,
+			decorateServerInterface,
+			decorateApplicationInterface,
+			decorateNotifier,
 		),
 		fx.Invoke(
-			NewSentry,
-			NewEcho,
+			newSentry,
+			newEcho,
 		),
 	)
 }

@@ -84,6 +84,13 @@ tasks:
             - secrets
         cmds:
             - skaffold dev --tail
+    run-local:
+        desc: run app locally
+        deps:
+            - decorate
+            - secrets
+        cmds:
+            - doppler run --config dev -- go run ./internal/post-forwarder/main.go
     stop:
         desc: stop app running locally
         cmds:
