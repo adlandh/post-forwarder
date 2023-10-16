@@ -7,15 +7,15 @@ import (
 	"net/http"
 	"time"
 
-	echo_sentry_middleware "github.com/adlandh/echo-sentry-middleware"
-	echo_zap_middleware "github.com/adlandh/echo-zap-middleware"
+	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware"
+	echoZapMiddleware "github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/wrappers"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driven"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driver"
-	sentry_zapcore "github.com/adlandh/sentry-zapcore"
+	sentryZapcore "github.com/adlandh/sentry-zapcore"
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
 	"github.com/labstack/echo/v4"
@@ -28,7 +28,7 @@ import (
 
 func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger) *application.Application {
 	if cfg.Sentry.DSN != "" {
-		logger = logger.WithOptions(sentry_zapcore.WithSentryOption(sentry_zapcore.WithStackTrace()))
+		logger = logger.WithOptions(sentryZapcore.WithSentryOption(sentryZapcore.WithStackTrace()))
 	}
 
 	return application.NewApplication(notifier, logger)
@@ -68,7 +68,7 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
-	e.Use(echo_zap_middleware.MiddlewareWithConfig(log, echo_zap_middleware.ZapConfig{
+	e.Use(echoZapMiddleware.MiddlewareWithConfig(log, echoZapMiddleware.ZapConfig{
 		AreHeadersDump: true,
 		IsBodyDump:     true,
 		LimitHTTPBody:  true,
@@ -83,7 +83,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 		e.Use(sentryecho.New(sentryecho.Options{
 			Repanic: true,
 		}))
-		e.Use(echo_sentry_middleware.MiddlewareWithConfig(echo_sentry_middleware.SentryConfig{
+		e.Use(echoSentryMiddleware.MiddlewareWithConfig(echoSentryMiddleware.SentryConfig{
 			AreHeadersDump: true,
 			IsBodyDump:     true,
 		}))
