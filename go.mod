@@ -4,14 +4,14 @@ go 1.21
 
 require (
 	github.com/adlandh/echo-sentry-middleware v0.2.3
-	github.com/adlandh/echo-zap-middleware v0.2.2
+	github.com/adlandh/echo-zap-middleware v1.0.0
 	github.com/adlandh/gowrap-templates v0.1.1
 	github.com/adlandh/sentry-zapcore v1.0.0
 	github.com/brianvoe/gofakeit/v6 v6.23.2
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.25.0
-	github.com/go-telegram/bot v0.8.1
+	github.com/go-telegram/bot v0.8.2
 	github.com/labstack/echo/v4 v4.11.2
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.0.0

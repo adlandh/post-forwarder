@@ -5,6 +5,8 @@ github.com/adlandh/echo-sentry-middleware v0.2.3 h1:uD9KPukdI2l1bkKPi39e+6nOMgnF
 github.com/adlandh/echo-sentry-middleware v0.2.3/go.mod h1:I85hVJZ0k1T0CSvZEba/+tXB+tRlcREcDG3gQ99zUl0=
 github.com/adlandh/echo-zap-middleware v0.2.2 h1:VeYOR1nBeJbDU2UXym55wVgPRg/jjgzRh8gjB/zk8dQ=
 github.com/adlandh/echo-zap-middleware v0.2.2/go.mod h1:oDMLz+jNtUEynlG6x+JTzpsrfG/3lWSOp0zy20lsiPc=
+github.com/adlandh/echo-zap-middleware v1.0.0 h1:wpYtPVeKcJJeLFQqcgTzToOkLchMfTzaHLueCGzp0V4=
+github.com/adlandh/echo-zap-middleware v1.0.0/go.mod h1:IbsMIAR6TkQyHia9pdDyKHf/xrcmBA5VZI/sZ9tvGdo=
 github.com/adlandh/gowrap-templates v0.1.1 h1:nKf3F6qXk+zE4Fdg/MgsoErpVEh4qZyQc3gPfj7QGQQ=
 github.com/adlandh/gowrap-templates v0.1.1/go.mod h1:HlC7oJhY3bzBUpeJr/gnjC0gzThGUl9T0QJrsVglNuk=
 github.com/adlandh/sentry-zapcore v1.0.0 h1:2p295SYsBOwU3NUOoeCcGaat4lHUxQhDK2lIi1rdUns=
@@ -43,6 +45,8 @@ github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible h1:2cauKuaEL
 github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible/go.mod h1:qf9acutJ8cwBUhm1bqgz6Bei9/C/c93FPDljKWwsOgM=
 github.com/go-telegram/bot v0.8.1 h1:tSHGYsicV8+1Xc+/BcCOW1QCmf+RF9QGqlxQSv8CLAk=
 github.com/go-telegram/bot v0.8.1/go.mod h1:i2TRs7fXWIeaceF3z7KzsMt/he0TwkVC680mvdTFYeM=
+github.com/go-telegram/bot v0.8.2 h1:5EeOHM6p4H1X1IyXB0uaqw1tnWqLCW8StJAwqfQh+UU=
+github.com/go-telegram/bot v0.8.2/go.mod h1:i2TRs7fXWIeaceF3z7KzsMt/he0TwkVC680mvdTFYeM=
 github.com/go-test/deep v1.0.4 h1:u2CU3YKy9I2pmu9pX0eq50wCgjfGIt539SqR7FbHiho=
 github.com/go-test/deep v1.0.4/go.mod h1:wGDj63lr65AM2AQyKZd/NYHGb0R+1RLqB8NKt3aSFNA=
 github.com/gobwas/glob v0.2.3 h1:A4xDbljILXROh+kObIiy5kIaPYD8e96x1tgBhUI5J+Y=

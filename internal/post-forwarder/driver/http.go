@@ -27,7 +27,11 @@ func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPSer
 }
 
 func (h HTTPServer) HealthCheck(ctx echo.Context) error {
-	return fmt.Errorf("error sending response: %w", ctx.String(http.StatusOK, "Ok"))
+	if err := ctx.String(http.StatusOK, "Ok"); err != nil {
+		return fmt.Errorf("error sending response: %w", err)
+	}
+
+	return nil
 }
 
 func (h HTTPServer) PostWebhook(ctx echo.Context, token string, service string) error {
@@ -70,5 +74,9 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return fmt.Errorf("error sending response: %w", ctx.NoContent(http.StatusOK))
+	if err := ctx.NoContent(http.StatusOK); err != nil {
+		return fmt.Errorf("error sending response: %w", err)
+	}
+
+	return nil
 }

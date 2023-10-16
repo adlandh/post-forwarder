@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"net/http"
 	"time"
 
 	echo_sentry_middleware "github.com/adlandh/echo-sentry-middleware"
@@ -39,14 +41,20 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 	lc.Append(fx.Hook{
 		OnStart: func(_ context.Context) error {
-			return fmt.Errorf("error initializing sentry: %w", sentry.Init(sentry.ClientOptions{
+			err := sentry.Init(sentry.ClientOptions{
 				Dsn:                cfg.Sentry.DSN,
 				EnableTracing:      true,
 				TracesSampleRate:   cfg.Sentry.TracesSampleRate,
 				ProfilesSampleRate: cfg.Sentry.ProfilesSampleRate,
 				MaxErrorDepth:      1,
 				Environment:        cfg.Sentry.Environment,
-			}))
+			})
+
+			if err != nil {
+				return fmt.Errorf("error initializing sentry: %w", err)
+			}
+
+			return nil
 		},
 		OnStop: func(ctx context.Context) error {
 			sentry.Flush(2 * time.Second)
@@ -85,11 +93,18 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 			driver.RegisterHandlers(e, server)
 			go func() {
 				err = e.Start(":" + cfg.Port)
+				if err != nil && !errors.Is(err, http.ErrServerClosed) {
+					log.Error("error starting echo server", zap.Error(err))
+				}
 			}()
-			return fmt.Errorf("error starting echo server: %w", err)
+			return nil
 		},
 		OnStop: func(ctx context.Context) error {
-			return fmt.Errorf("error shutting down echo server: %w", e.Shutdown(ctx))
+			err := e.Shutdown(ctx)
+			if err != nil {
+				return fmt.Errorf("error shutting down echo server: %w", err)
+			}
+			return nil
 		},
 	})
 
