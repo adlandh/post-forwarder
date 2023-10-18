@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
@@ -39,7 +40,7 @@ func (s *HttpServerTestSuite) SetupSuite() {
 		err := s.e.Start(":" + strconv.Itoa(port))
 		s.Require().True(err == nil || errors.Is(err, http.ErrServerClosed))
 	}()
-
+	time.Sleep(time.Second)
 	s.tester = httpexpect.Default(s.T(), "http://localhost:"+strconv.Itoa(port))
 }
 
