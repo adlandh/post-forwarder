@@ -2,6 +2,7 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 	"strings"
 
@@ -10,6 +11,7 @@ import (
 
 const TelegramService = "telegram"
 const SlackService = "slack"
+const PushoverService = "pushover"
 
 type SentryConfig struct {
 	DSN                string  `env:"DSN"`
@@ -28,11 +30,17 @@ type SlackConfig struct {
 	ChannelIDs []string `env:"CHANNEL_IDS" envSeparator:","`
 }
 
+type PushoverConfig struct {
+	Token string `env:"TOKEN"`
+	User  string `env:"USER"`
+}
+
 type Config struct {
 	Port      string         `env:"PORT" envDefault:"8080"`
 	AuthToken string         `env:"AUTH_TOKEN,notEmpty"`
 	Telegram  TelegramConfig `envPrefix:"TELEGRAM_"`
 	Slack     SlackConfig    `envPrefix:"SLACK_"`
+	Pushover  PushoverConfig `envPrefix:"PUSHOVER_"`
 	Notifiers []string       `env:"NOTIFIERS" envSeparator:"," envDefault:"TELEGRAM"`
 	Sentry    SentryConfig   `envPrefix:"SENTRY_"`
 }
@@ -53,28 +61,63 @@ func NewConfig() (*Config, error) {
 	return &cfg, nil
 }
 
-func checkNotifiers(cfg Config) error {
+func checkNotifiers(cfg Config) (err error) {
 	for i := range cfg.Notifiers {
 		cfg.Notifiers[i] = strings.ToLower(cfg.Notifiers[i])
 		switch cfg.Notifiers[i] {
 		case TelegramService:
-			if cfg.Telegram.Token == "" {
-				return fmt.Errorf("empty telegram token")
-			}
-
-			if len(cfg.Telegram.ChatIDs) == 0 {
-				return fmt.Errorf("no chat id provided")
+			err2 := checkTelegramConfig(cfg.Telegram)
+			if err2 != nil {
+				err = errors.Join(err, err2)
 			}
 		case SlackService:
-			if cfg.Slack.Token == "" {
-				return fmt.Errorf("empty slack api token")
+			err2 := checkSlackConfig(cfg.Slack)
+			if err2 != nil {
+				err = errors.Join(err, err2)
 			}
-
-			if len(cfg.Slack.ChannelIDs) == 0 {
-				return fmt.Errorf("no channel id provided")
+		case PushoverService:
+			err2 := checkPushoverConfig(cfg.Pushover)
+			if err2 != nil {
+				err = errors.Join(err, err2)
 			}
 		}
 	}
 
-	return nil
+	return
+}
+
+func checkPushoverConfig(cfg PushoverConfig) (err error) {
+	if cfg.Token == "" {
+		err = fmt.Errorf("empty pushover application api token")
+	}
+
+	if cfg.User == "" {
+		err = errors.Join(err, fmt.Errorf("empty pushover user api token"))
+	}
+
+	return
+}
+
+func checkSlackConfig(cfg SlackConfig) (err error) {
+	if cfg.Token == "" {
+		err = fmt.Errorf("empty slack api token")
+	}
+
+	if len(cfg.ChannelIDs) == 0 {
+		err = errors.Join(err, fmt.Errorf("no channel id provided"))
+	}
+
+	return
+}
+
+func checkTelegramConfig(cfg TelegramConfig) (err error) {
+	if cfg.Token == "" {
+		err = fmt.Errorf("empty telegram token")
+	}
+
+	if len(cfg.ChatIDs) == 0 {
+		err = errors.Join(err, fmt.Errorf("no chat id provided"))
+	}
+
+	return
 }
