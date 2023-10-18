@@ -49,7 +49,7 @@ func (a Application) ProcessRequest(ctx context.Context, service string, msg str
 }
 
 func genSubject(service string) string {
-	return fmt.Sprintf("Message from <b>%s</b>:", service)
+	return fmt.Sprintf("Message from %s", service)
 }
 
 func limitMessageLength(subject, msg string) string {

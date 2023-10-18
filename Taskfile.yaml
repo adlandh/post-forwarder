@@ -88,7 +88,6 @@ tasks:
         desc: run app locally
         deps:
             - decorate
-            - secrets
         cmds:
             - doppler run --config dev -- go run ./internal/post-forwarder/main.go
     stop:

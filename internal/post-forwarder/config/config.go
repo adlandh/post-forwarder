@@ -10,6 +10,7 @@ import (
 
 const TelegramService = "telegram"
 const SlackService = "slack"
+const PushoverService = "pushover"
 
 type SentryConfig struct {
 	DSN                string  `env:"DSN"`
@@ -28,11 +29,17 @@ type SlackConfig struct {
 	ChannelIDs []string `env:"CHANNEL_IDS" envSeparator:","`
 }
 
+type PushoverConfig struct {
+	Token string `env:"TOKEN"`
+	User  string `env:"USER"`
+}
+
 type Config struct {
 	Port      string         `env:"PORT" envDefault:"8080"`
 	AuthToken string         `env:"AUTH_TOKEN,notEmpty"`
 	Telegram  TelegramConfig `envPrefix:"TELEGRAM_"`
 	Slack     SlackConfig    `envPrefix:"SLACK_"`
+	Pushover  PushoverConfig `envPrefix:"PUSHOVER_"`
 	Notifiers []string       `env:"NOTIFIERS" envSeparator:"," envDefault:"TELEGRAM"`
 	Sentry    SentryConfig   `envPrefix:"SENTRY_"`
 }
@@ -72,6 +79,14 @@ func checkNotifiers(cfg Config) error {
 
 			if len(cfg.Slack.ChannelIDs) == 0 {
 				return fmt.Errorf("no channel id provided")
+			}
+		case PushoverService:
+			if cfg.Pushover.Token == "" {
+				return fmt.Errorf("empty pushover application api token")
+			}
+
+			if cfg.Pushover.User == "" {
+				return fmt.Errorf("empty pushover user api token")
 			}
 		}
 	}
