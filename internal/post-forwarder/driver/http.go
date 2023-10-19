@@ -22,6 +22,8 @@ type HTTPServer struct {
 
 var _ ServerInterface = (*HTTPServer)(nil)
 
+const ErrorSendingResponseMessage = "error sending response: %w"
+
 func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPServer {
 	return &HTTPServer{
 		token: cfg.AuthToken,
@@ -31,7 +33,7 @@ func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPSer
 
 func (h HTTPServer) HealthCheck(ctx echo.Context) error {
 	if err := ctx.String(http.StatusOK, "Ok"); err != nil {
-		return fmt.Errorf("error sending response: %w", err)
+		return fmt.Errorf(ErrorSendingResponseMessage, err)
 	}
 
 	return nil
@@ -78,7 +80,7 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 	}
 
 	if err := ctx.NoContent(http.StatusOK); err != nil {
-		return fmt.Errorf("error sending response: %w", err)
+		return fmt.Errorf(ErrorSendingResponseMessage, err)
 	}
 
 	return nil
@@ -115,7 +117,7 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 	})
 
 	if err != nil {
-		return fmt.Errorf("error sending response: %w", err)
+		return fmt.Errorf(ErrorSendingResponseMessage, err)
 	}
 
 	return nil

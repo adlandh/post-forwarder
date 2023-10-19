@@ -20,6 +20,13 @@ import (
 	"github.com/stretchr/testify/suite"
 )
 
+var fakeError = errors.New("fake error")
+
+const (
+	apiRoot    = "/api/"
+	apiMessage = apiRoot + "message/"
+)
+
 type HttpServerTestSuite struct {
 	suite.Suite
 	e      *echo.Echo
@@ -68,7 +75,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	request := gofakeit.SentenceSimple()
 	s.Run("happy case", func() {
 		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(nil).Once()
-		s.tester.POST("/api/" + s.token + "/" + service).
+		s.tester.POST(apiRoot + s.token + "/" + service).
 			WithText(request).
 			Expect().
 			Status(http.StatusOK).NoContent()
@@ -76,18 +83,18 @@ func (s *HttpServerTestSuite) TestWebhook() {
 
 	s.Run("wrong token", func() {
 		token := gofakeit.UUID()
-		s.tester.POST("/api/" + token + "/" + service).
+		s.tester.POST(apiRoot + token + "/" + service).
 			WithText("test").
 			Expect().
 			Status(http.StatusUnauthorized)
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(errors.New("fake error")).Once()
-		s.tester.POST("/api/"+s.token+"/"+service).
+		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(fakeError).Once()
+		s.tester.POST(apiRoot+s.token+"/"+service).
 			WithText(request).
 			Expect().
-			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", "fake error")
+			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", fakeError.Error())
 	})
 }
 
@@ -98,7 +105,7 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 
 	s.Run("happy case", func() {
 		s.app.On("ShowMessage", mock.Anything, id).Return(msg, createdAt, nil).Once()
-		s.tester.GET("/api/message/"+id).
+		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusOK).JSON().Object().HasValue("message", msg).HasValue("created_at", createdAt).
 			HasValue("id", id)
@@ -106,23 +113,23 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 
 	s.Run("invalid id", func() {
 		invalidId := gofakeit.Word()
-		s.tester.GET("/api/message/" + invalidId).
+		s.tester.GET(apiMessage + invalidId).
 			Expect().
 			Status(http.StatusBadRequest).JSON().Object().ContainsKey("message")
 	})
 
 	s.Run("not found", func() {
 		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
-		s.tester.GET("/api/message/"+id).
+		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusNotFound).JSON().Object().HasValue("message", "not found")
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, errors.New("fake error")).Once()
-		s.tester.GET("/api/message/"+id).
+		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, fakeError).Once()
+		s.tester.GET(apiMessage+id).
 			Expect().
-			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", "fake error")
+			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", fakeError.Error())
 	})
 }
 
