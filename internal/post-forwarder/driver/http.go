@@ -1,6 +1,7 @@
 package driver
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -8,6 +9,8 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+	"github.com/gofrs/uuid"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 
 	"github.com/labstack/echo/v4"
 )
@@ -69,12 +72,49 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 		msg += string(body)
 	}
 
-	err = h.app.ProcessRequest(ctx.Request().Context(), service, msg)
+	err = h.app.ProcessRequest(ctx.Request().Context(), getURLFromRequest(ctx.Request()), service, msg)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
 	if err := ctx.NoContent(http.StatusOK); err != nil {
+		return fmt.Errorf("error sending response: %w", err)
+	}
+
+	return nil
+}
+
+func getURLFromRequest(request *http.Request) string {
+	scheme := "http"
+	if request.TLS != nil {
+		scheme += "s"
+	}
+
+	return fmt.Sprintf("%s://%s", scheme, request.Host)
+}
+
+func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
+	newUUID, err := uuid.FromString(id)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+	}
+
+	msg, createdAt, err := h.app.ShowMessage(ctx.Request().Context(), id)
+	if err != nil {
+		if errors.Is(domain.ErrorNotFound, err) {
+			return echo.NewHTTPError(http.StatusNotFound, domain.ErrorNotFound.Error())
+		}
+
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
+	}
+
+	err = ctx.JSON(http.StatusOK, Message{
+		CreatedAt: createdAt,
+		Id:        openapi_types.UUID(newUUID),
+		Message:   msg,
+	})
+
+	if err != nil {
 		return fmt.Errorf("error sending response: %w", err)
 	}
 

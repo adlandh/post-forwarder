@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
+	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/stretchr/testify/mock"
 
@@ -25,6 +26,7 @@ type HttpServerTestSuite struct {
 	tester *httpexpect.Expect
 	token  string
 	app    *mocks.ApplicationInterface
+	url    string
 }
 
 func (s *HttpServerTestSuite) SetupSuite() {
@@ -41,7 +43,8 @@ func (s *HttpServerTestSuite) SetupSuite() {
 		s.Require().True(err == nil || errors.Is(err, http.ErrServerClosed))
 	}()
 	time.Sleep(time.Second)
-	s.tester = httpexpect.Default(s.T(), "http://localhost:"+strconv.Itoa(port))
+	s.url = "http://localhost:" + strconv.Itoa(port)
+	s.tester = httpexpect.Default(s.T(), s.url)
 }
 
 func (s *HttpServerTestSuite) TearDownSuite() {
@@ -64,8 +67,8 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	service := gofakeit.Word()
 	request := gofakeit.SentenceSimple()
 	s.Run("happy case", func() {
-		s.app.On("ProcessRequest", mock.Anything, service, request).Return(nil).Once()
-		s.tester.POST("/api/"+s.token+"/"+service).WithHeader(echo.HeaderContentType, echo.MIMEApplicationJSON).
+		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(nil).Once()
+		s.tester.POST("/api/" + s.token + "/" + service).
 			WithText(request).
 			Expect().
 			Status(http.StatusOK).NoContent()
@@ -73,16 +76,51 @@ func (s *HttpServerTestSuite) TestWebhook() {
 
 	s.Run("wrong token", func() {
 		token := gofakeit.UUID()
-		s.tester.POST("/api/"+token+"/"+service).WithHeader(echo.HeaderContentType, echo.MIMEApplicationJSON).
+		s.tester.POST("/api/" + token + "/" + service).
 			WithText("test").
 			Expect().
 			Status(http.StatusUnauthorized)
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ProcessRequest", mock.Anything, service, request).Return(errors.New("fake error")).Once()
-		s.tester.POST("/api/"+s.token+"/"+service).WithHeader(echo.HeaderContentType, echo.MIMEApplicationJSON).
+		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(errors.New("fake error")).Once()
+		s.tester.POST("/api/"+s.token+"/"+service).
 			WithText(request).
+			Expect().
+			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", "fake error")
+	})
+}
+
+func (s *HttpServerTestSuite) TestShowMessage() {
+	id := gofakeit.UUID()
+	msg := gofakeit.SentenceSimple()
+	createdAt := gofakeit.Date()
+
+	s.Run("happy case", func() {
+		s.app.On("ShowMessage", mock.Anything, id).Return(msg, createdAt, nil).Once()
+		s.tester.GET("/api/message/"+id).
+			Expect().
+			Status(http.StatusOK).JSON().Object().HasValue("message", msg).HasValue("created_at", createdAt).
+			HasValue("id", id)
+	})
+
+	s.Run("invalid id", func() {
+		invalidId := gofakeit.Word()
+		s.tester.GET("/api/message/" + invalidId).
+			Expect().
+			Status(http.StatusBadRequest).JSON().Object().ContainsKey("message")
+	})
+
+	s.Run("not found", func() {
+		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
+		s.tester.GET("/api/message/"+id).
+			Expect().
+			Status(http.StatusNotFound).JSON().Object().HasValue("message", "not found")
+	})
+
+	s.Run("error in app", func() {
+		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, errors.New("fake error")).Once()
+		s.tester.GET("/api/message/"+id).
 			Expect().
 			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", "fake error")
 	})

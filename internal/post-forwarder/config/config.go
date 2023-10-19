@@ -35,12 +35,18 @@ type PushoverConfig struct {
 	User  string `env:"USER"`
 }
 
+type RedisConfig struct {
+	URL    string `env:"URL,notEmpty"`
+	Prefix string `env:"PREFIX" envDefault:"post-forwarder"`
+}
+
 type Config struct {
 	Port      string         `env:"PORT" envDefault:"8080"`
 	AuthToken string         `env:"AUTH_TOKEN,notEmpty"`
 	Telegram  TelegramConfig `envPrefix:"TELEGRAM_"`
 	Slack     SlackConfig    `envPrefix:"SLACK_"`
 	Pushover  PushoverConfig `envPrefix:"PUSHOVER_"`
+	Redis     RedisConfig    `envPrefix:"REDIS_"`
 	Notifiers []string       `env:"NOTIFIERS" envSeparator:"," envDefault:"TELEGRAM"`
 	Sentry    SentryConfig   `envPrefix:"SENTRY_"`
 }

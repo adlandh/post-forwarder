@@ -5,6 +5,20 @@ info:
   version: 1.1.0
 servers:
   - url: 'http://localhost:8080'
+components:
+  schemas:
+    Message:
+      type: object
+      required: [id,created_at,message]
+      properties:
+        id:
+          type: string
+          format: uuid
+        created_at:
+          type: string
+          format: date-time
+        message:
+          type: string
 paths:
   /:
     get:
@@ -57,4 +71,23 @@ paths:
       responses:
         '200':
           description: ok
-
+  /api/message/{id}:
+    get:
+      operationId: showMessage
+      description: show long message
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: message id
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '404':
+          description: not found

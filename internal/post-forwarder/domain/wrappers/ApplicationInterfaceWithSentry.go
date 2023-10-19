@@ -8,6 +8,7 @@ package wrappers
 
 import (
 	"context"
+	"time"
 
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
@@ -38,17 +39,35 @@ func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instanc
 }
 
 // ProcessRequest implements domain.ApplicationInterface
-func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, service string, msg string) (err error) {
+func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, url string, service string, msg string) (err error) {
 	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ProcessRequest", sentry.WithTransactionName("domain.ApplicationInterface.ProcessRequest"))
 	ctx = span.Context()
 
 	defer func() {
 		_d._spanDecorator(span, map[string]interface{}{
 			"ctx":     ctx,
+			"url":     url,
 			"service": service,
 			"msg":     msg}, map[string]interface{}{
 			"err": err})
 		span.Finish()
 	}()
-	return _d.ApplicationInterface.ProcessRequest(ctx, service, msg)
+	return _d.ApplicationInterface.ProcessRequest(ctx, url, service, msg)
+}
+
+// ShowMessage implements domain.ApplicationInterface
+func (_d ApplicationInterfaceWithSentry) ShowMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
+	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ShowMessage", sentry.WithTransactionName("domain.ApplicationInterface.ShowMessage"))
+	ctx = span.Context()
+
+	defer func() {
+		_d._spanDecorator(span, map[string]interface{}{
+			"ctx": ctx,
+			"id":  id}, map[string]interface{}{
+			"msg":       msg,
+			"createdAt": createdAt,
+			"err":       err})
+		span.Finish()
+	}()
+	return _d.ApplicationInterface.ShowMessage(ctx, id)
 }
