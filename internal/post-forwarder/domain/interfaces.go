@@ -10,7 +10,7 @@ import (
 // ApplicationInterface in an interface for application.Application
 type ApplicationInterface interface {
 	ProcessRequest(ctx context.Context, url string, service string, msg string) (err error)
-	ShowMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error)
+	GetMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error)
 }
 
 // Notifier in an interface for Notifiers

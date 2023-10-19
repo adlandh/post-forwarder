@@ -38,6 +38,23 @@ func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instanc
 	return d
 }
 
+// GetMessage implements domain.ApplicationInterface
+func (_d ApplicationInterfaceWithSentry) GetMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
+	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.GetMessage", sentry.WithTransactionName("domain.ApplicationInterface.GetMessage"))
+	ctx = span.Context()
+
+	defer func() {
+		_d._spanDecorator(span, map[string]interface{}{
+			"ctx": ctx,
+			"id":  id}, map[string]interface{}{
+			"msg":       msg,
+			"createdAt": createdAt,
+			"err":       err})
+		span.Finish()
+	}()
+	return _d.ApplicationInterface.GetMessage(ctx, id)
+}
+
 // ProcessRequest implements domain.ApplicationInterface
 func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, url string, service string, msg string) (err error) {
 	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ProcessRequest", sentry.WithTransactionName("domain.ApplicationInterface.ProcessRequest"))
@@ -53,21 +70,4 @@ func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, url
 		span.Finish()
 	}()
 	return _d.ApplicationInterface.ProcessRequest(ctx, url, service, msg)
-}
-
-// ShowMessage implements domain.ApplicationInterface
-func (_d ApplicationInterfaceWithSentry) ShowMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ShowMessage", sentry.WithTransactionName("domain.ApplicationInterface.ShowMessage"))
-	ctx = span.Context()
-
-	defer func() {
-		_d._spanDecorator(span, map[string]interface{}{
-			"ctx": ctx,
-			"id":  id}, map[string]interface{}{
-			"msg":       msg,
-			"createdAt": createdAt,
-			"err":       err})
-		span.Finish()
-	}()
-	return _d.ApplicationInterface.ShowMessage(ctx, id)
 }

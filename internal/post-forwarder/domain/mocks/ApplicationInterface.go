@@ -15,22 +15,8 @@ type ApplicationInterface struct {
 	mock.Mock
 }
 
-// ProcessRequest provides a mock function with given fields: ctx, url, service, msg
-func (_m *ApplicationInterface) ProcessRequest(ctx context.Context, url string, service string, msg string) error {
-	ret := _m.Called(ctx, url, service, msg)
-
-	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) error); ok {
-		r0 = rf(ctx, url, service, msg)
-	} else {
-		r0 = ret.Error(0)
-	}
-
-	return r0
-}
-
-// ShowMessage provides a mock function with given fields: ctx, id
-func (_m *ApplicationInterface) ShowMessage(ctx context.Context, id string) (string, time.Time, error) {
+// GetMessage provides a mock function with given fields: ctx, id
+func (_m *ApplicationInterface) GetMessage(ctx context.Context, id string) (string, time.Time, error) {
 	ret := _m.Called(ctx, id)
 
 	var r0 string
@@ -58,6 +44,20 @@ func (_m *ApplicationInterface) ShowMessage(ctx context.Context, id string) (str
 	}
 
 	return r0, r1, r2
+}
+
+// ProcessRequest provides a mock function with given fields: ctx, url, service, msg
+func (_m *ApplicationInterface) ProcessRequest(ctx context.Context, url string, service string, msg string) error {
+	ret := _m.Called(ctx, url, service, msg)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, string, string, string) error); ok {
+		r0 = rf(ctx, url, service, msg)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
 }
 
 // NewApplicationInterface creates a new instance of ApplicationInterface. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.

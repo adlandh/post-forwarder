@@ -59,7 +59,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 	return nil
 }
 
-func (a Application) ShowMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
+func (a Application) GetMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
 	msg, createdAt, err = a.storage.Read(ctx, id)
 	if err == nil || errors.Is(err, domain.ErrorNotFound) {
 		return

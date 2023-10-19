@@ -104,7 +104,7 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 	createdAt := gofakeit.Date()
 
 	s.Run("happy case", func() {
-		s.app.On("ShowMessage", mock.Anything, id).Return(msg, createdAt, nil).Once()
+		s.app.On("GetMessage", mock.Anything, id).Return(msg, createdAt, nil).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusOK).JSON().Object().HasValue("message", msg).HasValue("created_at", createdAt).
@@ -119,14 +119,14 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 	})
 
 	s.Run("not found", func() {
-		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
+		s.app.On("GetMessage", mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusNotFound).JSON().Object().HasValue("message", "not found")
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ShowMessage", mock.Anything, id).Return("", time.Time{}, fakeError).Once()
+		s.app.On("GetMessage", mock.Anything, id).Return("", time.Time{}, fakeError).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", fakeError.Error())

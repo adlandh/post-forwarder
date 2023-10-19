@@ -101,7 +101,7 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
 
-	msg, createdAt, err := h.app.ShowMessage(ctx.Request().Context(), id)
+	msg, createdAt, err := h.app.GetMessage(ctx.Request().Context(), id)
 	if err != nil {
 		if errors.Is(domain.ErrorNotFound, err) {
 			return echo.NewHTTPError(http.StatusNotFound, domain.ErrorNotFound.Error())
