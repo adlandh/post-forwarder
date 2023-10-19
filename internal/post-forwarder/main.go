@@ -26,12 +26,12 @@ import (
 	"go.uber.org/zap"
 )
 
-func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger) *application.Application {
+func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *application.Application {
 	if cfg.Sentry.DSN != "" {
 		logger = logger.WithOptions(sentryZapcore.WithSentryOption(sentryZapcore.WithStackTrace()))
 	}
 
-	return application.NewApplication(notifier, logger)
+	return application.NewApplication(notifier, logger, storage)
 }
 
 func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
@@ -136,6 +136,14 @@ func decorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
 	return md
 }
 
+func decorateMessageStorage(cfg *config.Config, ms domain.MessageStorage) domain.MessageStorage {
+	if cfg.Sentry.DSN != "" {
+		ms = wrappers.NewMessageStorageWithSentry(ms, "redis")
+	}
+
+	return ms
+}
+
 func main() {
 	fx.New(createService()).Run()
 }
@@ -151,6 +159,10 @@ func createService() fx.Option {
 			config.NewConfig,
 			fx.Annotate(
 				zap.NewDevelopment,
+			),
+			fx.Annotate(
+				driven.NewRedisStorage,
+				fx.As(new(domain.MessageStorage)),
 			),
 			fx.Annotate(
 				driven.NewNotifiers,
@@ -169,6 +181,7 @@ func createService() fx.Option {
 			decorateServerInterface,
 			decorateApplicationInterface,
 			decorateNotifier,
+			decorateMessageStorage,
 		),
 		fx.Invoke(
 			newSentry,

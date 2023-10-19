@@ -6,16 +6,28 @@ package driver
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/oapi-codegen/runtime"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
+
+// Message defines model for Message.
+type Message struct {
+	CreatedAt time.Time          `json:"created_at"`
+	Id        openapi_types.UUID `json:"id"`
+	Message   string             `json:"message"`
+}
 
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
 
 	// (GET /)
 	HealthCheck(ctx echo.Context) error
+
+	// (GET /api/message/{id})
+	ShowMessage(ctx echo.Context, id string) error
 
 	// (GET /api/{token}/{service})
 	GetWebhook(ctx echo.Context, token string, service string) error
@@ -35,6 +47,22 @@ func (w *ServerInterfaceWrapper) HealthCheck(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshaled arguments
 	err = w.Handler.HealthCheck(ctx)
+	return err
+}
+
+// ShowMessage converts echo context to params.
+func (w *ServerInterfaceWrapper) ShowMessage(ctx echo.Context) error {
+	var err error
+	// ------------- Path parameter "id" -------------
+	var id string
+
+	err = runtime.BindStyledParameterWithLocation("simple", false, "id", runtime.ParamLocationPath, ctx.Param("id"), &id)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter id: %s", err))
+	}
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.ShowMessage(ctx, id)
 	return err
 }
 
@@ -115,6 +143,7 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	}
 
 	router.GET(baseURL+"/", wrapper.HealthCheck)
+	router.GET(baseURL+"/api/message/:id", wrapper.ShowMessage)
 	router.GET(baseURL+"/api/:token/:service", wrapper.GetWebhook)
 	router.POST(baseURL+"/api/:token/:service", wrapper.PostWebhook)
 

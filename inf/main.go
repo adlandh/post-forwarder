@@ -7,6 +7,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 	"github.com/pulumiverse/pulumi-sentry/sdk/go/sentry"
+	"github.com/upstash/pulumi-upstash/sdk/go/upstash"
 )
 
 func main() {
@@ -14,6 +15,10 @@ func main() {
 		conf := config.New(ctx, "")
 
 		if err := setupGCPProject(ctx, conf); err != nil {
+			return err
+		}
+
+		if err := setupRedis(ctx, conf); err != nil {
 			return err
 		}
 
@@ -28,6 +33,25 @@ func main() {
 
 		return nil
 	})
+}
+
+func setupRedis(ctx *pulumi.Context, conf *config.Config) error {
+	redis, err := upstash.NewRedisDatabase(ctx, conf.Get("redisdb"), &upstash.RedisDatabaseArgs{
+		DatabaseName: pulumi.String(conf.Get("redisdb")),
+		Region:       pulumi.String(conf.Get("redisregion")),
+		AutoScale:    pulumi.Bool(false),
+		Eviction:     pulumi.Bool(true),
+		Tls:          pulumi.Bool(true),
+	})
+	if err != nil {
+		return err
+	}
+
+	ctx.Export("Redis Database Endpoint", redis.Endpoint)
+	ctx.Export("Redis Database Post", redis.Port)
+	ctx.Export("Redis Database Password", redis.Password)
+
+	return nil
 }
 
 func setupSentryProject(ctx *pulumi.Context, project string, org string, team string) error {

@@ -7,7 +7,6 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/nikoksr/notify"
-	"github.com/nikoksr/notify/service/pushover"
 	"github.com/nikoksr/notify/service/slack"
 	"github.com/nikoksr/notify/service/telegram"
 )
@@ -39,7 +38,7 @@ func NewNotifiers(cfg *config.Config) (*notify.Notify, error) {
 
 			notify.UseServices(slackService)
 		case config.PushoverService:
-			pushoverService := pushover.New(cfg.Pushover.Token)
+			pushoverService := NewPushover(cfg.Pushover.Token)
 			pushoverService.AddReceivers(cfg.Pushover.User)
 
 			notify.UseServices(pushoverService)

@@ -89,3 +89,21 @@ func (_d ServerInterfaceWithSentry) PostWebhook(ctx echo.Context, token string, 
 	ctx.SetRequest(request.WithContext(ctxNew))
 	return _d.ServerInterface.PostWebhook(ctx, token, service)
 }
+
+// ShowMessage implements ServerInterface
+func (_d ServerInterfaceWithSentry) ShowMessage(ctx echo.Context, id string) (err error) {
+	request := ctx.Request()
+	savedCtx := request.Context()
+	span := sentry.StartSpan(savedCtx, _d._instance+".ServerInterface.ShowMessage", sentry.WithTransactionName("ServerInterface.ShowMessage"))
+	ctxNew := span.Context()
+
+	defer func() {
+		_d._spanDecorator(span, map[string]interface{}{
+			"ctx": ctx,
+			"id":  id}, map[string]interface{}{
+			"err": err})
+		span.Finish()
+	}()
+	ctx.SetRequest(request.WithContext(ctxNew))
+	return _d.ServerInterface.ShowMessage(ctx, id)
+}

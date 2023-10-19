@@ -14,38 +14,50 @@ import (
 
 func TestProcessRequest(t *testing.T) {
 	notifiers := new(mocks.Notifier)
+	storage := new(mocks.MessageStorage)
 	logger := zaptest.NewLogger(t)
-	app := NewApplication(notifiers, logger)
+	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
 	msg := gofakeit.SentenceSimple()
 	ctx := context.Background()
+	url := gofakeit.URL()
 
 	subject := genSubject(service)
 
 	t.Run("happy case", func(t *testing.T) {
 		notifiers.On("Send", ctx, subject, msg).Return(nil).Once()
-		err := app.ProcessRequest(ctx, service, msg)
+		err := app.ProcessRequest(ctx, url, service, msg)
 		require.NoError(t, err)
 	})
 
 	t.Run("happy case with long string", func(t *testing.T) {
 		longMsg := strings.Repeat("A", MaxMessageLength+1)
 		require.Greater(t, len(longMsg), MaxMessageLength)
-		shortenMsg := limitMessageLength(subject, longMsg)
-		require.LessOrEqual(t, len(subject+"\n"+shortenMsg), MaxMessageLength)
-		notifiers.On("Send", ctx, subject, shortenMsg).Return(nil).Once()
-		err := app.ProcessRequest(ctx, service, longMsg)
+		id := gofakeit.UUID()
+		storage.On("Store", ctx, longMsg).Return(id, nil).Once()
+		notifiers.On("Send", ctx, subject, genURL(url, id)).Return(nil).Once()
+		err := app.ProcessRequest(ctx, url, service, longMsg)
 		require.NoError(t, err)
 	})
 
 	t.Run("error case", func(t *testing.T) {
 		fakeErr := errors.New(gofakeit.SentenceSimple())
 		notifiers.On("Send", ctx, subject, msg).Return(fakeErr).Once()
-		err := app.ProcessRequest(ctx, service, msg)
+		err := app.ProcessRequest(ctx, url, service, msg)
 		require.Error(t, err)
 		require.Equal(t, err.Error(), ErrorSendingMessage)
 	})
 
+	storage.AssertExpectations(t)
 	notifiers.AssertExpectations(t)
+}
 
+func TestReplaceHtml(t *testing.T) {
+	testString := "<b>Test</b>"
+	resultString := r.ReplaceAllString(testString, "")
+	require.Equal(t, "Test", resultString)
+
+	testString = "<a href=\"https://example.com\">Test</a>"
+	resultString = r.ReplaceAllString(testString, "")
+	require.Equal(t, "Test", resultString)
 }

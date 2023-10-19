@@ -8,6 +8,7 @@ require (
 	github.com/pulumi/pulumi-gcp/sdk/v6 v6.66.0
 	github.com/pulumi/pulumi/sdk/v3 v3.84.0
 	github.com/pulumiverse/pulumi-sentry/sdk v0.0.0-20221203044705-f606e213ac13
+	github.com/upstash/pulumi-upstash/sdk v0.2.0
 )
 
 require (
