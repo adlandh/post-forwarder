@@ -63,13 +63,13 @@ tasks:
     namespace:
         desc: create new namespace in kubernetes
         cmds:
-            - kubectl apply -f docker/namespace.yaml
+            - kubectl apply -f k8s/namespace.yaml
     secrets:
         desc: create  kubernetes secrets
         deps:
             - namespace
         cmds:
-            - kubectl apply -f docker/secrets.yaml
+            - kubectl apply -f k8s/secrets.yaml
     run:
         desc: run app locally in kubernetes
         deps:
@@ -93,8 +93,8 @@ tasks:
     stop:
         desc: stop app running locally
         cmds:
-            - kubectl delete -f docker/deployment.yaml
-            - kubectl delete -f docker/namespace.yaml
+            - kubectl delete -f k8s/deployment.yaml
+            - kubectl delete -f k8s/namespace.yaml
     logs:
         desc: Show logs
         cmds:

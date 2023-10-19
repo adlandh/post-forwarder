@@ -12,4 +12,4 @@ build:
         main: ./internal/chat-id-checker
 manifests:
   rawYaml:
-    - docker/deployment.yaml
+    - k8s/deployment.yaml
