@@ -26,7 +26,7 @@ tasks:
             - decorate
             - mocks
         cmds:
-            - go test -cover -v ./...
+            - go test -cover -race -v ./...
     lint:
         desc: running linter
         dir: "internal/"
@@ -89,8 +89,7 @@ tasks:
     stop:
         desc: stop app running locally
         cmds:
-            - kubectl delete -f k8s/deployment.yaml
-            - kubectl delete -f k8s/namespace.yaml
+            - skaffold delete
     logs:
         desc: Show logs
         cmds:
