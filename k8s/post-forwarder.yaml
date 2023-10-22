@@ -33,32 +33,11 @@ spec:
       containers:
       - name: post-forwarder
         image: post-forwarder
+        env:
+          - name: REDIS_URL
+            value: redis://redis:6379
         envFrom:
           - secretRef:
               name: post-forwarder
         ports:
           - containerPort: 8080
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: chat-id-checker
-  namespace: post-forwarder
-  labels:
-    app: chat-id-checker
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: chat-id-checker
-  template:
-    metadata:
-      labels:
-        app: chat-id-checker
-    spec:
-      containers:
-        - name: chat-id-checker
-          image: chat-id-checker
-          envFrom:
-            - secretRef:
-                name: post-forwarder
