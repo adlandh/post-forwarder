@@ -1,4 +1,4 @@
-apiVersion: skaffold/v4beta6
+apiVersion: skaffold/v4beta7
 kind: Config
 metadata:
   name: post-forwarder
@@ -12,4 +12,6 @@ build:
         main: ./internal/chat-id-checker
 manifests:
   rawYaml:
-    - k8s/deployment.yaml
+    - k8s/redis.yaml
+    - k8s/post-forwarder.yaml
+    - k8s/chat-id-checker.yaml
