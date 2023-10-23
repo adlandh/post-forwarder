@@ -12,8 +12,9 @@ require (
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.25.0
 	github.com/go-telegram/bot v0.8.2
-	github.com/gofrs/uuid v4.2.0+incompatible
+	github.com/gofrs/uuid v4.4.0+incompatible
 	github.com/google/uuid v1.3.1
+	github.com/gregdel/pushover v1.2.0
 	github.com/labstack/echo/v4 v4.11.2
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.0.0
@@ -56,7 +57,6 @@ require (
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
-	github.com/gregdel/pushover v1.2.0 // indirect
 	github.com/hpcloud/tail v1.0.0 // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
 	github.com/klauspost/compress v1.17.0 // indirect
