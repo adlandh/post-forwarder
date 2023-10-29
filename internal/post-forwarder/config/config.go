@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/caarlos0/env/v9"
+	"github.com/caarlos0/env/v10"
 )
 
 const TelegramService = "telegram"

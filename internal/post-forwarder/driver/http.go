@@ -9,9 +9,7 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
-	"github.com/gofrs/uuid"
-	openapi_types "github.com/oapi-codegen/runtime/types"
-
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -96,7 +94,7 @@ func getURLFromRequest(request *http.Request) string {
 }
 
 func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
-	newUUID, err := uuid.FromString(id)
+	newUUID, err := uuid.Parse(id)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
 	}
@@ -112,7 +110,7 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 
 	err = ctx.JSON(http.StatusOK, Message{
 		CreatedAt: createdAt,
-		Id:        openapi_types.UUID(newUUID),
+		Id:        newUUID,
 		Message:   msg,
 	})
 
