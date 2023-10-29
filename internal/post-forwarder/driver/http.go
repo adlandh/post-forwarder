@@ -20,8 +20,6 @@ type HTTPServer struct {
 
 var _ ServerInterface = (*HTTPServer)(nil)
 
-const ErrorSendingResponseMessage = "error sending response: %w"
-
 func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPServer {
 	return &HTTPServer{
 		token: cfg.AuthToken,
@@ -30,11 +28,7 @@ func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPSer
 }
 
 func (h HTTPServer) HealthCheck(ctx echo.Context) error {
-	if err := ctx.String(http.StatusOK, "Ok"); err != nil {
-		return fmt.Errorf(ErrorSendingResponseMessage, err)
-	}
-
-	return nil
+	return ctx.String(http.StatusOK, "Ok")
 }
 
 func (h HTTPServer) PostWebhook(ctx echo.Context, token string, service string) error {
@@ -77,11 +71,7 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	if err := ctx.NoContent(http.StatusOK); err != nil {
-		return fmt.Errorf(ErrorSendingResponseMessage, err)
-	}
-
-	return nil
+	return ctx.NoContent(http.StatusOK)
 }
 
 func getURLFromRequest(request *http.Request) string {
@@ -108,15 +98,9 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	err = ctx.JSON(http.StatusOK, Message{
+	return ctx.JSON(http.StatusOK, Message{
 		CreatedAt: createdAt,
 		Id:        newUUID,
 		Message:   msg,
 	})
-
-	if err != nil {
-		return fmt.Errorf(ErrorSendingResponseMessage, err)
-	}
-
-	return nil
 }
