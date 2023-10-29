@@ -13,8 +13,8 @@ github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkH
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
 github.com/adlandh/echo-sentry-middleware v1.0.1 h1:qEOAhZXULFjQqb9vCVqUwBdEclx0XD0OcwiPJs/4y/Q=
 github.com/adlandh/echo-sentry-middleware v1.0.1/go.mod h1:KKqOOMpM9qHm+qrH50jrYfvH3IJlQLQ/JmRSN97Ouh4=
-github.com/adlandh/echo-zap-middleware v1.0.0 h1:wpYtPVeKcJJeLFQqcgTzToOkLchMfTzaHLueCGzp0V4=
-github.com/adlandh/echo-zap-middleware v1.0.0/go.mod h1:IbsMIAR6TkQyHia9pdDyKHf/xrcmBA5VZI/sZ9tvGdo=
+github.com/adlandh/echo-zap-middleware v1.0.1 h1:VtD5XvfkMLLE2/g+2LRxNuLa3wIHZ7xXTN3+0IglQyw=
+github.com/adlandh/echo-zap-middleware v1.0.1/go.mod h1:IbsMIAR6TkQyHia9pdDyKHf/xrcmBA5VZI/sZ9tvGdo=
 github.com/adlandh/gowrap-templates v0.1.1 h1:nKf3F6qXk+zE4Fdg/MgsoErpVEh4qZyQc3gPfj7QGQQ=
 github.com/adlandh/gowrap-templates v0.1.1/go.mod h1:HlC7oJhY3bzBUpeJr/gnjC0gzThGUl9T0QJrsVglNuk=
 github.com/adlandh/sentry-zapcore v1.0.1 h1:K4Yrmi+yJAoUXaaMooNximk8kICJJOYzm81gBhpvz7Y=
