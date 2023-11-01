@@ -68,12 +68,7 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
-	e.Use(echoZapMiddleware.MiddlewareWithConfig(log, echoZapMiddleware.ZapConfig{
-		AreHeadersDump: true,
-		IsBodyDump:     true,
-		LimitHTTPBody:  true,
-		LimitSize:      1024,
-	}))
+	e.Use(echoZapMiddleware.Middleware(log))
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
