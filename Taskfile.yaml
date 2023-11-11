@@ -1,64 +1,36 @@
 version: 3
 tasks:
-    api:
-        desc: generating http handlers
+    generate:
+        desc: generating http handlers, mocks and decorators
         sources:
-            -  api/post-forwarder.yaml
+            - api/post-forwarder.yaml
+            - internal/post-forwarder/domain/interfaces.go
+            - internal/post-forwarder/driver/http.go
         generates:
             - internal/post-forwarder/driver/openapi_gen.go
+            - internal/post-forwarder/domain/mocks/*.go
+            - internal/post-forwarder/domain/wrappers/*.go
+            - internal/post-forwarder/driver/*gen.go
         cmds:
-            - oapi-codegen -old-config-style -generate types,server -o "internal/post-forwarder/driver/openapi_gen.go" -package "driver" "api/post-forwarder.yaml"
-    mocks:
-        desc: generating mocks
-        sources:
-            - interfaces.go
-        generates:
-            - mocks/*.go
-        dir: "internal/post-forwarder/domain"
-        cmds:
-            - mockery --name ApplicationInterface
-            - mockery --name Notifier
-            - mockery --name MessageStorage
+            - go generate ./internal/post-forwarder/...
     test:
         desc: running tests
         dir: "internal/"
         deps:
-            - decorate
-            - mocks
+            - generate
         cmds:
             - go test -cover -race -v ./...
     lint:
         desc: running linter
+        deps:
+            - generate
         dir: "internal/"
         cmds:
             - golangci-lint run
-    decorate-handlers:
-        deps:
-            - api
-        desc: decorate handlers
-        dir: "internal/post-forwarder/driver"
-        sources:
-            - openapi_gen.go
-        generates:
-            - open_api_zap_gen.go
-            - open_api_sentry_gen.go
-        cmds:
-            - gowrap gen -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go
-    decorate:
-        desc: decorate interfaces
-        deps:
-            - decorate-handlers
-        dir: "internal/post-forwarder/domain"
-        sources:
-            - interfaces.go
-        generates:
-            - wrappers/*.go
-        cmds:
-            - gowrap gen -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/ApplicationInterfaceWithSentry.go
-            - gowrap gen -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/NotifierWithSentry.go
-            - gowrap gen -i MessageStorage -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl  -o wrappers/MessageStorageWithSentry.go
     deploy:
         desc: Deploy to gcp
+        deps:
+            - generate
         cmds:
             - doppler secrets substitute --config prd app-secrets.yaml.gotmpl >app-secrets.yaml
             - gcloud app deploy --quiet
@@ -75,14 +47,14 @@ tasks:
     run:
         desc: run app locally in kubernetes
         deps:
-            - decorate
+            - generate
             - secrets
         cmds:
             - skaffold run
     dev:
         desc: run app locally in kubernetes with auto build when code is changed
         deps:
-            - decorate
+            - generate
             - secrets
         cmds:
             - skaffold dev --tail
