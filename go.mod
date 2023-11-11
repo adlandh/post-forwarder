@@ -3,6 +3,7 @@ module github.com/adlandh/post-forwarder
 go 1.21
 
 require (
+	github.com/adlandh/context-logger v1.0.0
 	github.com/adlandh/echo-sentry-middleware v1.0.1
 	github.com/adlandh/echo-zap-middleware v1.0.1
 	github.com/adlandh/gowrap-templates v0.1.1
@@ -99,6 +100,8 @@ require (
 	github.com/yudai/gojsondiff v1.0.0 // indirect
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
+	go.opentelemetry.io/otel v1.19.0 // indirect
+	go.opentelemetry.io/otel/trace v1.19.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/dig v1.17.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
