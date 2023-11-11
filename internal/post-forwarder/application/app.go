@@ -8,7 +8,9 @@ import (
 	"regexp"
 	"time"
 
+	contextlogger "github.com/adlandh/context-logger"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+
 	"go.uber.org/zap"
 )
 
@@ -23,14 +25,14 @@ var _ domain.ApplicationInterface = (*Application)(nil)
 
 type Application struct {
 	notifier domain.Notifier
-	logger   *zap.Logger
+	logger   *contextlogger.ContextLogger
 	storage  domain.MessageStorage
 }
 
 func NewApplication(notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *Application {
 	return &Application{
 		notifier: notifier,
-		logger:   logger,
+		logger:   contextlogger.WithContext(logger, contextlogger.WithValueExtractor("request_id")),
 		storage:  storage,
 	}
 }
@@ -41,7 +43,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 	if isMessageLong(subject, msg) {
 		id, err := a.storage.Store(ctx, msg)
 		if err != nil {
-			a.logger.Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
+			a.logger.Ctx(ctx).Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
 			return errors.New(ErrorSendingMessage)
 		}
 
@@ -52,7 +54,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 
 	err := a.notifier.Send(ctx, subject, msg)
 	if err != nil {
-		a.logger.Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
+		a.logger.Ctx(ctx).Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
 		return errors.New(ErrorSendingMessage)
 	}
 
@@ -65,7 +67,7 @@ func (a Application) GetMessage(ctx context.Context, id string) (msg string, cre
 		return
 	}
 
-	a.logger.Error("error getting message", zap.String("id", id), zap.Error(err))
+	a.logger.Ctx(ctx).Error("error getting message", zap.String("id", id), zap.Error(err))
 
 	return msg, createdAt, fmt.Errorf("error getting message: %s", id)
 }

@@ -4,8 +4,6 @@
 
 package wrappers
 
-//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/domain -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl -o ApplicationInterfaceWithSentry.go -l ""
-
 import (
 	"context"
 	"time"

@@ -7,19 +7,23 @@ import (
 	"time"
 )
 
-// ApplicationInterface in an interface for application.Application
+//go:generate mockery --name ApplicationInterface
+//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/domain -i ApplicationInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl -o ./wrappers/ApplicationInterfaceWithSentry.go -l "" -g
 type ApplicationInterface interface {
 	ProcessRequest(ctx context.Context, url string, service string, msg string) (err error)
 	GetMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error)
 }
 
-// Notifier in an interface for Notifiers
+//go:generate mockery --name Notifier
+//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/domain -i MessageStorage -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl -o ./wrappers/MessageStorageWithSentry.go -l "" -g
 type Notifier interface {
 	Send(ctx context.Context, service, msg string) (err error)
 }
 
 var ErrorNotFound = fmt.Errorf("not found")
 
+//go:generate mockery --name MessageStorage
+//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/domain -i Notifier -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/sentry.gotmpl -o ./wrappers/NotifierWithSentry.go -l "" -g
 type MessageStorage interface {
 	Store(ctx context.Context, msg string) (id string, err error)
 	Read(ctx context.Context, id string) (msg string, createdAt time.Time, err error)

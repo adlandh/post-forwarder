@@ -4,8 +4,6 @@
 
 package driver
 
-//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/driver -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go -l ""
-
 import (
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
 	"github.com/getsentry/sentry-go"
