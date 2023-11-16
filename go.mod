@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/adlandh/context-logger v1.0.0
-	github.com/adlandh/echo-sentry-middleware v1.0.2
+	github.com/adlandh/echo-sentry-middleware v1.0.3
 	github.com/adlandh/echo-zap-middleware v1.0.3
 	github.com/adlandh/gowrap-templates v0.1.1
 	github.com/adlandh/sentry-zapcore v1.0.1
@@ -17,7 +17,7 @@ require (
 	github.com/gregdel/pushover v1.3.0
 	github.com/labstack/echo/v4 v4.11.3
 	github.com/nikoksr/notify v0.41.0
-	github.com/oapi-codegen/runtime v1.0.0
+	github.com/oapi-codegen/runtime v1.1.0
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/redis/go-redis/v9 v9.3.0
 	github.com/stretchr/testify v1.8.4
@@ -76,7 +76,7 @@ require (
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0-rc5 // indirect
-	github.com/opencontainers/runc v1.1.9 // indirect
+	github.com/opencontainers/runc v1.1.10 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/power-devops/perfstat v0.0.0-20221212215047-62379fc7944b // indirect
