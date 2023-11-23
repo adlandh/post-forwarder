@@ -4,9 +4,9 @@ go 1.21
 
 require (
 	github.com/adlandh/context-logger v1.0.1
-	github.com/adlandh/echo-sentry-middleware v1.0.3
-	github.com/adlandh/echo-zap-middleware v1.0.3
-	github.com/adlandh/gowrap-templates v0.1.2
+	github.com/adlandh/echo-sentry-middleware v1.0.4
+	github.com/adlandh/echo-zap-middleware v1.0.4
+	github.com/adlandh/gowrap-templates v1.0.0
 	github.com/adlandh/sentry-zapcore v1.0.1
 	github.com/brianvoe/gofakeit/v6 v6.24.0
 	github.com/caarlos0/env/v10 v10.0.0
