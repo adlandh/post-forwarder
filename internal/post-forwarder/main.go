@@ -73,10 +73,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
 	e.Use(middleware.RequestIDWithConfig(middleware.RequestIDConfig{
-		RequestIDHandler: func(e echo.Context, id string) {
-			ctx := context.WithValue(e.Request().Context(), domain.RequestIDKey("request_id"), id)
-			e.SetRequest(e.Request().WithContext(ctx))
-		},
+		RequestIDHandler: domain.RequestID.Saver,
 	}))
 
 	if cfg.Sentry.DSN != "" {
