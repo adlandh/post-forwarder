@@ -32,7 +32,7 @@ type Application struct {
 func NewApplication(notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *Application {
 	return &Application{
 		notifier: notifier,
-		logger:   contextlogger.WithContext(logger, contextlogger.WithValueExtractor("request_id")),
+		logger:   contextlogger.WithContext(logger, contextlogger.WithValueExtractor(domain.RequestIDKey("request_id"))),
 		storage:  storage,
 	}
 }

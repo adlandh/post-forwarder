@@ -26,8 +26,6 @@ import (
 	"go.uber.org/zap"
 )
 
-type contextKey string
-
 func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *application.Application {
 	if cfg.Sentry.DSN != "" {
 		logger = logger.WithOptions(sentryZapcore.WithSentryOption(sentryZapcore.WithStackTrace()))
@@ -76,7 +74,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.Use(middleware.BodyLimit("1M"))
 	e.Use(middleware.RequestIDWithConfig(middleware.RequestIDConfig{
 		RequestIDHandler: func(e echo.Context, id string) {
-			ctx := context.WithValue(e.Request().Context(), contextKey("request_id"), id)
+			ctx := context.WithValue(e.Request().Context(), domain.RequestIDKey("request_id"), id)
 			e.SetRequest(e.Request().WithContext(ctx))
 		},
 	}))

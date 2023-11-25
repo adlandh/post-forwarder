@@ -6,6 +6,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/require"
@@ -19,7 +20,7 @@ func TestProcessRequest(t *testing.T) {
 	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
 	msg := gofakeit.SentenceSimple()
-	ctx := context.Background()
+	ctx := context.WithValue(context.Background(), domain.RequestIDKey("request_id"), gofakeit.UUID())
 	url := gofakeit.URL()
 
 	subject := genSubject(service)

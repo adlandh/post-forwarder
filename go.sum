@@ -11,8 +11,8 @@ github.com/Microsoft/hcsshim v0.11.2/go.mod h1:smjE4dvqPX9Zldna+t5FG3rnoHhaB7QYx
 github.com/RaveNoX/go-jsoncommentstrip v1.0.0/go.mod h1:78ihd09MekBnJnxpICcwzCMzGrKSKYe4AqU6PDYYpjk=
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkHBuFDA6DUhhse0IGJ7T5bemHyNILUjvOq4=
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
-github.com/adlandh/context-logger v1.0.1 h1:dLZaJGQfmvbZmCdaxJi2Gflg1QrzH1nk+ePhmUBTYxA=
-github.com/adlandh/context-logger v1.0.1/go.mod h1:pkPKZ2dAcHPlR1TVCLS28p3kgTDBazsnyhjprRk3wtw=
+github.com/adlandh/context-logger v1.1.0 h1:CykTRTUdJEO2wrGy8A/NUhkYHMDIvNl/yc8T2f/L09A=
+github.com/adlandh/context-logger v1.1.0/go.mod h1:pkPKZ2dAcHPlR1TVCLS28p3kgTDBazsnyhjprRk3wtw=
 github.com/adlandh/echo-otel-middleware v1.0.4 h1:snvGFCccrf6biJ8JPTCIphmjOMC8fN5tNGu8QS3NG2w=
 github.com/adlandh/echo-otel-middleware v1.0.4/go.mod h1:bFzFMpUuIRGIsy3X90VPJAlCWJBFEalLusQyNlnQi9Y=
 github.com/adlandh/echo-sentry-middleware v1.0.4 h1:K4Gr5FFd1I6X616RbZP3PU1Kgas5I92BT+sBGI7qJF8=
