@@ -19,13 +19,18 @@ func TestProcessRequest(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
-	msg := gofakeit.Word()
+	msg := gofakeit.SentenceSimple()
 	ctx := context.WithValue(context.Background(), domain.RequestID, gofakeit.UUID())
 	url := gofakeit.URL()
 
 	subject := genSubject(service)
 
 	t.Run("happy case", func(t *testing.T) {
+		if isMessageLong(subject, msg) {
+			id := gofakeit.UUID()
+			storage.On("Store", ctx, msg).Return(id, nil).Once()
+		}
+
 		notifiers.On("Send", ctx, subject, msg).Return(nil).Once()
 		err := app.ProcessRequest(ctx, url, service, msg)
 		require.NoError(t, err)
