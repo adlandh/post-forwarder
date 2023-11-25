@@ -68,7 +68,6 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
 	e := echo.New()
-	e.Use(echoZapMiddleware.Middleware(log))
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
 	e.Use(middleware.BodyLimit("1M"))
@@ -85,6 +84,8 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 			IsBodyDump:     true,
 		}))
 	}
+
+	e.Use(echoZapMiddleware.Middleware(log))
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) (err error) {
