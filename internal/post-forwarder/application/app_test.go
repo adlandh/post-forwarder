@@ -19,8 +19,8 @@ func TestProcessRequest(t *testing.T) {
 	logger := zaptest.NewLogger(t)
 	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
-	msg := gofakeit.SentenceSimple()
-	ctx := context.WithValue(context.Background(), domain.RequestIDKey("request_id"), gofakeit.UUID())
+	msg := gofakeit.Word()
+	ctx := context.WithValue(context.Background(), domain.RequestID, gofakeit.UUID())
 	url := gofakeit.URL()
 
 	subject := genSubject(service)
