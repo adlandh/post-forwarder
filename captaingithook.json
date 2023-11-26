@@ -1,5 +1,0 @@
-{
-  "hooks": {
-    "pre-push": "task lint && task test"
-  }
-}
