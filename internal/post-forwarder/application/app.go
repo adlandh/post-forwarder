@@ -82,5 +82,5 @@ func isMessageLong(subject, msg string) bool {
 
 func genURL(url string, id string) string {
 	url = url + "/api/message/" + id
-	return "Full message is here: " + fmt.Sprintf("<a href=\"%s\">%s</a>", url, url)
+	return "Full message is here: " + fmt.Sprintf("<a href=%q>%s</a>", url, url)
 }
