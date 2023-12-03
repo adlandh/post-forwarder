@@ -6,7 +6,7 @@ require (
 	github.com/adlandh/context-logger v1.1.2
 	github.com/adlandh/echo-sentry-middleware v1.0.5
 	github.com/adlandh/echo-zap-middleware v1.0.5
-	github.com/adlandh/gowrap-templates v1.0.0
+	github.com/adlandh/gowrap-templates v1.0.1
 	github.com/adlandh/sentry-zapcore v1.0.2
 	github.com/brianvoe/gofakeit/v6 v6.25.0
 	github.com/caarlos0/env/v10 v10.0.0
@@ -106,14 +106,14 @@ require (
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/dig v1.17.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.15.0 // indirect
+	golang.org/x/crypto v0.16.0 // indirect
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d // indirect
 	golang.org/x/mod v0.13.0 // indirect
-	golang.org/x/net v0.18.0 // indirect
+	golang.org/x/net v0.19.0 // indirect
 	golang.org/x/sync v0.5.0 // indirect
-	golang.org/x/sys v0.14.0 // indirect
+	golang.org/x/sys v0.15.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
-	golang.org/x/time v0.4.0 // indirect
+	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.14.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
 	google.golang.org/grpc v1.59.0 // indirect
