@@ -13,6 +13,8 @@ github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkH
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
 github.com/adlandh/context-logger v1.1.2 h1:5+FoYrlwNfcfERFVDwkeZFXAi/Zi/3hi5pODYXpd+tU=
 github.com/adlandh/context-logger v1.1.2/go.mod h1:yC3tKW0HStOmmKK3PpKv3J1wgKtOfMqrK82Ec1rv2Rs=
+github.com/adlandh/context-logger v1.2.0 h1:aqZVUlFWbbAO+N4lcHD5IsoBxYZx9oV22RTfIHXa96s=
+github.com/adlandh/context-logger v1.2.0/go.mod h1:iiGcHDCczDYoaW1wYRiXWlzwjcriUcAJI4hDuTQeXwc=
 github.com/adlandh/echo-otel-middleware v1.0.5 h1:wB97UwiMmYD07Mw4QeA7t3h6X07Lhlnh/KW+nTeRv7U=
 github.com/adlandh/echo-otel-middleware v1.0.5/go.mod h1:bFzFMpUuIRGIsy3X90VPJAlCWJBFEalLusQyNlnQi9Y=
 github.com/adlandh/echo-sentry-middleware v1.0.5 h1:dJbSjU2ZEgaUbXLvrrzfU60QXyW+2vjEDO7U9pvWrmw=
@@ -25,6 +27,8 @@ github.com/adlandh/response-dumper v1.0.1 h1:U71jU9RATWSR9BX2Q+Mfqfn7pqhKaXRYaR5
 github.com/adlandh/response-dumper v1.0.1/go.mod h1:qZwuAis9oi7Z1rhRMIhLZ5X7TUhxhgYZJnZC9AAYDD8=
 github.com/adlandh/sentry-zapcore v1.0.2 h1:pvbT5GXLIaYF8yS9Obst6IDXzm2NL8xT+3LdlD3OGPk=
 github.com/adlandh/sentry-zapcore v1.0.2/go.mod h1:d0yJHN2nngAWXfdF1C6eO76xQiK2WrLawu2ZgdTELRY=
+github.com/adlandh/sentry-zapcore v1.1.0 h1:6MMPewFXSO7GCYFFqNNPh3ptTQTLZY+KkloNnq4Gg4A=
+github.com/adlandh/sentry-zapcore v1.1.0/go.mod h1:d0yJHN2nngAWXfdF1C6eO76xQiK2WrLawu2ZgdTELRY=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.0.6 h1:Yf9fFpf49Zrxb9NlQaluyE92/+X7UVHlhMNJN2sxfOI=
