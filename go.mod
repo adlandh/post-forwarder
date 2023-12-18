@@ -13,7 +13,7 @@ require (
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.25.0
 	github.com/go-telegram/bot v0.8.3
-	github.com/google/uuid v1.4.0
+	github.com/google/uuid v1.5.0
 	github.com/gregdel/pushover v1.3.0
 	github.com/labstack/echo/v4 v4.11.3
 	github.com/nikoksr/notify v0.41.0
