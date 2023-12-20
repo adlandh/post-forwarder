@@ -9,8 +9,7 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/brianvoe/gofakeit/v6"
 	"github.com/stretchr/testify/suite"
-	"github.com/testcontainers/testcontainers-go"
-	"github.com/testcontainers/testcontainers-go/wait"
+	"github.com/testcontainers/testcontainers-go/modules/redis"
 	"go.uber.org/fx/fxtest"
 )
 
@@ -21,34 +20,10 @@ type RedisStorageTestSuite struct {
 
 func (s *RedisStorageTestSuite) SetupSuite() {
 	ctx := context.Background()
+	redisContainer, err := redis.RunContainer(ctx)
 
-	req := testcontainers.ContainerRequest{
-		Image:        "redis:latest",
-		ExposedPorts: []string{"6379/tcp"},
-		WaitingFor: wait.ForAll(
-			wait.ForLog("Ready to accept connections").WithStartupTimeout(3*time.Minute),
-			wait.ForListeningPort("6379/tcp").WithStartupTimeout(3*time.Minute),
-		),
-		Name: "redis",
-	}
-
-	container, err := testcontainers.GenericContainer(ctx, testcontainers.GenericContainerRequest{
-		ContainerRequest: req,
-		Started:          true,
-	})
+	connStr, err := redisContainer.ConnectionString(ctx)
 	s.Require().NoError(err)
-
-	redisPort, err := container.MappedPort(ctx, "6379")
-	s.Require().NoError(err)
-
-	port := redisPort.Port()
-
-	host, err := container.Host(ctx)
-	s.Require().NoError(err)
-
-	if host == "" {
-		host = "localhost"
-	}
 
 	lc := fxtest.NewLifecycle(s.T())
 
@@ -56,7 +31,7 @@ func (s *RedisStorageTestSuite) SetupSuite() {
 		lc,
 		&config.Config{
 			Redis: config.RedisConfig{
-				URL:    "redis://" + host + ":" + port,
+				URL:    connStr,
 				Prefix: gofakeit.Word(),
 			},
 		})

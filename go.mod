@@ -89,6 +89,7 @@ require (
 	github.com/slack-go/slack v0.12.3 // indirect
 	github.com/stretchr/objx v0.5.1 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
+	github.com/testcontainers/testcontainers-go/modules/redis v0.26.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/tklauser/numcpus v0.6.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
