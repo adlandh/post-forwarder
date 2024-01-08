@@ -17,7 +17,7 @@ require (
 	github.com/gregdel/pushover v1.3.0
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/nikoksr/notify v0.41.0
-	github.com/oapi-codegen/runtime v1.1.0
+	github.com/oapi-codegen/runtime v1.1.1
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/redis/go-redis/v9 v9.3.1
 	github.com/stretchr/testify v1.8.4
