@@ -3,7 +3,7 @@ module github.com/adlandh/post-forwarder
 go 1.21
 
 require (
-	github.com/adlandh/context-logger v1.2.1
+	github.com/adlandh/context-logger v1.2.2
 	github.com/adlandh/echo-sentry-middleware v1.0.5
 	github.com/adlandh/echo-zap-middleware v1.0.5
 	github.com/adlandh/gowrap-templates v1.0.4
