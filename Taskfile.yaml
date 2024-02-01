@@ -33,7 +33,7 @@ tasks:
             - generate
         cmds:
             - doppler secrets substitute --config prd app-secrets.yaml.gotmpl >app-secrets.yaml
-            - gcloud app deploy --quiet
+            - gcloud app deploy --quiet --no-cache
     namespace:
         desc: create new namespace in kubernetes
         cmds:
