@@ -12,9 +12,12 @@ jobs:
 
     steps:
       - name: Install go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version: 1.21
+          cache-dependency-path: |
+            go.sum
+            inf/go.sum
 
       - name: Pulling code
         uses: actions/checkout@v4
