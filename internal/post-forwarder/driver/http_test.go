@@ -13,7 +13,7 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/stretchr/testify/mock"
 
-	"github.com/brianvoe/gofakeit/v6"
+	"github.com/brianvoe/gofakeit/v7"
 	"github.com/gavv/httpexpect/v2"
 	"github.com/labstack/echo/v4"
 	"github.com/phayes/freeport"

@@ -8,7 +8,7 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
-	"github.com/brianvoe/gofakeit/v6"
+	"github.com/brianvoe/gofakeit/v7"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zaptest"
 )

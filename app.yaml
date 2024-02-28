@@ -1,4 +1,4 @@
-runtime: go121
+runtime: go122
 main: ./internal/post-forwarder/main.go
 includes:
   - app-secrets.yaml

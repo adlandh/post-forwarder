@@ -1,18 +1,18 @@
 module github.com/adlandh/post-forwarder
 
-go 1.21
+go 1.22
 
 require (
-	github.com/adlandh/context-logger v1.2.3
+	github.com/adlandh/context-logger v1.2.4
 	github.com/adlandh/echo-sentry-middleware v1.0.6
-	github.com/adlandh/echo-zap-middleware v1.0.6
-	github.com/adlandh/gowrap-templates v1.0.5
-	github.com/adlandh/sentry-zapcore v1.1.1
-	github.com/brianvoe/gofakeit/v6 v6.28.0
+	github.com/adlandh/echo-zap-middleware v1.0.7
+	github.com/adlandh/gowrap-templates v1.0.6
+	github.com/adlandh/sentry-zapcore v1.1.2
+	github.com/brianvoe/gofakeit/v7 v7.0.2
 	github.com/caarlos0/env/v10 v10.0.0
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.27.0
-	github.com/go-telegram/bot v1.1.3
+	github.com/go-telegram/bot v1.1.4
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.0
 	github.com/labstack/echo/v4 v4.11.4
@@ -37,6 +37,7 @@ require (
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
+	github.com/brianvoe/gofakeit/v6 v6.28.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/containerd/containerd v1.7.13 // indirect
@@ -105,9 +106,9 @@ require (
 	github.com/yudai/golcs v0.0.0-20170316035057-ecda9a501e82 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.45.0 // indirect
-	go.opentelemetry.io/otel v1.23.1 // indirect
-	go.opentelemetry.io/otel/metric v1.23.1 // indirect
-	go.opentelemetry.io/otel/trace v1.23.1 // indirect
+	go.opentelemetry.io/otel v1.24.0 // indirect
+	go.opentelemetry.io/otel/metric v1.24.0 // indirect
+	go.opentelemetry.io/otel/trace v1.24.0 // indirect
 	go.uber.org/atomic v1.11.0 // indirect
 	go.uber.org/dig v1.17.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
