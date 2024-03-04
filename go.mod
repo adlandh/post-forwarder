@@ -20,7 +20,7 @@ require (
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/redis/go-redis/v9 v9.5.1
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.28.0
 	go.uber.org/automaxprocs v1.5.3
 	go.uber.org/fx v1.20.1
@@ -90,7 +90,7 @@ require (
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/slack-go/slack v0.12.3 // indirect
-	github.com/stretchr/objx v0.5.1 // indirect
+	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/testcontainers/testcontainers-go v0.28.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
