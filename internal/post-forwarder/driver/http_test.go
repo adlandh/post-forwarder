@@ -72,7 +72,7 @@ func (s *HttpServerTestSuite) TestHealthCheck() {
 
 func (s *HttpServerTestSuite) TestWebhook() {
 	service := gofakeit.Word()
-	request := gofakeit.SentenceSimple()
+	request := gofakeit.Sentence(3)
 	s.Run("happy case", func() {
 		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(nil).Once()
 		s.tester.POST(apiRoot + s.token + "/" + service).
@@ -100,7 +100,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 
 func (s *HttpServerTestSuite) TestShowMessage() {
 	id := gofakeit.UUID()
-	msg := gofakeit.SentenceSimple()
+	msg := gofakeit.Sentence(3)
 	createdAt := gofakeit.Date()
 
 	s.Run("happy case", func() {
