@@ -17,8 +17,8 @@ github.com/adlandh/echo-otel-middleware v1.0.8 h1:il/OTWbEs9BwGZQb12t0GqornLK4mr
 github.com/adlandh/echo-otel-middleware v1.0.8/go.mod h1:uRbAykn4E9bK03W6yFw0LqJolgKHNIUxV7j5fNoLsiU=
 github.com/adlandh/echo-sentry-middleware v1.0.6 h1:Yw7uAzqvMYXyGefBqmXZ5GiIVfNz6uwErxzVxFrRc5Q=
 github.com/adlandh/echo-sentry-middleware v1.0.6/go.mod h1:lqdv1nJzXxbvMeGuQnDFrYrStWSwjnZLFk1AWzEU1ls=
-github.com/adlandh/echo-zap-middleware v1.0.7 h1:mG/wjMddjXNoBHq/BnS3IEizafCbpaowxZYbNUFZOFo=
-github.com/adlandh/echo-zap-middleware v1.0.7/go.mod h1:R6fwZ41Qk3wdhGE2r3tGFEOydw/yFkptg0EutdLxqoU=
+github.com/adlandh/echo-zap-middleware v1.1.0 h1:pnvTh9EnP+57xzp2usEl1DGrS8E8Ujz2N2PfCekoQ8s=
+github.com/adlandh/echo-zap-middleware v1.1.0/go.mod h1:XutzLAb84ORJTEZApMvZU15iWYX4pZeiQ7N2G24tnCo=
 github.com/adlandh/gowrap-templates v1.0.6 h1:JM2/eDkFCkG4sJbzecrtEz9L9278ouCKY3bZ3SdJOoY=
 github.com/adlandh/gowrap-templates v1.0.6/go.mod h1:5Q1k/bzKgQNqv+TFVePqJXwlFgxQpF612BMHa/u2vuY=
 github.com/adlandh/response-dumper v1.0.1 h1:U71jU9RATWSR9BX2Q+Mfqfn7pqhKaXRYaR5dpAVXm6M=

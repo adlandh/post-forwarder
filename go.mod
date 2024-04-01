@@ -5,7 +5,7 @@ go 1.22
 require (
 	github.com/adlandh/context-logger v1.2.4
 	github.com/adlandh/echo-sentry-middleware v1.0.6
-	github.com/adlandh/echo-zap-middleware v1.0.7
+	github.com/adlandh/echo-zap-middleware v1.1.0
 	github.com/adlandh/gowrap-templates v1.0.6
 	github.com/adlandh/sentry-zapcore v1.1.2
 	github.com/brianvoe/gofakeit/v7 v7.0.2
