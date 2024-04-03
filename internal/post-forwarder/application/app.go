@@ -19,6 +19,8 @@ const (
 	ErrorSendingMessage = "error sending message"
 )
 
+var ErrorSendingMessageError = errors.New(ErrorSendingMessage)
+
 var r = regexp.MustCompile(`<.*?>`)
 
 var _ domain.ApplicationInterface = (*Application)(nil)
@@ -44,7 +46,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 		id, err := a.storage.Store(ctx, msg)
 		if err != nil {
 			a.logger.Ctx(ctx).Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
-			return errors.New(ErrorSendingMessage)
+			return ErrorSendingMessageError
 		}
 
 		msg = genURL(url, id)
@@ -55,7 +57,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 	err := a.notifier.Send(ctx, subject, msg)
 	if err != nil {
 		a.logger.Ctx(ctx).Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
-		return errors.New(ErrorSendingMessage)
+		return ErrorSendingMessageError
 	}
 
 	return nil
