@@ -8,7 +8,7 @@ import (
 	"time"
 
 	contextlogger "github.com/adlandh/context-logger"
-	"github.com/adlandh/context-logger/sentry-extractor"
+	sentryExtractor "github.com/adlandh/context-logger/sentry-extractor"
 	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware"
 	echoZapMiddleware "github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
@@ -42,7 +42,7 @@ func newLogger(cfg *config.Config) (*zap.Logger, error) {
 }
 
 func newContextLogger(logger *zap.Logger) *contextlogger.ContextLogger {
-	return contextlogger.WithContext(logger, contextlogger.WithValueExtractor(domain.RequestID), sentryextractor.With())
+	return contextlogger.WithContext(logger, contextlogger.WithValueExtractor(domain.RequestID), sentryExtractor.With())
 }
 
 func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
