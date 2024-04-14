@@ -1,10 +1,12 @@
 module github.com/adlandh/post-forwarder
 
-go 1.22.2
+go 1.22
+
+toolchain go1.22.0
 
 require (
-	github.com/adlandh/context-logger v1.3.1
-	github.com/adlandh/context-logger/sentry-extractor v1.3.1
+	github.com/adlandh/context-logger v1.3.2
+	github.com/adlandh/context-logger/sentry-extractor v1.3.2
 	github.com/adlandh/echo-sentry-middleware v1.0.7
 	github.com/adlandh/echo-zap-middleware v1.2.1
 	github.com/adlandh/gowrap-templates v1.0.6
