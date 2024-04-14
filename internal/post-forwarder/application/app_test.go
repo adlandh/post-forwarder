@@ -5,6 +5,7 @@ import (
 	"strings"
 	"testing"
 
+	contextlogger "github.com/adlandh/context-logger"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/brianvoe/gofakeit/v7"
@@ -15,7 +16,7 @@ import (
 func TestProcessRequest(t *testing.T) {
 	notifiers := new(mocks.Notifier)
 	storage := new(mocks.MessageStorage)
-	logger := zaptest.NewLogger(t)
+	logger := contextlogger.WithContext(zaptest.NewLogger(t))
 	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
 	shortMessage := gofakeit.Sentence(3)

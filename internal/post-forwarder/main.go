@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"time"
 
+	contextlogger "github.com/adlandh/context-logger"
+	"github.com/adlandh/context-logger/sentry-extractor"
 	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware"
 	echoZapMiddleware "github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
@@ -26,12 +28,21 @@ import (
 	"go.uber.org/zap"
 )
 
-func newApplication(cfg *config.Config, notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *application.Application {
+func newLogger(cfg *config.Config) (*zap.Logger, error) {
+	logger, err := zap.NewDevelopment()
+	if err != nil {
+		return nil, fmt.Errorf("error creating logger: %w", err)
+	}
+
 	if cfg.Sentry.DSN != "" {
 		logger = logger.WithOptions(sentryZapcore.WithSentryOption(sentryZapcore.WithStackTrace()))
 	}
 
-	return application.NewApplication(notifier, logger, storage)
+	return logger, nil
+}
+
+func newContextLogger(logger *zap.Logger) *contextlogger.ContextLogger {
+	return contextlogger.WithContext(logger, contextlogger.WithValueExtractor(domain.RequestID), sentryextractor.With())
 }
 
 func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
@@ -66,7 +77,7 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	return nil
 }
 
-func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, log *zap.Logger) *echo.Echo {
+func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, logger *contextlogger.ContextLogger) *echo.Echo {
 	e := echo.New()
 	e.Use(middleware.Secure())
 	e.Use(middleware.Recover())
@@ -85,7 +96,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 		}))
 	}
 
-	e.Use(echoZapMiddleware.Middleware(log))
+	e.Use(echoZapMiddleware.MiddlewareWithContextLogger(logger))
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) (err error) {
@@ -93,7 +104,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 			go func() {
 				err = e.Start(":" + cfg.Port)
 				if err != nil && !errors.Is(err, http.ErrServerClosed) {
-					log.Error("error starting echo server", zap.Error(err))
+					logger.Ctx(ctx).Error("error starting echo server", zap.Error(err))
 				}
 			}()
 			return nil
@@ -155,9 +166,8 @@ func createService() fx.Option {
 		),
 		fx.Provide(
 			config.NewConfig,
-			fx.Annotate(
-				zap.NewDevelopment,
-			),
+			newLogger,
+			newContextLogger,
 			fx.Annotate(
 				driven.NewRedisStorage,
 				fx.As(new(domain.MessageStorage)),
@@ -167,7 +177,7 @@ func createService() fx.Option {
 				fx.As(new(domain.Notifier)),
 			),
 			fx.Annotate(
-				newApplication,
+				application.NewApplication,
 				fx.As(new(domain.ApplicationInterface)),
 			),
 			fx.Annotate(
