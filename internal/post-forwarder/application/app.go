@@ -31,10 +31,10 @@ type Application struct {
 	storage  domain.MessageStorage
 }
 
-func NewApplication(notifier domain.Notifier, logger *zap.Logger, storage domain.MessageStorage) *Application {
+func NewApplication(notifier domain.Notifier, logger *contextlogger.ContextLogger, storage domain.MessageStorage) *Application {
 	return &Application{
 		notifier: notifier,
-		logger:   contextlogger.WithContext(logger, contextlogger.WithValueExtractor(domain.RequestID), contextlogger.WithSentryExtractor()),
+		logger:   logger,
 		storage:  storage,
 	}
 }
