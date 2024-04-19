@@ -7,8 +7,8 @@ toolchain go1.22.0
 require (
 	github.com/adlandh/context-logger v1.3.2
 	github.com/adlandh/context-logger/sentry-extractor v1.3.2
-	github.com/adlandh/echo-sentry-middleware v1.0.7
-	github.com/adlandh/echo-zap-middleware v1.2.1
+	github.com/adlandh/echo-sentry-middleware v1.0.8
+	github.com/adlandh/echo-zap-middleware v1.2.2
 	github.com/adlandh/gowrap-templates v1.0.6
 	github.com/adlandh/sentry-zapcore v1.1.2
 	github.com/brianvoe/gofakeit/v7 v7.0.2
@@ -18,7 +18,7 @@ require (
 	github.com/go-telegram/bot v1.2.1
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.0
-	github.com/labstack/echo/v4 v4.11.4
+	github.com/labstack/echo/v4 v4.12.0
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
@@ -36,11 +36,10 @@ require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/Microsoft/hcsshim v0.12.2 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
-	github.com/adlandh/response-dumper v1.0.1 // indirect
+	github.com/adlandh/response-dumper v1.1.0 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
-	github.com/brianvoe/gofakeit/v6 v6.28.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/containerd/containerd v1.7.15 // indirect
