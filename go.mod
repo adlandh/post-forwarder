@@ -1,15 +1,13 @@
 module github.com/adlandh/post-forwarder
 
-go 1.22
-
-toolchain go1.22.0
+go 1.22.2
 
 require (
 	github.com/adlandh/context-logger v1.3.2
 	github.com/adlandh/context-logger/sentry-extractor v1.3.2
 	github.com/adlandh/echo-sentry-middleware v1.0.8
 	github.com/adlandh/echo-zap-middleware v1.2.2
-	github.com/adlandh/gowrap-templates v1.0.6
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.0
 	github.com/adlandh/sentry-zapcore v1.1.2
 	github.com/brianvoe/gofakeit/v7 v7.0.2
 	github.com/caarlos0/env/v10 v10.0.0
@@ -36,6 +34,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/Microsoft/hcsshim v0.12.2 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
+	github.com/adlandh/gowrap-templates/helpers v1.1.0 // indirect
 	github.com/adlandh/response-dumper v1.1.0 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
