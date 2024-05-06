@@ -15,7 +15,7 @@ require (
 	github.com/getsentry/sentry-go v0.27.0
 	github.com/go-telegram/bot v1.2.2
 	github.com/google/uuid v1.6.0
-	github.com/gregdel/pushover v1.3.0
+	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.1.1
