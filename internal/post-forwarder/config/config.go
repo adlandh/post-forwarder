@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/caarlos0/env/v10"
+	"github.com/caarlos0/env/v11"
 )
 
 const TelegramService = "telegram"
@@ -52,11 +52,11 @@ type Config struct {
 }
 
 func NewConfig() (*Config, error) {
-	var cfg Config
-
-	if err := env.ParseWithOptions(&cfg, env.Options{
+	cfg, err := env.ParseAsWithOptions[Config](env.Options{
 		RequiredIfNoDef: false,
-	}); err != nil {
+	})
+
+	if err != nil {
 		return nil, fmt.Errorf("error parsing config: %w", err)
 	}
 

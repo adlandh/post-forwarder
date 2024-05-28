@@ -4,16 +4,16 @@ go 1.22.2
 
 require (
 	github.com/adlandh/context-logger v1.3.3
-	github.com/adlandh/context-logger/sentry-extractor v1.3.3
-	github.com/adlandh/echo-sentry-middleware v1.0.8
+	github.com/adlandh/context-logger/sentry-extractor v1.3.4
+	github.com/adlandh/echo-sentry-middleware v1.0.9
 	github.com/adlandh/echo-zap-middleware v1.2.3
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.0
-	github.com/adlandh/sentry-zapcore v1.1.2
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.2
+	github.com/adlandh/sentry-zapcore v1.1.3
 	github.com/brianvoe/gofakeit/v7 v7.0.3
-	github.com/caarlos0/env/v10 v10.0.0
+	github.com/caarlos0/env/v11 v11.0.1
 	github.com/gavv/httpexpect/v2 v2.16.0
-	github.com/getsentry/sentry-go v0.27.0
-	github.com/go-telegram/bot v1.2.2
+	github.com/getsentry/sentry-go v0.28.0
+	github.com/go-telegram/bot v1.3.1
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
@@ -58,7 +58,7 @@ require (
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
-	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/goccy/go-json v0.10.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
@@ -67,7 +67,7 @@ require (
 	github.com/imkira/go-interpol v1.1.0 // indirect
 	github.com/klauspost/compress v1.17.8 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
-	github.com/lufia/plan9stats v0.0.0-20240408141607-282e7b5d6b74 // indirect
+	github.com/lufia/plan9stats v0.0.0-20240513124658-fba389f38bae // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
@@ -86,17 +86,17 @@ require (
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
 	github.com/sanity-io/litter v1.5.5 // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect
-	github.com/shirou/gopsutil/v3 v3.24.3 // indirect
+	github.com/shirou/gopsutil/v3 v3.24.4 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/slack-go/slack v0.12.5 // indirect
+	github.com/slack-go/slack v0.13.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/testcontainers/testcontainers-go v0.31.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect
 	github.com/tklauser/numcpus v0.8.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.52.0 // indirect
+	github.com/valyala/fasthttp v1.54.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
