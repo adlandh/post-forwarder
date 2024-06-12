@@ -20,7 +20,7 @@ require (
 	github.com/nikoksr/notify v0.41.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
-	github.com/redis/go-redis/v9 v9.5.2
+	github.com/redis/go-redis/v9 v9.5.3
 	github.com/stretchr/testify v1.9.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.31.0
 	go.uber.org/automaxprocs v1.5.3
