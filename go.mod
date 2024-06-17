@@ -12,7 +12,7 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.0.3
 	github.com/caarlos0/env/v11 v11.0.1
 	github.com/gavv/httpexpect/v2 v2.16.0
-	github.com/getsentry/sentry-go v0.28.0
+	github.com/getsentry/sentry-go v0.28.1
 	github.com/go-telegram/bot v1.4.0
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
