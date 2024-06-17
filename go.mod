@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/adlandh/context-logger v1.3.3
-	github.com/adlandh/context-logger/sentry-extractor v1.3.4
+	github.com/adlandh/context-logger/sentry-extractor v1.3.5
 	github.com/adlandh/echo-sentry-middleware v1.0.9
 	github.com/adlandh/echo-zap-middleware v1.2.3
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.2
@@ -12,7 +12,7 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.0.3
 	github.com/caarlos0/env/v11 v11.0.1
 	github.com/gavv/httpexpect/v2 v2.16.0
-	github.com/getsentry/sentry-go v0.28.0
+	github.com/getsentry/sentry-go v0.28.1
 	github.com/go-telegram/bot v1.4.0
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
