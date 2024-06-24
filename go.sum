@@ -21,8 +21,8 @@ github.com/adlandh/echo-zap-middleware v1.2.3 h1:FF3zCfB0hR5+VnWelJKmMfMmWm9hKTU
 github.com/adlandh/echo-zap-middleware v1.2.3/go.mod h1:Hsrpz6bh80mpCSyJX0OTw4EQk+2eccpNZYwS0OwlUpQ=
 github.com/adlandh/gowrap-templates/helpers v1.1.0 h1:0lpClzTHB2RB/qkfkVExwEUIv04BfHNEtiPcQhK6vio=
 github.com/adlandh/gowrap-templates/helpers v1.1.0/go.mod h1:/ljBxiKRrozxbUbPjYcIEPPCxWd0itx9RujKjpr95aM=
-github.com/adlandh/gowrap-templates/helpers/sentry v1.1.2 h1:1LNthFpvmHyIl/Ql4NRKBb+JD6ElUDnkLzSlrX0ylAg=
-github.com/adlandh/gowrap-templates/helpers/sentry v1.1.2/go.mod h1:Tqrdq66hrb6dvppE1E+d8nHGLgY2QmmVa5JBhk2Ku6s=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.3 h1:9AytlRc2KESUsjyplnFP3n8p3VYn+sExpMGC75JeO8g=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.3/go.mod h1:8/gXyDXuZ96GTxnuvKB/CTdcPM+mzd2Hjx04U1zJ2MM=
 github.com/adlandh/response-dumper v1.1.0 h1:4e5ACKLR1xrKeAs4S1j4c3izCFcogWN4ruNRonI5ynI=
 github.com/adlandh/response-dumper v1.1.0/go.mod h1:rIiwLtJmnpIPEJEgDSouuGKebd8pJxuQoOIKnouEoF8=
 github.com/adlandh/sentry-zapcore v1.1.4 h1:jGNprDu+X4nuKB+/w/ARWVe9BfzxVlun50ia9WXNEA4=
