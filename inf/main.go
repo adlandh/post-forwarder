@@ -58,7 +58,7 @@ func setupSentryProject(ctx *pulumi.Context, project string, org string, team st
 	sentryProject, err := sentry.NewSentryProject(ctx, project, &sentry.SentryProjectArgs{
 		Platform:     pulumi.String("go"),
 		Organization: pulumi.String(org),
-		Teams:        pulumi.StringArray{pulumi.String(team)},
+		Team:         pulumi.String(team),
 		Name:         pulumi.String(project),
 		Slug:         pulumi.String(project),
 	})
