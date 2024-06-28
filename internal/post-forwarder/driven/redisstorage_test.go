@@ -21,6 +21,7 @@ type RedisStorageTestSuite struct {
 func (s *RedisStorageTestSuite) SetupSuite() {
 	ctx := context.Background()
 	redisContainer, err := redis.RunContainer(ctx)
+	s.Require().NoError(err)
 
 	connStr, err := redisContainer.ConnectionString(ctx)
 	s.Require().NoError(err)

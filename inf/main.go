@@ -58,7 +58,7 @@ func setupSentryProject(ctx *pulumi.Context, project string, org string, team st
 	sentryProject, err := sentry.NewSentryProject(ctx, project, &sentry.SentryProjectArgs{
 		Platform:     pulumi.String("go"),
 		Organization: pulumi.String(org),
-		Team:         pulumi.String(team),
+		Teams:        pulumi.StringArray{pulumi.String(team)},
 		Name:         pulumi.String(project),
 		Slug:         pulumi.String(project),
 	})
@@ -67,7 +67,7 @@ func setupSentryProject(ctx *pulumi.Context, project string, org string, team st
 	}
 
 	ctx.Export("Sentry Project Name", sentryProject.ID())
-	ctx.Export("Sentry Project ID", sentryProject.ProjectId)
+	ctx.Export("Sentry Project ID", sentryProject.InternalId)
 
 	dsn := sentryProject.ID().ApplyT(func(name string) string {
 		key, err := sentry.LookupSentryKey(ctx, &sentry.LookupSentryKeyArgs{
