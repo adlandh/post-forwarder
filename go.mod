@@ -24,7 +24,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.31.0
 	go.uber.org/automaxprocs v1.5.3
-	go.uber.org/fx v1.22.0
+	go.uber.org/fx v1.22.1
 	go.uber.org/zap v1.27.0
 )
 
