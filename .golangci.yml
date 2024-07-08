@@ -5,7 +5,6 @@ run:
 
 linters:
   disable-all: true
-  fix: true
   enable:
     - bodyclose
     - errcheck
@@ -34,6 +33,7 @@ linters:
     - prealloc
     - predeclared
     - stylecheck
+    - thelper
     - wastedassign
     - wsl
     - wrapcheck
