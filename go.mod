@@ -17,7 +17,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/nikoksr/notify v0.41.1
+	github.com/nikoksr/notify v1.0.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/redis/go-redis/v9 v9.6.1
@@ -90,7 +90,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.24.4 // indirect
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
-	github.com/slack-go/slack v0.13.0 // indirect
+	github.com/slack-go/slack v0.13.1 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/testcontainers/testcontainers-go v0.32.0 // indirect
