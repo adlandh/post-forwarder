@@ -93,7 +93,7 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 
 	msg, createdAt, err := h.app.GetMessage(ctx.Request().Context(), id)
 	if err != nil {
-		if errors.Is(domain.ErrorNotFound, err) {
+		if errors.Is(err, domain.ErrorNotFound) {
 			return echo.NewHTTPError(http.StatusNotFound, domain.ErrorNotFound.Error())
 		}
 
