@@ -38,7 +38,7 @@ type HttpServerTestSuite struct {
 
 func (s *HttpServerTestSuite) SetupSuite() {
 	s.token = gofakeit.UUID()
-	s.app = new(mocks.ApplicationInterface)
+	s.app = mocks.NewApplicationInterface(s.T())
 	s.e = echo.New()
 	RegisterHandlers(s.e, NewHTTPServer(&config.Config{
 		AuthToken: s.token,
@@ -59,10 +59,6 @@ func (s *HttpServerTestSuite) TearDownSuite() {
 	s.NoError(err)
 }
 
-func (s *HttpServerTestSuite) TearDownTest() {
-	s.app.AssertExpectations(s.T())
-}
-
 func (s *HttpServerTestSuite) TestHealthCheck() {
 	s.tester.GET("/").WithHeader(echo.HeaderContentType, echo.MIMETextPlain).
 		Expect().
@@ -74,7 +70,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	service := gofakeit.Word()
 	request := gofakeit.Sentence(3)
 	s.Run("happy case", func() {
-		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(nil).Once()
+		s.app.EXPECT().ProcessRequest(mock.Anything, s.url, service, request).Return(nil).Once()
 		s.tester.POST(apiRoot + s.token + "/" + service).
 			WithText(request).
 			Expect().
@@ -90,7 +86,7 @@ func (s *HttpServerTestSuite) TestWebhook() {
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("ProcessRequest", mock.Anything, s.url, service, request).Return(fakeError).Once()
+		s.app.EXPECT().ProcessRequest(mock.Anything, s.url, service, request).Return(fakeError).Once()
 		s.tester.POST(apiRoot+s.token+"/"+service).
 			WithText(request).
 			Expect().
@@ -104,7 +100,7 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 	createdAt := gofakeit.Date()
 
 	s.Run("happy case", func() {
-		s.app.On("GetMessage", mock.Anything, id).Return(msg, createdAt, nil).Once()
+		s.app.EXPECT().GetMessage(mock.Anything, id).Return(msg, createdAt, nil).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusOK).JSON().Object().HasValue("message", msg).HasValue("created_at", createdAt).
@@ -119,14 +115,14 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 	})
 
 	s.Run("not found", func() {
-		s.app.On("GetMessage", mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
+		s.app.EXPECT().GetMessage(mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusNotFound).JSON().Object().HasValue("message", "not found")
 	})
 
 	s.Run("error in app", func() {
-		s.app.On("GetMessage", mock.Anything, id).Return("", time.Time{}, fakeError).Once()
+		s.app.EXPECT().GetMessage(mock.Anything, id).Return("", time.Time{}, fakeError).Once()
 		s.tester.GET(apiMessage+id).
 			Expect().
 			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", fakeError.Error())

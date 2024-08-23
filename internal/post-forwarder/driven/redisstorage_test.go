@@ -20,7 +20,7 @@ type RedisStorageTestSuite struct {
 
 func (s *RedisStorageTestSuite) SetupSuite() {
 	ctx := context.Background()
-	redisContainer, err := redis.RunContainer(ctx)
+	redisContainer, err := redis.Run(ctx, "redis:7-alpine")
 	s.Require().NoError(err)
 
 	connStr, err := redisContainer.ConnectionString(ctx)
