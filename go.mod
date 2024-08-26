@@ -22,7 +22,7 @@ require (
 	github.com/phayes/freeport v0.0.0-20220201140144-74d24b5ae9f5
 	github.com/redis/go-redis/v9 v9.6.1
 	github.com/stretchr/testify v1.9.0
-	github.com/testcontainers/testcontainers-go/modules/redis v0.32.0
+	github.com/testcontainers/testcontainers-go/modules/redis v0.33.0
 	go.uber.org/automaxprocs v1.5.3
 	go.uber.org/fx v1.22.2
 	go.uber.org/zap v1.27.0
@@ -33,7 +33,6 @@ require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
-	github.com/Microsoft/hcsshim v0.12.5 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
 	github.com/adlandh/gowrap-templates/helpers v1.1.0 // indirect
 	github.com/adlandh/response-dumper v1.1.0 // indirect
@@ -42,7 +41,6 @@ require (
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/containerd/containerd v1.7.20 // indirect
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/platforms v0.2.1 // indirect
 	github.com/cpuguy83/dockercfg v0.3.1 // indirect
@@ -95,7 +93,7 @@ require (
 	github.com/slack-go/slack v0.14.0 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
-	github.com/testcontainers/testcontainers-go v0.32.0 // indirect
+	github.com/testcontainers/testcontainers-go v0.33.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect
 	github.com/tklauser/numcpus v0.8.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
@@ -110,7 +108,9 @@ require (
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.53.0 // indirect
 	go.opentelemetry.io/otel v1.28.0 // indirect
+	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.19.0 // indirect
 	go.opentelemetry.io/otel/metric v1.28.0 // indirect
+	go.opentelemetry.io/otel/sdk v1.21.0 // indirect
 	go.opentelemetry.io/otel/trace v1.28.0 // indirect
 	go.uber.org/dig v1.18.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
