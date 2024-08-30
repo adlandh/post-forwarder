@@ -10,6 +10,9 @@ build:
     - image: chat-id-checker
       ko:
         main: ./internal/chat-id-checker
+deploy:
+  statusCheckDeadlineSeconds: 300
+  tolerateFailuresUntilDeadline: true
 manifests:
   rawYaml:
     - k8s/redis.yaml

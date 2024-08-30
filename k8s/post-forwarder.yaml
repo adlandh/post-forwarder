@@ -33,6 +33,18 @@ spec:
       containers:
       - name: post-forwarder
         image: post-forwarder
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
         env:
           - name: REDIS_URL
             value: redis://redis:6379
