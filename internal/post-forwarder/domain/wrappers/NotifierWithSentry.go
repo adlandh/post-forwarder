@@ -7,20 +7,21 @@ package wrappers
 import (
 	"context"
 
+	_sourceDomain "github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
-	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/getsentry/sentry-go"
 )
 
-// NotifierWithSentry implements domain.Notifier interface instrumented with opentracing spans
+// NotifierWithSentry implements _sourceDomain.Notifier interface instrumented with opentracing spans
 type NotifierWithSentry struct {
-	domain.Notifier
+	_sourceDomain.Notifier
 	_spanDecorator func(span *sentry.Span, params, results map[string]interface{})
 	_instance      string
 }
 
 // NewNotifierWithSentry returns NotifierWithSentry
-func NewNotifierWithSentry(base domain.Notifier, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) NotifierWithSentry {
+func NewNotifierWithSentry(base _sourceDomain.Notifier, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) NotifierWithSentry {
 	d := NotifierWithSentry{
 		Notifier:  base,
 		_instance: instance,
@@ -35,9 +36,9 @@ func NewNotifierWithSentry(base domain.Notifier, instance string, spanDecorator 
 	return d
 }
 
-// Send implements domain.Notifier
+// Send implements _sourceDomain.Notifier
 func (_d NotifierWithSentry) Send(ctx context.Context, service string, msg string) (err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.Notifier.Send", sentry.WithTransactionName("domain.Notifier.Send"))
+	span := sentry.StartSpan(ctx, _d._instance+"._sourceDomain.Notifier.Send", sentry.WithTransactionName("_sourceDomain.Notifier.Send"))
 	ctx = span.Context()
 
 	defer func() {

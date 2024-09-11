@@ -8,20 +8,21 @@ import (
 	"context"
 	"time"
 
+	_sourceDomain "github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
-	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/getsentry/sentry-go"
 )
 
-// ApplicationInterfaceWithSentry implements domain.ApplicationInterface interface instrumented with opentracing spans
+// ApplicationInterfaceWithSentry implements _sourceDomain.ApplicationInterface interface instrumented with opentracing spans
 type ApplicationInterfaceWithSentry struct {
-	domain.ApplicationInterface
+	_sourceDomain.ApplicationInterface
 	_spanDecorator func(span *sentry.Span, params, results map[string]interface{})
 	_instance      string
 }
 
 // NewApplicationInterfaceWithSentry returns ApplicationInterfaceWithSentry
-func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) ApplicationInterfaceWithSentry {
+func NewApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) ApplicationInterfaceWithSentry {
 	d := ApplicationInterfaceWithSentry{
 		ApplicationInterface: base,
 		_instance:            instance,
@@ -36,9 +37,9 @@ func NewApplicationInterfaceWithSentry(base domain.ApplicationInterface, instanc
 	return d
 }
 
-// GetMessage implements domain.ApplicationInterface
+// GetMessage implements _sourceDomain.ApplicationInterface
 func (_d ApplicationInterfaceWithSentry) GetMessage(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.GetMessage", sentry.WithTransactionName("domain.ApplicationInterface.GetMessage"))
+	span := sentry.StartSpan(ctx, _d._instance+"._sourceDomain.ApplicationInterface.GetMessage", sentry.WithTransactionName("_sourceDomain.ApplicationInterface.GetMessage"))
 	ctx = span.Context()
 
 	defer func() {
@@ -53,9 +54,9 @@ func (_d ApplicationInterfaceWithSentry) GetMessage(ctx context.Context, id stri
 	return _d.ApplicationInterface.GetMessage(ctx, id)
 }
 
-// ProcessRequest implements domain.ApplicationInterface
+// ProcessRequest implements _sourceDomain.ApplicationInterface
 func (_d ApplicationInterfaceWithSentry) ProcessRequest(ctx context.Context, url string, service string, msg string) (err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.ApplicationInterface.ProcessRequest", sentry.WithTransactionName("domain.ApplicationInterface.ProcessRequest"))
+	span := sentry.StartSpan(ctx, _d._instance+"._sourceDomain.ApplicationInterface.ProcessRequest", sentry.WithTransactionName("_sourceDomain.ApplicationInterface.ProcessRequest"))
 	ctx = span.Context()
 
 	defer func() {

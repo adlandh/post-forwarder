@@ -5,9 +5,10 @@
 package driver
 
 import (
+	"github.com/labstack/echo/v4"
+
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
 	"github.com/getsentry/sentry-go"
-	"github.com/labstack/echo/v4"
 )
 
 // ServerInterfaceWithSentry implements ServerInterface interface instrumented with opentracing spans

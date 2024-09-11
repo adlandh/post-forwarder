@@ -8,20 +8,21 @@ import (
 	"context"
 	"time"
 
+	_sourceDomain "github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
+
 	helpers "github.com/adlandh/gowrap-templates/helpers/sentry"
-	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/getsentry/sentry-go"
 )
 
-// MessageStorageWithSentry implements domain.MessageStorage interface instrumented with opentracing spans
+// MessageStorageWithSentry implements _sourceDomain.MessageStorage interface instrumented with opentracing spans
 type MessageStorageWithSentry struct {
-	domain.MessageStorage
+	_sourceDomain.MessageStorage
 	_spanDecorator func(span *sentry.Span, params, results map[string]interface{})
 	_instance      string
 }
 
 // NewMessageStorageWithSentry returns MessageStorageWithSentry
-func NewMessageStorageWithSentry(base domain.MessageStorage, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) MessageStorageWithSentry {
+func NewMessageStorageWithSentry(base _sourceDomain.MessageStorage, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) MessageStorageWithSentry {
 	d := MessageStorageWithSentry{
 		MessageStorage: base,
 		_instance:      instance,
@@ -36,9 +37,9 @@ func NewMessageStorageWithSentry(base domain.MessageStorage, instance string, sp
 	return d
 }
 
-// Read implements domain.MessageStorage
+// Read implements _sourceDomain.MessageStorage
 func (_d MessageStorageWithSentry) Read(ctx context.Context, id string) (msg string, createdAt time.Time, err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.MessageStorage.Read", sentry.WithTransactionName("domain.MessageStorage.Read"))
+	span := sentry.StartSpan(ctx, _d._instance+"._sourceDomain.MessageStorage.Read", sentry.WithTransactionName("_sourceDomain.MessageStorage.Read"))
 	ctx = span.Context()
 
 	defer func() {
@@ -53,9 +54,9 @@ func (_d MessageStorageWithSentry) Read(ctx context.Context, id string) (msg str
 	return _d.MessageStorage.Read(ctx, id)
 }
 
-// Store implements domain.MessageStorage
+// Store implements _sourceDomain.MessageStorage
 func (_d MessageStorageWithSentry) Store(ctx context.Context, msg string) (id string, err error) {
-	span := sentry.StartSpan(ctx, _d._instance+".domain.MessageStorage.Store", sentry.WithTransactionName("domain.MessageStorage.Store"))
+	span := sentry.StartSpan(ctx, _d._instance+"._sourceDomain.MessageStorage.Store", sentry.WithTransactionName("_sourceDomain.MessageStorage.Store"))
 	ctx = span.Context()
 
 	defer func() {
