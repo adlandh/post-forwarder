@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"net/http"
-	"strconv"
+	"net/http/httptest"
 	"testing"
 	"time"
 
@@ -16,7 +16,6 @@ import (
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/gavv/httpexpect/v2"
 	"github.com/labstack/echo/v4"
-	"github.com/phayes/freeport"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -43,14 +42,9 @@ func (s *HttpServerTestSuite) SetupSuite() {
 	RegisterHandlers(s.e, NewHTTPServer(&config.Config{
 		AuthToken: s.token,
 	}, s.app))
-	port, err := freeport.GetFreePort()
-	s.Require().NoError(err)
-	go func() {
-		err := s.e.Start(":" + strconv.Itoa(port))
-		s.Require().True(err == nil || errors.Is(err, http.ErrServerClosed))
-	}()
-	time.Sleep(time.Second)
-	s.url = "http://localhost:" + strconv.Itoa(port)
+
+	server := httptest.NewServer(s.e)
+	s.url = server.URL
 	s.tester = httpexpect.Default(s.T(), s.url)
 }
 
