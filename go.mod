@@ -8,12 +8,12 @@ require (
 	github.com/adlandh/echo-sentry-middleware v1.0.11
 	github.com/adlandh/echo-zap-middleware v1.2.3
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.4
-	github.com/adlandh/sentry-zapcore v1.1.4
+	github.com/adlandh/sentry-zapcore v1.1.5
 	github.com/brianvoe/gofakeit/v7 v7.0.4
 	github.com/caarlos0/env/v11 v11.2.2
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.29.0
-	github.com/go-telegram/bot v1.8.0
+	github.com/go-telegram/bot v1.8.1
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
@@ -46,7 +46,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/docker v27.2.1+incompatible // indirect
+	github.com/docker/docker v27.3.0+incompatible // indirect
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/fatih/color v1.17.0 // indirect
