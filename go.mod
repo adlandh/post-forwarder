@@ -1,6 +1,7 @@
 module github.com/adlandh/post-forwarder
 
 go 1.22.2
+toolchain go1.22.8
 
 require (
 	github.com/adlandh/context-logger v1.3.3
@@ -17,7 +18,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
-	github.com/nikoksr/notify v1.0.0
+	github.com/nikoksr/notify v1.0.1
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/redis/go-redis/v9 v9.7.0
 	github.com/stretchr/testify v1.9.0
@@ -109,7 +110,6 @@ require (
 	go.opentelemetry.io/otel v1.31.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp v1.31.0 // indirect
 	go.opentelemetry.io/otel/metric v1.31.0 // indirect
-	go.opentelemetry.io/otel/sdk v1.31.0 // indirect
 	go.opentelemetry.io/otel/trace v1.31.0 // indirect
 	go.uber.org/dig v1.18.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
