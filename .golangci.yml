@@ -18,7 +18,7 @@ linters:
     - dupl
     - dupword
     - errorlint
-    - exportloopref
+    - copyloopvar
     - forcetypeassert
     - funlen
     - gocritic
