@@ -23,6 +23,10 @@ type ApplicationInterfaceWithSentry struct {
 
 // NewApplicationInterfaceWithSentry returns ApplicationInterfaceWithSentry
 func NewApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) ApplicationInterfaceWithSentry {
+	if instance == "" {
+		instance = "application"
+	}
+
 	d := ApplicationInterfaceWithSentry{
 		ApplicationInterface: base,
 		_instance:            instance,
@@ -35,6 +39,11 @@ func NewApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface, 
 	}
 
 	return d
+}
+
+// DecorateApplicationInterfaceWithSentry returns ApplicationInterfaceWithSentry. Useful for uber fx
+func DecorateApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface) ApplicationInterfaceWithSentry {
+	return NewApplicationInterfaceWithSentry(base, "")
 }
 
 // GetMessage implements _sourceDomain.ApplicationInterface

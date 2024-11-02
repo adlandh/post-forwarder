@@ -20,6 +20,10 @@ type ServerInterfaceWithSentry struct {
 
 // NewServerInterfaceWithSentry returns ServerInterfaceWithSentry
 func NewServerInterfaceWithSentry(base ServerInterface, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) ServerInterfaceWithSentry {
+	if instance == "" {
+		instance = "handlers"
+	}
+
 	d := ServerInterfaceWithSentry{
 		ServerInterface: base,
 		_instance:       instance,
@@ -32,6 +36,11 @@ func NewServerInterfaceWithSentry(base ServerInterface, instance string, spanDec
 	}
 
 	return d
+}
+
+// DecorateServerInterfaceWithSentry returns ServerInterfaceWithSentry. Useful for uber fx
+func DecorateServerInterfaceWithSentry(base ServerInterface) ServerInterfaceWithSentry {
+	return NewServerInterfaceWithSentry(base, "")
 }
 
 // GetWebhook implements ServerInterface

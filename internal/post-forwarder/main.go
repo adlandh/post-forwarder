@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	contextlogger "github.com/adlandh/context-logger"
@@ -121,44 +122,12 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	return e
 }
 
-func decorateServerInterface(cfg *config.Config, srv driver.ServerInterface) driver.ServerInterface {
-	if cfg.Sentry.DSN != "" {
-		srv = driver.NewServerInterfaceWithSentry(srv, "handlers")
-	}
-
-	return srv
-}
-
-func decorateApplicationInterface(cfg *config.Config, app domain.ApplicationInterface) domain.ApplicationInterface {
-	if cfg.Sentry.DSN != "" {
-		app = wrappers.NewApplicationInterfaceWithSentry(app, "application")
-	}
-
-	return app
-}
-
-func decorateNotifier(cfg *config.Config, md domain.Notifier) domain.Notifier {
-	if cfg.Sentry.DSN != "" {
-		md = wrappers.NewNotifierWithSentry(md, "notifier")
-	}
-
-	return md
-}
-
-func decorateMessageStorage(cfg *config.Config, ms domain.MessageStorage) domain.MessageStorage {
-	if cfg.Sentry.DSN != "" {
-		ms = wrappers.NewMessageStorageWithSentry(ms, "redis")
-	}
-
-	return ms
-}
-
 func main() {
 	fx.New(createService()).Run()
 }
 
 func createService() fx.Option {
-	return fx.Options(
+	options := fx.Options(
 		fx.WithLogger(
 			func(log *zap.Logger) fxevent.Logger {
 				return &fxevent.ZapLogger{Logger: log}
@@ -185,15 +154,20 @@ func createService() fx.Option {
 				fx.As(new(driver.ServerInterface)),
 			),
 		),
-		fx.Decorate(
-			decorateServerInterface,
-			decorateApplicationInterface,
-			decorateNotifier,
-			decorateMessageStorage,
-		),
 		fx.Invoke(
 			newSentry,
 			newEcho,
 		),
 	)
+
+	if os.Getenv("SENTRY_DSN") != "" {
+		options = fx.Options(options, fx.Decorate(
+			driver.DecorateServerInterfaceWithSentry,
+			wrappers.DecorateApplicationInterfaceWithSentry,
+			wrappers.DecorateNotifierWithSentry,
+			wrappers.DecorateMessageStorageWithSentry,
+		))
+	}
+
+	return options
 }

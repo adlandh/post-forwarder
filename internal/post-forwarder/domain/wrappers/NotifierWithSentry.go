@@ -22,6 +22,10 @@ type NotifierWithSentry struct {
 
 // NewNotifierWithSentry returns NotifierWithSentry
 func NewNotifierWithSentry(base _sourceDomain.Notifier, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) NotifierWithSentry {
+	if instance == "" {
+		instance = "redis"
+	}
+
 	d := NotifierWithSentry{
 		Notifier:  base,
 		_instance: instance,
@@ -34,6 +38,11 @@ func NewNotifierWithSentry(base _sourceDomain.Notifier, instance string, spanDec
 	}
 
 	return d
+}
+
+// DecorateNotifierWithSentry returns NotifierWithSentry. Useful for uber fx
+func DecorateNotifierWithSentry(base _sourceDomain.Notifier) NotifierWithSentry {
+	return NewNotifierWithSentry(base, "")
 }
 
 // Send implements _sourceDomain.Notifier

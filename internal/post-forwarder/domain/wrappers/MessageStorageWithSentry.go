@@ -23,6 +23,10 @@ type MessageStorageWithSentry struct {
 
 // NewMessageStorageWithSentry returns MessageStorageWithSentry
 func NewMessageStorageWithSentry(base _sourceDomain.MessageStorage, instance string, spanDecorator ...func(span *sentry.Span, params, results map[string]interface{})) MessageStorageWithSentry {
+	if instance == "" {
+		instance = "notifier"
+	}
+
 	d := MessageStorageWithSentry{
 		MessageStorage: base,
 		_instance:      instance,
@@ -35,6 +39,11 @@ func NewMessageStorageWithSentry(base _sourceDomain.MessageStorage, instance str
 	}
 
 	return d
+}
+
+// DecorateMessageStorageWithSentry returns MessageStorageWithSentry. Useful for uber fx
+func DecorateMessageStorageWithSentry(base _sourceDomain.MessageStorage) MessageStorageWithSentry {
+	return NewMessageStorageWithSentry(base, "")
 }
 
 // Read implements _sourceDomain.MessageStorage
