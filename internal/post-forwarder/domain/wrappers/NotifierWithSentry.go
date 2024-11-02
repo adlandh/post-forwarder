@@ -40,8 +40,8 @@ func NewNotifierWithSentry(base _sourceDomain.Notifier, instance string, spanDec
 	return d
 }
 
-// DecorateNotifierWithSentry returns NotifierWithSentry. Useful for uber fx
-func DecorateNotifierWithSentry(base _sourceDomain.Notifier) NotifierWithSentry {
+// DecorateNotifierWithSentry returns _sourceDomain.Notifier with tracing decorators. Useful for uber fx
+func DecorateNotifierWithSentry(base _sourceDomain.Notifier) _sourceDomain.Notifier {
 	return NewNotifierWithSentry(base, "")
 }
 

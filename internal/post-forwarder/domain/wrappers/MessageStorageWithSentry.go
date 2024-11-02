@@ -41,8 +41,8 @@ func NewMessageStorageWithSentry(base _sourceDomain.MessageStorage, instance str
 	return d
 }
 
-// DecorateMessageStorageWithSentry returns MessageStorageWithSentry. Useful for uber fx
-func DecorateMessageStorageWithSentry(base _sourceDomain.MessageStorage) MessageStorageWithSentry {
+// DecorateMessageStorageWithSentry returns _sourceDomain.MessageStorage with tracing decorators. Useful for uber fx
+func DecorateMessageStorageWithSentry(base _sourceDomain.MessageStorage) _sourceDomain.MessageStorage {
 	return NewMessageStorageWithSentry(base, "")
 }
 

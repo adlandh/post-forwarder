@@ -38,8 +38,8 @@ func NewServerInterfaceWithSentry(base ServerInterface, instance string, spanDec
 	return d
 }
 
-// DecorateServerInterfaceWithSentry returns ServerInterfaceWithSentry. Useful for uber fx
-func DecorateServerInterfaceWithSentry(base ServerInterface) ServerInterfaceWithSentry {
+// DecorateServerInterfaceWithSentry returns ServerInterface with tracing decorators. Useful for uber fx
+func DecorateServerInterfaceWithSentry(base ServerInterface) ServerInterface {
 	return NewServerInterfaceWithSentry(base, "")
 }
 

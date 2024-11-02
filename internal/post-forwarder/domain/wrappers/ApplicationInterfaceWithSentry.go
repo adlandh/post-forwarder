@@ -41,8 +41,8 @@ func NewApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface, 
 	return d
 }
 
-// DecorateApplicationInterfaceWithSentry returns ApplicationInterfaceWithSentry. Useful for uber fx
-func DecorateApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface) ApplicationInterfaceWithSentry {
+// DecorateApplicationInterfaceWithSentry returns _sourceDomain.ApplicationInterface with tracing decorators. Useful for uber fx
+func DecorateApplicationInterfaceWithSentry(base _sourceDomain.ApplicationInterface) _sourceDomain.ApplicationInterface {
 	return NewApplicationInterfaceWithSentry(base, "")
 }
 
