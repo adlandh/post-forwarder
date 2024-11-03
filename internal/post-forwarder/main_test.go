@@ -8,6 +8,7 @@ import (
 )
 
 func TestCreateService(t *testing.T) {
+	t.Setenv("SENTRY_DSN", "test")
 	err := fx.ValidateApp(createService())
 	require.NoError(t, err)
 }
