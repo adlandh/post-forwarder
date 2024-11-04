@@ -15,7 +15,7 @@ require (
 	github.com/caarlos0/env/v11 v11.2.2
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.29.1
-	github.com/go-telegram/bot v1.9.1
+	github.com/go-telegram/bot v1.10.0
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.12.0
