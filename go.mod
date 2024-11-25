@@ -22,7 +22,7 @@ require (
 	github.com/nikoksr/notify v1.1.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/redis/go-redis/v9 v9.7.0
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.10.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.34.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/fx v1.23.0
