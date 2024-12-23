@@ -7,7 +7,7 @@ toolchain go1.23.2
 require (
 	github.com/adlandh/context-logger v1.3.3
 	github.com/adlandh/context-logger/sentry-extractor v1.3.7
-	github.com/adlandh/echo-sentry-middleware v1.1.1
+	github.com/adlandh/echo-sentry-middleware v1.1.2
 	github.com/adlandh/echo-zap-middleware v1.6.2
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.9
 	github.com/adlandh/sentry-zapcore v1.1.6
