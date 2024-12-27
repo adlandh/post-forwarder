@@ -7,7 +7,7 @@ toolchain go1.23.2
 require (
 	github.com/adlandh/context-logger v1.3.3
 	github.com/adlandh/context-logger/sentry-extractor v1.3.7
-	github.com/adlandh/echo-sentry-middleware v1.1.2
+	github.com/adlandh/echo-sentry-middleware v1.1.3
 	github.com/adlandh/echo-zap-middleware v1.6.2
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.9
 	github.com/adlandh/sentry-zapcore v1.1.6
@@ -15,7 +15,7 @@ require (
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.16.0
 	github.com/getsentry/sentry-go v0.30.0
-	github.com/go-telegram/bot v1.11.1
+	github.com/go-telegram/bot v1.12.1
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.13.3
@@ -48,7 +48,7 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/docker v27.4.0+incompatible // indirect
+	github.com/docker/docker v27.4.1+incompatible // indirect
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
