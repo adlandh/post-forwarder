@@ -6,15 +6,16 @@ toolchain go1.23.2
 
 require (
 	github.com/adlandh/context-logger v1.3.3
-	github.com/adlandh/context-logger/sentry-extractor v1.3.7
-	github.com/adlandh/echo-sentry-middleware v1.1.3
+	github.com/adlandh/context-logger/sentry-extractor v1.3.8
+	github.com/adlandh/echo-sentry-middleware v1.1.4
 	github.com/adlandh/echo-zap-middleware v1.6.2
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.9
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.10
 	github.com/adlandh/sentry-zapcore v1.1.6
 	github.com/brianvoe/gofakeit/v7 v7.1.2
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.16.0
-	github.com/getsentry/sentry-go v0.30.0
+	github.com/getsentry/sentry-go v0.31.1
+	github.com/getsentry/sentry-go/echo v0.31.1
 	github.com/go-telegram/bot v1.12.1
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
@@ -32,7 +33,7 @@ require (
 require (
 	dario.cat/mergo v1.0.1 // indirect
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
-	github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 // indirect
+	github.com/Azure/go-ansiterm v0.0.0-20250102033503-faa5f7b0171c // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
 	github.com/adlandh/gowrap-templates/helpers v1.1.3 // indirect
@@ -77,7 +78,7 @@ require (
 	github.com/moby/sys/sequential v0.6.0 // indirect
 	github.com/moby/sys/user v0.3.0 // indirect
 	github.com/moby/sys/userns v0.1.0 // indirect
-	github.com/moby/term v0.5.0 // indirect
+	github.com/moby/term v0.5.2 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.0 // indirect
@@ -117,10 +118,10 @@ require (
 	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/net v0.33.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect
-	golang.org/x/time v0.8.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241223144023-3abc09e42ca8 // indirect
+	golang.org/x/time v0.9.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250102185135-69823020774d // indirect
 	google.golang.org/grpc v1.69.2 // indirect
 	google.golang.org/protobuf v1.36.1 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect

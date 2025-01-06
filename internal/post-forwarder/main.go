@@ -54,12 +54,11 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 	lc.Append(fx.Hook{
 		OnStart: func(_ context.Context) error {
 			err := sentry.Init(sentry.ClientOptions{
-				Dsn:                cfg.Sentry.DSN,
-				EnableTracing:      true,
-				TracesSampleRate:   cfg.Sentry.TracesSampleRate,
-				ProfilesSampleRate: cfg.Sentry.ProfilesSampleRate,
-				MaxErrorDepth:      1,
-				Environment:        cfg.Sentry.Environment,
+				Dsn:              cfg.Sentry.DSN,
+				EnableTracing:    true,
+				TracesSampleRate: cfg.Sentry.TracesSampleRate,
+				MaxErrorDepth:    1,
+				Environment:      cfg.Sentry.Environment,
 			})
 
 			if err != nil {
