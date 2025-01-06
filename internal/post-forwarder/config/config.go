@@ -14,10 +14,9 @@ const SlackService = "slack"
 const PushoverService = "pushover"
 
 type SentryConfig struct {
-	DSN                string  `env:"DSN"`
-	Environment        string  `env:"ENVIRONMENT"`
-	TracesSampleRate   float64 `env:"TRACES_SAMPLE_RATE" envDefault:"1.0"`
-	ProfilesSampleRate float64 `env:"PROFILES_SAMPLE_RATE" envDefault:"1.0"`
+	DSN              string  `env:"DSN"`
+	Environment      string  `env:"ENVIRONMENT"`
+	TracesSampleRate float64 `env:"TRACES_SAMPLE_RATE" envDefault:"1.0"`
 }
 
 type TelegramConfig struct {
