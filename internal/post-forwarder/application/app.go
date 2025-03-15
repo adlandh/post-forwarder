@@ -53,6 +53,7 @@ func (a Application) ProcessRequest(ctx context.Context, url string, service str
 	} else {
 		msg = r.ReplaceAllString(msg, "")
 	}
+
 	err := a.notifier.Send(ctx, subject, msg)
 	if err != nil {
 		a.logger.Ctx(ctx).Error(ErrorSendingMessage, zap.String("subject", subject), zap.String("msg", msg), zap.Error(err))
