@@ -26,6 +26,7 @@ tasks:
             - generate
         dir: "internal/"
         cmds:
+            - curl -sS https://raw.githubusercontent.com/adlandh/golangci-lint-config/refs/heads/main/.golangci.yml -o ../.golangci.yml
             - golangci-lint run
     deploy:
         desc: Deploy to gcp

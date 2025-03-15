@@ -2,3 +2,4 @@
 /inf/Pulumi.prod.yaml
 /app-secrets.yaml
 /.task
+.golangci.yml
