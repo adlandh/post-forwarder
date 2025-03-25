@@ -85,8 +85,8 @@ tasks:
     registry:
         desc: Run registry locally
         cmds:
-            - docker run -d -p 5000:5000 --restart=always --name registry registry:2
-            - skaffold config set default-repo localhost:5000
+            - docker run -d -p 5001:5000 --restart=always --name registry registry:2
+            - skaffold config set default-repo localhost:5001
     send-test-string:
         desc: Send test string
         cmds:
