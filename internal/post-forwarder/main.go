@@ -67,7 +67,7 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 			return nil
 		},
-		OnStop: func(ctx context.Context) error {
+		OnStop: func(_ context.Context) error {
 			sentry.Flush(2 * time.Second)
 
 			return nil
@@ -79,9 +79,27 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, logger *contextlogger.ContextLogger) *echo.Echo {
 	e := echo.New()
-	e.Use(middleware.Secure())
-	e.Use(middleware.Recover())
+	e.HideBanner = true
+	e.HidePort = true
+
+	// Configure middleware with optimized settings
+	e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
+		StackSize:         4 << 10,
+		DisableStackAll:   true,
+		DisablePrintStack: true,
+	}))
+	e.Use(middleware.SecureWithConfig(middleware.SecureConfig{
+		XSSProtection:      "1; mode=block",
+		ContentTypeNosniff: "nosniff",
+		XFrameOptions:      "SAMEORIGIN",
+		HSTSMaxAge:         31536000,
+		HSTSPreloadEnabled: true,
+	}))
 	e.Use(middleware.BodyLimit("1M"))
+	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
+		Level:     5,
+		MinLength: 256,
+	}))
 	e.Use(middleware.RequestIDWithConfig(middleware.RequestIDConfig{
 		RequestIDHandler: domain.RequestID.Saver,
 	}))
@@ -102,16 +120,17 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 		OnStart: func(ctx context.Context) (err error) {
 			driver.RegisterHandlers(e, server)
 			go func() {
-				err = e.Start(":" + cfg.Port)
-				if err != nil && !errors.Is(err, http.ErrServerClosed) {
+				if err := e.Start(":" + cfg.Port); err != nil && !errors.Is(err, http.ErrServerClosed) {
 					logger.Ctx(ctx).Error("error starting echo server", zap.Error(err))
 				}
 			}()
 			return nil
 		},
 		OnStop: func(ctx context.Context) error {
-			err := e.Shutdown(ctx)
-			if err != nil {
+			ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+			defer cancel()
+
+			if err := e.Shutdown(ctx); err != nil {
 				return fmt.Errorf("error shutting down echo server: %w", err)
 			}
 			return nil
