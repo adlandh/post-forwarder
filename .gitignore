@@ -3,3 +3,4 @@
 /app-secrets.yaml
 /.task
 .golangci.yml
+**/mocks/**
