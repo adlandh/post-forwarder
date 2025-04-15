@@ -6,11 +6,11 @@ toolchain go1.24.1
 
 require (
 	github.com/adlandh/context-logger v1.3.3
-	github.com/adlandh/context-logger/sentry-extractor v1.3.8
-	github.com/adlandh/echo-sentry-middleware v1.1.5
+	github.com/adlandh/context-logger/sentry-extractor v1.3.9
+	github.com/adlandh/echo-sentry-middleware v1.1.6
 	github.com/adlandh/echo-zap-middleware v1.6.3
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.10
-	github.com/adlandh/sentry-zapcore v1.1.7
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.11
+	github.com/adlandh/sentry-zapcore v1.1.8
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
@@ -121,8 +121,8 @@ require (
 	golang.org/x/sys v0.32.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/time v0.11.0 // indirect
-	google.golang.org/genproto/googleapis/api v0.0.0-20250409194420-de1ac958c67a // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250409194420-de1ac958c67a // indirect
+	google.golang.org/genproto/googleapis/api v0.0.0-20250414145226-207652e42e2e // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250414145226-207652e42e2e // indirect
 	google.golang.org/grpc v1.71.1 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
