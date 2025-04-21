@@ -7,6 +7,8 @@ log-level: info
 structname: '{{.InterfaceName}}'
 pkgname: 'mocks'
 recursive: true
+exclude-subpkg-regex:
+    - ".*driver.*"
 require-template-schema-exists: true
 template: testify
 template-schema: '{{.Template}}.schema.json'
