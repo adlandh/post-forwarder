@@ -10,7 +10,7 @@ require (
 	github.com/adlandh/echo-sentry-middleware v1.2.0
 	github.com/adlandh/echo-zap-middleware v1.7.0
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.11
-	github.com/adlandh/sentry-zapcore v1.1.8
+	github.com/adlandh/sentry-zapcore v1.1.9
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
