@@ -16,7 +16,7 @@ require (
 	github.com/gavv/httpexpect/v2 v2.17.0
 	github.com/getsentry/sentry-go v0.32.0
 	github.com/getsentry/sentry-go/echo v0.32.0
-	github.com/go-telegram/bot v1.14.2
+	github.com/go-telegram/bot v1.15.0
 	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.13.3
