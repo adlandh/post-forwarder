@@ -8,8 +8,8 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
-	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
+	"github.com/segmentio/ksuid"
 	"go.uber.org/fx"
 )
 
@@ -47,13 +47,13 @@ func NewRedisStorage(lc fx.Lifecycle, cfg *config.Config) (*RedisStorage, error)
 }
 
 func (r RedisStorage) Store(ctx context.Context, msg string) (id string, err error) {
-	newUUID, err := uuid.NewUUID()
+	newID, err := ksuid.NewRandom()
 	if err != nil {
-		err = fmt.Errorf("error generating uuid: %w", err)
+		err = fmt.Errorf("error generating id: %w", err)
 		return
 	}
 
-	id = newUUID.String()
+	id = newID.String()
 
 	err = r.client.Set(ctx, r.prefix+"::"+id, msg, ttl).Err()
 	if err != nil {
