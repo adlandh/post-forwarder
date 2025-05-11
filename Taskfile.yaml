@@ -45,31 +45,17 @@ tasks:
             - namespace
         cmds:
             - kubectl apply -f k8s/secrets.yaml
-    run:
-        desc: run app locally in kubernetes
-        deps:
-            - generate
-            - secrets
-        cmds:
-            - skaffold run
-    dev:
-        desc: run app locally in kubernetes with auto build when code is changed
-        deps:
-            - generate
-            - secrets
-        cmds:
-            - skaffold dev --tail
-    tilt:
+    up:
         desc: run app locally in kubernetes with auto build when code is changed with tilt
         deps:
             - generate
             - secrets
         cmds:
             - tilt up
-    stop:
+    down:
         desc: stop app running locally
         cmds:
-            - skaffold delete
+            - tilt down
     logs:
         desc: Show logs
         cmds:
@@ -93,7 +79,6 @@ tasks:
         desc: Run registry locally
         cmds:
             - docker run -d -p 5001:5000 --restart=always --name registry registry:2
-            - skaffold config set default-repo localhost:5001
     send-test-string:
         desc: Send test string
         cmds:
