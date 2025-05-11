@@ -59,6 +59,13 @@ tasks:
             - secrets
         cmds:
             - skaffold dev --tail
+    tilt:
+        desc: run app locally in kubernetes with auto build when code is changed with tilt
+        deps:
+            - generate
+            - secrets
+        cmds:
+            - tilt up
     stop:
         desc: stop app running locally
         cmds:

@@ -1,0 +1,6 @@
+load('ext://ko', 'ko_build')
+ko_build('post-forwarder', './internal/post-forwarder')
+k8s_yaml('k8s/namespace.yaml')
+k8s_yaml('k8s/redis.yaml')
+k8s_yaml('k8s/post-forwarder.yaml')
+k8s_resource('post-forwarder', port_forwards=8080)
