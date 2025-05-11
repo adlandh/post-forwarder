@@ -1,5 +1,5 @@
 load('ext://ko', 'ko_build')
-ko_build('post-forwarder', './internal/post-forwarder')
+ko_build('post-forwarder', './internal/post-forwarder', deps=[ "internal/", "go.mod", "go.sum"])
 k8s_yaml('k8s/namespace.yaml')
 k8s_yaml('k8s/redis.yaml')
 k8s_yaml('k8s/post-forwarder.yaml')

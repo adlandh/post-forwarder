@@ -30,7 +30,7 @@ import (
 )
 
 func newLogger(cfg *config.Config) (*zap.Logger, error) {
-	logger, err := zap.NewDevelopment()
+	logger, err := zap.NewProduction()
 	if err != nil {
 		return nil, fmt.Errorf("error creating logger: %w", err)
 	}
@@ -148,7 +148,10 @@ func createService() fx.Option {
 	options := fx.Options(
 		fx.WithLogger(
 			func(log *zap.Logger) fxevent.Logger {
-				return &fxevent.ZapLogger{Logger: log}
+				eventLogger := &fxevent.ZapLogger{Logger: log}
+				eventLogger.UseLogLevel(zap.DebugLevel)
+
+				return eventLogger
 			},
 		),
 		fx.Provide(
