@@ -7,12 +7,10 @@ log-level: info
 structname: '{{.InterfaceName}}'
 pkgname: 'mocks'
 recursive: true
-exclude-subpkg-regex:
-    - ".*driver.*"
 require-template-schema-exists: true
 template: testify
 template-schema: '{{.Template}}.schema.json'
 packages:
-  github.com/adlandh/post-forwarder:
+  github.com/adlandh/post-forwarder/internal/post-forwarder/domain:
     config:
       all: true
