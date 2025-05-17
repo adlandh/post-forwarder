@@ -12,8 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v5
+
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Go generate
+        run: go generate ./...
 
       - name: Download golangci-lint config
         run: curl -sS https://raw.githubusercontent.com/adlandh/golangci-lint-config/refs/heads/main/.golangci.yml -o .golangci.yml

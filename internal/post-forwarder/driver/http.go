@@ -18,8 +18,6 @@ type HTTPServer struct {
 	token string
 }
 
-//go:generate oapi-codegen -old-config-style -generate types,server -o "openapi_gen.go" -package "driver" "../../../api/post-forwarder.yaml"
-//go:generate gowrap gen -p github.com/adlandh/post-forwarder/internal/post-forwarder/driver -i ServerInterface -t https://raw.githubusercontent.com/adlandh/gowrap-templates/main/echo-sentry.gotmpl -o open_api_sentry_gen.go -l "" -g
 var _ ServerInterface = (*HTTPServer)(nil)
 
 func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPServer {
