@@ -20,5 +20,8 @@ jobs:
       - name: Pulling code
         uses: actions/checkout@v4
 
+      - name: Go generate
+        run: go generate ./...
+
       - name: Run tests
-        run: go generate ./... && go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+        run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
