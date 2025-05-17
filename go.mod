@@ -39,6 +39,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
+	github.com/adlandh/find-interfaces v1.1.3 // indirect
 	github.com/adlandh/gowrap-templates/helpers v1.1.3 // indirect
 	github.com/adlandh/response-dumper v1.1.0 // indirect
 	github.com/ajg/form v1.5.1 // indirect
@@ -180,6 +181,7 @@ require (
 )
 
 tool (
+	github.com/adlandh/find-interfaces
 	github.com/hexdigest/gowrap/cmd/gowrap
 	github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen
 	github.com/vektra/mockery/v3

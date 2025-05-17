@@ -23,6 +23,10 @@ github.com/adlandh/echo-sentry-middleware v1.2.0 h1:sfztCcujO1IKJn0amws6wJ86UZdW
 github.com/adlandh/echo-sentry-middleware v1.2.0/go.mod h1:d0gsLH8LaI8ZCRi+SFriIkaM+tbbs9YM1lDP9FvhfF0=
 github.com/adlandh/echo-zap-middleware v1.7.1 h1:S/Do/aKn3RhQluV2/zd91Ydy74UZhOo9WWMSNKi6uBY=
 github.com/adlandh/echo-zap-middleware v1.7.1/go.mod h1:CgCdyThx5B7P/nrfIXGkcRzhgIGrXb/NJxJ8z/tzkKU=
+github.com/adlandh/find-interfaces v1.1.2 h1:fFRdvDKOz+pmMLaONbAKTm1TtLWPHBr7+ba3igXkfkk=
+github.com/adlandh/find-interfaces v1.1.2/go.mod h1:QaaebvWg44faHVvS8OgyDzaHtdfTZ865/vzgXvkE6vE=
+github.com/adlandh/find-interfaces v1.1.3 h1:if/eJYubFs/cTBC63pvJdW73oiJeFgNOhvCRZiUP7H8=
+github.com/adlandh/find-interfaces v1.1.3/go.mod h1:QaaebvWg44faHVvS8OgyDzaHtdfTZ865/vzgXvkE6vE=
 github.com/adlandh/gowrap-templates/helpers v1.1.3 h1:k8Q4SrEkWgWBL4UCfN4ZrZE6wSxv3foCHbsSsCmF2tY=
 github.com/adlandh/gowrap-templates/helpers v1.1.3/go.mod h1:kCCaq641xHfuvKSjUU1KqOZFoeR5JEKIK+qxMhaHltA=
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.11 h1:iXZx3EeS7jPC7o5xXX1+TX1dvZyaYDg7hy+03V2QnIw=
