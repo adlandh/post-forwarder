@@ -4,3 +4,5 @@
 /.task
 .golangci.yml
 **/mocks/**
+**/wrappers/**
+**/*.gen.go

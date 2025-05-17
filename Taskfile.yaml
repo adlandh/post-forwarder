@@ -7,12 +7,15 @@ tasks:
             - internal/post-forwarder/domain/interfaces.go
             - internal/post-forwarder/driver/http.go
         generates:
-            - internal/post-forwarder/driver/openapi_gen.go
-            - internal/post-forwarder/domain/mocks/*.go
-            - internal/post-forwarder/domain/wrappers/*.go
-            - internal/post-forwarder/driver/*gen.go
+            - internal/post-forwarder/driver/*.gen.go
+            - internal/post-forwarder/domain/mocks/*.gen.go
+            - internal/post-forwarder/domain/wrappers/*.gen.go
         cmds:
             - go generate ./internal/post-forwarder/...
+    rm-generated:
+        desc: removing generated files
+        cmds:
+            - find . -name "*.gen.go" -exec rm -f {} \;
     test:
         desc: running tests
         dir: "internal/"

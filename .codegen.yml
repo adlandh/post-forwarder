@@ -1,0 +1,5 @@
+package: driver
+generate:
+  echo-server: true
+  models: true
+output: openapi.gen.go
