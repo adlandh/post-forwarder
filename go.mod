@@ -9,6 +9,7 @@ require (
 	github.com/adlandh/context-logger/sentry-extractor v1.3.10
 	github.com/adlandh/echo-sentry-middleware v1.2.0
 	github.com/adlandh/echo-zap-middleware v1.7.1
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.11
 	github.com/adlandh/sentry-zapcore v1.1.9
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/caarlos0/env/v11 v11.3.1
@@ -20,6 +21,7 @@ require (
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.13.3
 	github.com/nikoksr/notify v1.3.0
+	github.com/oapi-codegen/runtime v1.1.1
 	github.com/redis/go-redis/v9 v9.8.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.10.0
@@ -37,9 +39,11 @@ require (
 	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
+	github.com/adlandh/gowrap-templates/helpers v1.1.3 // indirect
 	github.com/adlandh/response-dumper v1.1.0 // indirect
 	github.com/ajg/form v1.5.1 // indirect
 	github.com/andybalholm/brotli v1.1.1 // indirect
+	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
 	github.com/brunoga/deep v1.2.4 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -68,6 +72,7 @@ require (
 	github.com/go-telegram-bot-api/telegram-bot-api v4.6.4+incompatible // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/gobwas/glob v0.2.3 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
