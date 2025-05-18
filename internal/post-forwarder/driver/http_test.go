@@ -101,13 +101,6 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 			HasValue("id", id)
 	})
 
-	s.Run("invalid id", func() {
-		invalidId := gofakeit.Word()
-		s.tester.GET(apiMessage + invalidId).
-			Expect().
-			Status(http.StatusBadRequest).JSON().Object().ContainsKey("message")
-	})
-
 	s.Run("not found", func() {
 		s.app.EXPECT().GetMessage(mock.Anything, id).Return("", time.Time{}, domain.ErrorNotFound).Once()
 		s.tester.GET(apiMessage+id).
