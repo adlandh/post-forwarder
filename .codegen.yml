@@ -2,4 +2,5 @@ package: driver
 generate:
   echo-server: true
   models: true
+  embedded-spec: true
 output: openapi.gen.go

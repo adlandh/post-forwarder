@@ -9,7 +9,6 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
-	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
 
@@ -84,11 +83,6 @@ func getURLFromRequest(request *http.Request) string {
 }
 
 func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
-	newUUID, err := uuid.Parse(id)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, err.Error())
-	}
-
 	msg, createdAt, err := h.app.GetMessage(ctx.Request().Context(), id)
 	if err != nil {
 		if errors.Is(err, domain.ErrorNotFound) {
@@ -100,7 +94,7 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 
 	return ctx.JSON(http.StatusOK, Message{
 		CreatedAt: createdAt,
-		Id:        newUUID,
+		Id:        id,
 		Message:   msg,
 	})
 }
