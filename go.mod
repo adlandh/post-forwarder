@@ -9,17 +9,17 @@ require (
 	github.com/adlandh/context-logger/sentry-extractor v1.3.10
 	github.com/adlandh/echo-sentry-middleware v1.2.0
 	github.com/adlandh/echo-zap-middleware v1.7.1
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.11
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.12
 	github.com/adlandh/sentry-zapcore v1.1.9
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
+	github.com/getkin/kin-openapi v0.131.0
 	github.com/getsentry/sentry-go v0.33.0
 	github.com/getsentry/sentry-go/echo v0.33.0
 	github.com/go-telegram/bot v1.15.0
-	github.com/google/uuid v1.6.0
 	github.com/gregdel/pushover v1.3.1
-	github.com/labstack/echo/v4 v4.13.3
+	github.com/labstack/echo/v4 v4.13.4
 	github.com/nikoksr/notify v1.3.0
 	github.com/oapi-codegen/runtime v1.1.1
 	github.com/redis/go-redis/v9 v9.8.0
@@ -64,7 +64,6 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
-	github.com/getkin/kin-openapi v0.131.0 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
@@ -76,6 +75,7 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
 	github.com/hexdigest/gowrap v1.4.2 // indirect
