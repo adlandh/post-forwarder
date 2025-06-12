@@ -1,8 +1,6 @@
 module github.com/adlandh/post-forwarder
 
-go 1.23.7
-
-toolchain go1.24.3
+go 1.24.4
 
 require (
 	github.com/adlandh/context-logger v1.3.4
