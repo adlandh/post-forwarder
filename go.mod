@@ -5,14 +5,14 @@ go 1.24.4
 require (
 	github.com/adlandh/context-logger v1.3.4
 	github.com/adlandh/context-logger/sentry-extractor v1.3.11
-	github.com/adlandh/echo-sentry-middleware v1.2.2
+	github.com/adlandh/echo-sentry-middleware v1.2.3
 	github.com/adlandh/echo-zap-middleware v1.7.2
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.13
 	github.com/adlandh/sentry-zapcore v1.1.9
 	github.com/brianvoe/gofakeit/v7 v7.2.1
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
-	github.com/getsentry/sentry-go v0.33.0
+	github.com/getsentry/sentry-go v0.34.0
 	github.com/getsentry/sentry-go/echo v0.33.0
 	github.com/go-telegram/bot v1.15.0
 	github.com/gregdel/pushover v1.3.1
@@ -160,15 +160,15 @@ require (
 	go.opentelemetry.io/otel/trace v1.36.0 // indirect
 	go.uber.org/dig v1.19.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.38.0 // indirect
+	golang.org/x/crypto v0.39.0 // indirect
 	golang.org/x/exp v0.0.0-20250506013437-ce4c2cf36ca6 // indirect
-	golang.org/x/mod v0.24.0 // indirect
-	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/sync v0.14.0 // indirect
+	golang.org/x/mod v0.25.0 // indirect
+	golang.org/x/net v0.41.0 // indirect
+	golang.org/x/sync v0.15.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/term v0.32.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
-	golang.org/x/time v0.11.0 // indirect
+	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/time v0.12.0 // indirect
 	golang.org/x/tools v0.33.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
