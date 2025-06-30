@@ -31,8 +31,8 @@ github.com/adlandh/gowrap-templates/helpers/sentry v1.1.13 h1:9Erui96E7K8cxRMyzz
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.13/go.mod h1:6IdW7WvGlRJgaowOl7O1O7/tTvEtZzs4oiEZmPrj6kI=
 github.com/adlandh/response-dumper v1.1.0 h1:4e5ACKLR1xrKeAs4S1j4c3izCFcogWN4ruNRonI5ynI=
 github.com/adlandh/response-dumper v1.1.0/go.mod h1:rIiwLtJmnpIPEJEgDSouuGKebd8pJxuQoOIKnouEoF8=
-github.com/adlandh/sentry-zapcore v1.1.9 h1:S2PGsbbSU9O9vGi8nEiF2X2kcrq39YA1cv0NNE4TFuI=
-github.com/adlandh/sentry-zapcore v1.1.9/go.mod h1:iMZXn84tOPCFg0V7ubKKvcyMxfLflIOOw8lnocF3JgE=
+github.com/adlandh/sentry-zapcore v1.2.0 h1:MHOj9xezlCLgQoDS3bRVRm7Dk1JnVySCKP4PYGtHT6M=
+github.com/adlandh/sentry-zapcore v1.2.0/go.mod h1:XW78Zx9ROMsMCYs02bht/uSzudP3ZdIC0qm9DW8Ipig=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.1.1 h1:PR2pgnyFznKEugtsUo0xLdDop5SKXd5Qf5ysW+7XdTA=
@@ -40,8 +40,8 @@ github.com/andybalholm/brotli v1.1.1/go.mod h1:05ib4cKhjx3OQYUY22hTVd34Bc8upXjOL
 github.com/apapsch/go-jsonmerge/v2 v2.0.0 h1:axGnT1gRIfimI7gJifB699GoE/oq+F2MU7Dml6nw9rQ=
 github.com/apapsch/go-jsonmerge/v2 v2.0.0/go.mod h1:lvDnEdqiQrp0O42VQGgmlKpxL1AP2+08jFMw88y4klk=
 github.com/bmatcuk/doublestar v1.1.1/go.mod h1:UD6OnuiIn0yFxxA2le/rnRU1G4RaI4UvFv1sNto9p6w=
-github.com/brianvoe/gofakeit/v7 v7.2.1 h1:AGojgaaCdgq4Adzrd2uWdbGNDyX6MWNhHdQBraNfOHI=
-github.com/brianvoe/gofakeit/v7 v7.2.1/go.mod h1:QXuPeBw164PJCzCUZVmgpgHJ3Llj49jSLVkKPMtxtxA=
+github.com/brianvoe/gofakeit/v7 v7.3.0 h1:TWStf7/lLpAjKw+bqwzeORo9jvrxToWEwp9b1J2vApQ=
+github.com/brianvoe/gofakeit/v7 v7.3.0/go.mod h1:QXuPeBw164PJCzCUZVmgpgHJ3Llj49jSLVkKPMtxtxA=
 github.com/brunoga/deep v1.2.5 h1:bigq4eooqbeJXfvTfZBn3AH3B1iW+rtetxVeh0GiLrg=
 github.com/brunoga/deep v1.2.5/go.mod h1:GDV6dnXqn80ezsLSZ5Wlv1PdKAWAO4L5PnKYtv2dgaI=
 github.com/bsm/ginkgo/v2 v2.12.0 h1:Ny8MWAHyOepLGlLKYmXG4IEkioBysk6GpaRTLC8zwWs=
