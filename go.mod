@@ -12,7 +12,6 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.3.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
-	github.com/getkin/kin-openapi v0.132.0
 	github.com/getsentry/sentry-go v0.34.1
 	github.com/getsentry/sentry-go/echo v0.34.1
 	github.com/go-telegram/bot v1.16.0
@@ -23,7 +22,7 @@ require (
 	github.com/redis/go-redis/v9 v9.11.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.10.0
-	github.com/testcontainers/testcontainers-go/modules/redis v0.37.0
+	github.com/testcontainers/testcontainers-go/modules/redis v0.38.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/fx v1.24.0
 	go.uber.org/zap v1.27.0
@@ -63,6 +62,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/getkin/kin-openapi v0.132.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
@@ -104,7 +104,6 @@ require (
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/go-archive v0.1.0 // indirect
 	github.com/moby/patternmatcher v0.6.0 // indirect
-	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/sequential v0.6.0 // indirect
 	github.com/moby/sys/user v0.4.0 // indirect
 	github.com/moby/sys/userns v0.1.0 // indirect
@@ -124,7 +123,7 @@ require (
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/sanity-io/litter v1.5.8 // indirect
 	github.com/sergi/go-diff v1.3.1 // indirect
-	github.com/shirou/gopsutil/v4 v4.25.4 // indirect
+	github.com/shirou/gopsutil/v4 v4.25.5 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/slack-go/slack v0.17.0 // indirect
@@ -135,7 +134,7 @@ require (
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/stretchr/objx v0.5.2 // indirect
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
-	github.com/testcontainers/testcontainers-go v0.37.0 // indirect
+	github.com/testcontainers/testcontainers-go v0.38.0 // indirect
 	github.com/tklauser/go-sysconf v0.3.15 // indirect
 	github.com/tklauser/numcpus v0.10.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
