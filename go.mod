@@ -4,11 +4,11 @@ go 1.24.4
 
 require (
 	github.com/adlandh/context-logger v1.3.4
-	github.com/adlandh/context-logger/sentry-extractor v1.3.13
-	github.com/adlandh/echo-sentry-middleware v1.2.4
+	github.com/adlandh/context-logger/sentry-extractor v1.3.14
+	github.com/adlandh/echo-sentry-middleware v1.2.5
 	github.com/adlandh/echo-zap-middleware v1.7.2
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.15
-	github.com/adlandh/sentry-zapcore v1.2.1
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.16
+	github.com/adlandh/sentry-zapcore v1.2.2
 	github.com/brianvoe/gofakeit/v7 v7.3.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
@@ -19,7 +19,7 @@ require (
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/nikoksr/notify v1.3.0
 	github.com/oapi-codegen/runtime v1.1.2
-	github.com/redis/go-redis/v9 v9.11.0
+	github.com/redis/go-redis/v9 v9.12.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.10.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.38.0
