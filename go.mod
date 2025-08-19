@@ -5,16 +5,16 @@ go 1.24.4
 require (
 	github.com/adlandh/context-logger v1.3.4
 	github.com/adlandh/context-logger/sentry-extractor v1.3.14
-	github.com/adlandh/echo-sentry-middleware v1.2.5
+	github.com/adlandh/echo-sentry-middleware v1.2.6
 	github.com/adlandh/echo-zap-middleware v1.8.0
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.16
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.17
 	github.com/adlandh/sentry-zapcore v1.2.2
 	github.com/brianvoe/gofakeit/v7 v7.3.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
 	github.com/getsentry/sentry-go v0.35.1
 	github.com/getsentry/sentry-go/echo v0.35.1
-	github.com/go-telegram/bot v1.16.0
+	github.com/go-telegram/bot v1.17.0
 	github.com/gregdel/pushover v1.3.1
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/nikoksr/notify v1.3.0
@@ -54,7 +54,7 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/docker v28.3.3+incompatible // indirect
-	github.com/docker/go-connections v0.5.0 // indirect
+	github.com/docker/go-connections v0.6.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
 	github.com/dprotaso/go-yit v0.0.0-20250513224043-18a80f8f6df4 // indirect
 	github.com/ebitengine/purego v0.8.4 // indirect
@@ -122,8 +122,8 @@ require (
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/sanity-io/litter v1.5.8 // indirect
-	github.com/sergi/go-diff v1.3.1 // indirect
-	github.com/shirou/gopsutil/v4 v4.25.5 // indirect
+	github.com/sergi/go-diff v1.4.0 // indirect
+	github.com/shirou/gopsutil/v4 v4.25.7 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/slack-go/slack v0.17.0 // indirect
@@ -138,7 +138,7 @@ require (
 	github.com/tklauser/go-sysconf v0.3.15 // indirect
 	github.com/tklauser/numcpus v0.10.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasthttp v1.62.0 // indirect
+	github.com/valyala/fasthttp v1.65.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/vektra/mockery/v3 v3.5.2 // indirect
 	github.com/vmware-labs/yaml-jsonpath v0.3.2 // indirect
