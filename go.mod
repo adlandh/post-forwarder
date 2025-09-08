@@ -21,7 +21,7 @@ require (
 	github.com/oapi-codegen/runtime v1.1.2
 	github.com/redis/go-redis/v9 v9.13.0
 	github.com/segmentio/ksuid v1.0.4
-	github.com/stretchr/testify v1.11.0
+	github.com/stretchr/testify v1.11.1
 	github.com/testcontainers/testcontainers-go/modules/redis v0.38.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/fx v1.24.0
