@@ -19,7 +19,7 @@ require (
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/nikoksr/notify v1.3.0
 	github.com/oapi-codegen/runtime v1.1.2
-	github.com/redis/go-redis/v9 v9.12.1
+	github.com/redis/go-redis/v9 v9.13.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.11.0
 	github.com/testcontainers/testcontainers-go/modules/redis v0.38.0
