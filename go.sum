@@ -31,8 +31,8 @@ github.com/adlandh/gowrap-templates/helpers/sentry v1.1.17 h1:+IBrBkQH1j/oK9P0Rd
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.17/go.mod h1:nH949nwO6K+TVbaGpCAOcHdgpKut203LJeYy31X/zPs=
 github.com/adlandh/response-dumper v1.1.1 h1:69Emp2eEUsE2GHFpjeRWktWoogtNT8FfEQxPQVlkQ08=
 github.com/adlandh/response-dumper v1.1.1/go.mod h1:0jQvKkiq/xie4LxGg3cAdGbXFbtwlg+kuUra+L3uEf0=
-github.com/adlandh/sentry-zapcore v1.2.3 h1:Bbs3gzwBxUyH/pq/HWux3TOiV+7bdiRwhY6+B4kbRLM=
-github.com/adlandh/sentry-zapcore v1.2.3/go.mod h1:2aBDPsO6smPikYFef3ri7ZOTgd+x7KiTTz5sPZbWVR4=
+github.com/adlandh/sentry-zapcore v1.2.4 h1:HKfNzvOOBcMKVj99G20m2E9WjTjw60CvUHY6AjktJ04=
+github.com/adlandh/sentry-zapcore v1.2.4/go.mod h1:l2tJcKwvP28ZSDXX/v7A4sddDrEx9REguHI1q/69cdo=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
@@ -105,8 +105,8 @@ github.com/gavv/httpexpect/v2 v2.17.0 h1:nIJqt5v5e4P7/0jODpX2gtSw+pHXUqdP28Ycjqw
 github.com/gavv/httpexpect/v2 v2.17.0/go.mod h1:E8ENFlT9MZ3Si2sfM6c6ONdwXV2noBCGkhA+lkJgkP0=
 github.com/getkin/kin-openapi v0.132.0 h1:3ISeLMsQzcb5v26yeJrBcdTCEQTag36ZjaGk7MIRUwk=
 github.com/getkin/kin-openapi v0.132.0/go.mod h1:3OlG51PCYNsPByuiMB0t4fjnNlIDnaEDsjiKUV8nL58=
-github.com/getsentry/sentry-go v0.35.2 h1:jKuujpRwa8FFRYMIwwZpu83Xh0voll9bmvyc6310WBM=
-github.com/getsentry/sentry-go v0.35.2/go.mod h1:mdL49ixwT2yi57k5eh7mpnDyPybixPzlzEJFu0Z76QA=
+github.com/getsentry/sentry-go v0.35.3 h1:u5IJaEqZyPdWqe/hKlBKBBnMTSxB/HenCqF3QLabeds=
+github.com/getsentry/sentry-go v0.35.3/go.mod h1:mdL49ixwT2yi57k5eh7mpnDyPybixPzlzEJFu0Z76QA=
 github.com/getsentry/sentry-go/echo v0.35.2 h1:+I+aShrW00iA4GZLIFVAkeAZymVqd8ygePn7uma1ymE=
 github.com/getsentry/sentry-go/echo v0.35.2/go.mod h1:hjViliudnHK+HWCo7NWaYw5A48ipKvs6aHrFjhToo8c=
 github.com/go-errors/errors v1.4.2 h1:J6MZopCL4uSllY1OfXM374weqZFFItUbrImctkmUxIA=
