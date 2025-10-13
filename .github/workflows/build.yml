@@ -8,16 +8,16 @@ jobs:
     name: Publish Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
-          go-version: '1.24'
+          go-version: '1.25'
           cache-dependency-path: |
             go.sum
             inf/go.sum
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Generate Code
         run: go generate ./...
-      - uses: ko-build/setup-ko@v0.6
+      - uses: ko-build/setup-ko@v0.7
       - name: Build Release and Push to Docker Hub
         run: |
           tag=$(echo ${{ github.ref }} | cut -c11-) 
