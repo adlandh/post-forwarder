@@ -19,7 +19,7 @@ func TestProcessRequest(t *testing.T) {
 	logger := contextlogger.WithContext(zaptest.NewLogger(t))
 	app := NewApplication(notifiers, logger, storage)
 	service := gofakeit.Word()
-	shortMessage := gofakeit.Sentence(3)
+	shortMessage := gofakeit.Sentence()
 	ctx := context.WithValue(context.Background(), domain.RequestID, gofakeit.UUID())
 	url := gofakeit.URL()
 

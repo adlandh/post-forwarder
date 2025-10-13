@@ -43,7 +43,7 @@ func (s *RedisStorageTestSuite) SetupSuite() {
 }
 
 func (s *RedisStorageTestSuite) TestStore() {
-	msg := gofakeit.SentenceSimple()
+	msg := gofakeit.Sentence()
 
 	id, err := s.storage.Store(context.Background(), msg)
 	s.Require().NoError(err)
@@ -51,7 +51,7 @@ func (s *RedisStorageTestSuite) TestStore() {
 }
 
 func (s *RedisStorageTestSuite) TestRead() {
-	msg := gofakeit.SentenceSimple()
+	msg := gofakeit.Sentence()
 
 	id, err := s.storage.Store(context.Background(), msg)
 	s.Require().NoError(err)
