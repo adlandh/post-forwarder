@@ -12,8 +12,8 @@ require (
 	github.com/brianvoe/gofakeit/v7 v7.8.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
-	github.com/getsentry/sentry-go v0.35.3
-	github.com/getsentry/sentry-go/echo v0.35.3
+	github.com/getsentry/sentry-go v0.36.0
+	github.com/getsentry/sentry-go/echo v0.36.0
 	github.com/go-telegram/bot v1.17.0
 	github.com/gregdel/pushover v1.4.0
 	github.com/labstack/echo/v4 v4.13.4
@@ -120,7 +120,6 @@ require (
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/power-devops/perfstat v0.0.0-20240221224432-82ca36839d55 // indirect
-	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rs/zerolog v1.34.0 // indirect
 	github.com/sanity-io/litter v1.5.8 // indirect
 	github.com/sergi/go-diff v1.4.0 // indirect
