@@ -31,8 +31,8 @@ github.com/adlandh/gowrap-templates/helpers/sentry v1.1.20 h1:80/jY6pvq2Zj/TzAly
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.20/go.mod h1:ZF6dCuMUD3amO3hNJ3Eh2+wM6FiwiRwotgvLfNoiRkk=
 github.com/adlandh/response-dumper v1.1.1 h1:69Emp2eEUsE2GHFpjeRWktWoogtNT8FfEQxPQVlkQ08=
 github.com/adlandh/response-dumper v1.1.1/go.mod h1:0jQvKkiq/xie4LxGg3cAdGbXFbtwlg+kuUra+L3uEf0=
-github.com/adlandh/sentry-zapcore v1.2.4 h1:HKfNzvOOBcMKVj99G20m2E9WjTjw60CvUHY6AjktJ04=
-github.com/adlandh/sentry-zapcore v1.2.4/go.mod h1:l2tJcKwvP28ZSDXX/v7A4sddDrEx9REguHI1q/69cdo=
+github.com/adlandh/sentry-zapcore v1.2.5 h1:9vN9lNcl1ti8IdUJQtv8PipF9Wy/ZbItiWkkoItX5X4=
+github.com/adlandh/sentry-zapcore v1.2.5/go.mod h1:bpmOWf+xeRrsy250NlxCRkwI/jFFcTMqB3hkM541oWw=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
