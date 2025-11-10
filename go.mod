@@ -7,8 +7,8 @@ require (
 	github.com/adlandh/context-logger/sentry-extractor v1.3.19
 	github.com/adlandh/echo-sentry-middleware v1.2.10
 	github.com/adlandh/echo-zap-middleware v1.8.0
-	github.com/adlandh/sentry-zapcore v1.2.7
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.22
+	github.com/adlandh/sentry-zapcore v1.2.7
 	github.com/brianvoe/gofakeit/v7 v7.8.2
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
@@ -19,7 +19,7 @@ require (
 	github.com/labstack/echo/v4 v4.13.4
 	github.com/nikoksr/notify v1.3.0
 	github.com/oapi-codegen/runtime v1.1.2
-	github.com/redis/go-redis/v9 v9.14.1
+	github.com/redis/go-redis/v9 v9.16.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.11.1
 	github.com/testcontainers/testcontainers-go/modules/redis v0.40.0
