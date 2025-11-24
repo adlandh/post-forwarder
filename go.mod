@@ -3,15 +3,16 @@ module github.com/adlandh/post-forwarder
 go 1.25
 
 require (
-	github.com/adlandh/context-logger v1.3.4
+	github.com/adlandh/context-logger v1.3.5
 	github.com/adlandh/context-logger/sentry-extractor v1.3.20
-	github.com/adlandh/echo-sentry-middleware v1.2.12
-	github.com/adlandh/echo-zap-middleware v1.8.0
+	github.com/adlandh/echo-sentry-middleware v1.2.13
+	github.com/adlandh/echo-zap-middleware v1.8.2
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.22
-	github.com/adlandh/sentry-zapcore v1.2.7
-	github.com/brianvoe/gofakeit/v7 v7.9.0
+	github.com/adlandh/sentry-zapcore v1.2.8
+	github.com/brianvoe/gofakeit/v7 v7.11.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
+	github.com/getkin/kin-openapi v0.133.0
 	github.com/getsentry/sentry-go v0.38.0
 	github.com/getsentry/sentry-go/echo v0.38.0
 	github.com/go-telegram/bot v1.17.0
@@ -63,7 +64,6 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/getkin/kin-openapi v0.133.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
