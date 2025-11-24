@@ -25,7 +25,7 @@ require (
 	github.com/testcontainers/testcontainers-go/modules/redis v0.40.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/fx v1.24.0
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 require (
