@@ -13,7 +13,7 @@ require (
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0
 	github.com/getsentry/sentry-go v0.40.0
-	github.com/getsentry/sentry-go/echo v0.38.0
+	github.com/getsentry/sentry-go/echo v0.40.0
 	github.com/go-telegram/bot v1.17.0
 	github.com/gregdel/pushover v1.4.0
 	github.com/labstack/echo/v4 v4.13.4
