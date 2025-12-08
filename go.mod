@@ -7,7 +7,7 @@ require (
 	github.com/adlandh/context-logger/sentry-extractor v1.3.21
 	github.com/adlandh/echo-sentry-middleware v1.2.13
 	github.com/adlandh/echo-zap-middleware v1.8.2
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.22
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.23
 	github.com/adlandh/sentry-zapcore v1.2.9
 	github.com/brianvoe/gofakeit/v7 v7.12.1
 	github.com/caarlos0/env/v11 v11.3.1
