@@ -17,8 +17,8 @@ github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkH
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
 github.com/adlandh/context-logger v1.3.5 h1:QVM4Nh4DXnyz3/NyQh6evYKvacNMa7FLSc2g+o0byIY=
 github.com/adlandh/context-logger v1.3.5/go.mod h1:ywfAUvZdIuAU7tjte+ZWu9it6UPlIhQve9imIt9UdY8=
-github.com/adlandh/context-logger/sentry-extractor v1.3.20 h1:bYkOfsfboO9JfVmEZcW6FVkWe7QBndfP22Xej9ZV+L0=
-github.com/adlandh/context-logger/sentry-extractor v1.3.20/go.mod h1:J4IGtwo8ljnAGlq1MEsYjgcvB383Y/mPgS6FeYZXQ/Q=
+github.com/adlandh/context-logger/sentry-extractor v1.3.21 h1:OYIIW+HnXVDwg2fanr4SIk+rUeLu59d/a4RV3zbll48=
+github.com/adlandh/context-logger/sentry-extractor v1.3.21/go.mod h1:OXw6g8maZq9VU+VefBZMTM5L1/tkakYe1DvnZTdZuAA=
 github.com/adlandh/echo-sentry-middleware v1.2.13 h1:jF4Cq43gmE6VBI78GHmVdLEo27bKTzawFCinzcMLMtM=
 github.com/adlandh/echo-sentry-middleware v1.2.13/go.mod h1:OTa1mt7pxmmnQPWuFMfUmdS2136u7yuJgWlBvnFm8Zw=
 github.com/adlandh/echo-zap-middleware v1.8.2 h1:uRFS0vtxMJ0EROPh/WgnMLegzVCGgGMPYuUoq6UyxX0=
