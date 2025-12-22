@@ -19,8 +19,8 @@ github.com/adlandh/context-logger v1.3.5 h1:QVM4Nh4DXnyz3/NyQh6evYKvacNMa7FLSc2g
 github.com/adlandh/context-logger v1.3.5/go.mod h1:ywfAUvZdIuAU7tjte+ZWu9it6UPlIhQve9imIt9UdY8=
 github.com/adlandh/context-logger/sentry-extractor v1.3.21 h1:OYIIW+HnXVDwg2fanr4SIk+rUeLu59d/a4RV3zbll48=
 github.com/adlandh/context-logger/sentry-extractor v1.3.21/go.mod h1:OXw6g8maZq9VU+VefBZMTM5L1/tkakYe1DvnZTdZuAA=
-github.com/adlandh/echo-sentry-middleware v1.2.13 h1:jF4Cq43gmE6VBI78GHmVdLEo27bKTzawFCinzcMLMtM=
-github.com/adlandh/echo-sentry-middleware v1.2.13/go.mod h1:OTa1mt7pxmmnQPWuFMfUmdS2136u7yuJgWlBvnFm8Zw=
+github.com/adlandh/echo-sentry-middleware v1.2.14 h1:5bQPPM8hBAx84hC/2AhTRDAsLDbJOJT0QKwVZ9wTLKA=
+github.com/adlandh/echo-sentry-middleware v1.2.14/go.mod h1:OlrNjDszWXOiIcRgnRGCxlFgKrbehPKgODh9sNZmudU=
 github.com/adlandh/echo-zap-middleware v1.8.2 h1:uRFS0vtxMJ0EROPh/WgnMLegzVCGgGMPYuUoq6UyxX0=
 github.com/adlandh/echo-zap-middleware v1.8.2/go.mod h1:E16kPM5N4r+P9U3oq993m9pC/fGiN2Bvx7H/QZ6i470=
 github.com/adlandh/find-interfaces v1.1.3 h1:if/eJYubFs/cTBC63pvJdW73oiJeFgNOhvCRZiUP7H8=
