@@ -17,7 +17,7 @@ require (
 	github.com/go-telegram/bot v1.17.0
 	github.com/gregdel/pushover v1.4.0
 	github.com/labstack/echo/v4 v4.14.0
-	github.com/nikoksr/notify v1.4.0
+	github.com/nikoksr/notify v1.5.0
 	github.com/oapi-codegen/runtime v1.1.2
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/segmentio/ksuid v1.0.4
