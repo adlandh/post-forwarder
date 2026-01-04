@@ -54,7 +54,6 @@ func NewConfig() (*Config, error) {
 	cfg, err := env.ParseAsWithOptions[Config](env.Options{
 		RequiredIfNoDef: false,
 	})
-
 	if err != nil {
 		return nil, fmt.Errorf("error parsing config: %w", err)
 	}
