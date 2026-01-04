@@ -4,7 +4,7 @@ go 1.24.7
 
 require (
 	github.com/pulumi/pulumi-gcp/sdk/v6 v6.67.1
-	github.com/pulumi/pulumi/sdk/v3 v3.213.0
+	github.com/pulumi/pulumi/sdk/v3 v3.214.1
 	github.com/pulumiverse/pulumi-sentry/sdk v0.0.9
 	github.com/upstash/pulumi-upstash/sdk v0.5.0
 )

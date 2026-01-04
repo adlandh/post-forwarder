@@ -60,7 +60,6 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 				MaxErrorDepth:    1,
 				Environment:      cfg.Sentry.Environment,
 			})
-
 			if err != nil {
 				return fmt.Errorf("error initializing sentry: %w", err)
 			}
@@ -82,6 +81,36 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	e.HideBanner = true
 	e.HidePort = true
 
+	configureMiddleware(e, cfg, logger)
+
+	lc.Append(fx.Hook{
+		OnStart: func(ctx context.Context) (err error) {
+			driver.RegisterHandlers(e, server)
+
+			go func() {
+				if err := e.Start(":" + cfg.Port); err != nil && !errors.Is(err, http.ErrServerClosed) {
+					logger.Ctx(ctx).Error("error starting echo server", zap.Error(err))
+				}
+			}()
+
+			return nil
+		},
+		OnStop: func(ctx context.Context) error {
+			ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
+			defer cancel()
+
+			if err := e.Shutdown(ctx); err != nil {
+				return fmt.Errorf("error shutting down echo server: %w", err)
+			}
+
+			return nil
+		},
+	})
+
+	return e
+}
+
+func configureMiddleware(e *echo.Echo, cfg *config.Config, logger *contextlogger.ContextLogger) {
 	// Configure middleware with optimized settings
 	e.Use(middleware.RecoverWithConfig(middleware.RecoverConfig{
 		StackSize:         4 << 10,
@@ -115,29 +144,6 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 	}
 
 	e.Use(echoZapMiddleware.MiddlewareWithContextLogger(logger))
-
-	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) (err error) {
-			driver.RegisterHandlers(e, server)
-			go func() {
-				if err := e.Start(":" + cfg.Port); err != nil && !errors.Is(err, http.ErrServerClosed) {
-					logger.Ctx(ctx).Error("error starting echo server", zap.Error(err))
-				}
-			}()
-			return nil
-		},
-		OnStop: func(ctx context.Context) error {
-			ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
-			defer cancel()
-
-			if err := e.Shutdown(ctx); err != nil {
-				return fmt.Errorf("error shutting down echo server: %w", err)
-			}
-			return nil
-		},
-	})
-
-	return e
 }
 
 func main() {

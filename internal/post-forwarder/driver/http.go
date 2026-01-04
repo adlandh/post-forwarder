@@ -53,7 +53,6 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 
 	// checking body parameters
 	body, err := io.ReadAll(ctx.Request().Body)
-
 	if err != nil {
 		// if parameters were empty, just throw error
 		if msg == "" {

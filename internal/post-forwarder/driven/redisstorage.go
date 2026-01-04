@@ -39,6 +39,7 @@ func NewRedisStorage(lc fx.Lifecycle, cfg *config.Config) (*RedisStorage, error)
 			if err != nil {
 				return fmt.Errorf("error connecting to redis: %w", err)
 			}
+
 			return nil
 		},
 	})
