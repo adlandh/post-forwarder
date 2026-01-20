@@ -4,11 +4,11 @@ go 1.25
 
 require (
 	github.com/adlandh/context-logger v1.4.0
-	github.com/adlandh/context-logger/sentry-extractor v1.3.22
-	github.com/adlandh/echo-sentry-middleware v1.3.1
+	github.com/adlandh/context-logger/sentry-extractor v1.3.23
+	github.com/adlandh/echo-sentry-middleware v1.3.2
 	github.com/adlandh/echo-zap-middleware v1.9.1
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.25
-	github.com/adlandh/sentry-zapcore v1.2.9
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26
+	github.com/adlandh/sentry-zapcore v1.2.10
 	github.com/brianvoe/gofakeit/v7 v7.14.0
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/gavv/httpexpect/v2 v2.17.0

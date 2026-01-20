@@ -19,8 +19,12 @@ github.com/adlandh/context-logger v1.4.0 h1:hRTE3/jvlaBGMrJgnIZrFbmHuiHKAAac/pCK
 github.com/adlandh/context-logger v1.4.0/go.mod h1:pbxIYUAE9rNSkMfvPhoCH/L/Vl6cfL3RP1ltsSfpVaM=
 github.com/adlandh/context-logger/sentry-extractor v1.3.22 h1:NpMMM4UBKJLnUrBGoX1OC1JwkdM/pIUI3iqXm6B3UvU=
 github.com/adlandh/context-logger/sentry-extractor v1.3.22/go.mod h1:7rND3+J2S7yKVOlz9hs/DvkbNqzajYL2+VnEsiR4sxE=
+github.com/adlandh/context-logger/sentry-extractor v1.3.23 h1:2QSmHXEWrwfqLBOJ7sgID/f0c6EC9pVStSaydFu9FFM=
+github.com/adlandh/context-logger/sentry-extractor v1.3.23/go.mod h1:vERCk4mv4DFOGhiUqyEgRaL1wtziDpBYYoH0mhpjVUg=
 github.com/adlandh/echo-sentry-middleware v1.3.1 h1:I2DDbLvzeBx7+9S6xF4CGx2c3C8k/fTZ01+/NROOeLk=
 github.com/adlandh/echo-sentry-middleware v1.3.1/go.mod h1:LMA/6+nvh7V3biCbwGoAx4stcn9WhBy+36rdRxfuhSg=
+github.com/adlandh/echo-sentry-middleware v1.3.2 h1:6olKeX/gTjFx/jbQ7C17go6Vm4oJW17+DyYJOpxUnGE=
+github.com/adlandh/echo-sentry-middleware v1.3.2/go.mod h1:r0+7e9abXhcGCvp4vZEdpLQtIX264kxKZ6UNZYyl0CQ=
 github.com/adlandh/echo-zap-middleware v1.9.1 h1:2spETiNHtN2TtuwRYeSom4BhbNTi8MZvAJSE0Mfbs7Y=
 github.com/adlandh/echo-zap-middleware v1.9.1/go.mod h1:zqFycKNylfJhLLOjwrnrgAUMQed9zx0oX4lFAsuzWm0=
 github.com/adlandh/find-interfaces v1.1.3 h1:if/eJYubFs/cTBC63pvJdW73oiJeFgNOhvCRZiUP7H8=
@@ -29,10 +33,14 @@ github.com/adlandh/gowrap-templates/helpers v1.1.3 h1:k8Q4SrEkWgWBL4UCfN4ZrZE6wS
 github.com/adlandh/gowrap-templates/helpers v1.1.3/go.mod h1:kCCaq641xHfuvKSjUU1KqOZFoeR5JEKIK+qxMhaHltA=
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.25 h1:me52O1cL8p1GYh/IPAVg8kNIS5oYDxQZ1oi8YIcqy6k=
 github.com/adlandh/gowrap-templates/helpers/sentry v1.1.25/go.mod h1:lcr6Kcpr5VL/M3kT/fb0CkSOEfA37vktNZy0CXE7fHE=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26 h1:WXaz2YFJVpGQ7+9/9HC9lUIxs/horw0yvBivY+Fi59c=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26/go.mod h1:3KRFocPxcY4nnu3nGmFL6oO5ip8+yezvOjvRP+Tpw3s=
 github.com/adlandh/response-dumper v1.2.0 h1:HXN9hL3nrWMmh7t+6c1Mgwrm+HuyeWPwbuq13K/h4QE=
 github.com/adlandh/response-dumper v1.2.0/go.mod h1:nBfsf9BR86Fqg1TOlpQHSJu5eZ/W6Il4ucs+20VsYMs=
 github.com/adlandh/sentry-zapcore v1.2.9 h1:gZOGkjIYoHOZAOqsW3c+4aJ4G35h4yzqb+ju1PcdzCo=
 github.com/adlandh/sentry-zapcore v1.2.9/go.mod h1:F6e4U3v2p9YOlDOR8dXK3EsKtyelmBl+KZXmq0Kg/GQ=
+github.com/adlandh/sentry-zapcore v1.2.10 h1:45bVDCs0aRVojAyGUbRZiR7uGJ251gTcprtx1UfSMD4=
+github.com/adlandh/sentry-zapcore v1.2.10/go.mod h1:F86RXBmj7HynuDH1tumrybrDkqO87zVui68cmGSy7Lc=
 github.com/ajg/form v1.5.1 h1:t9c7v8JUKu/XxOGBU0yjNpaMloxGEJhUkqFRq0ibGeU=
 github.com/ajg/form v1.5.1/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
