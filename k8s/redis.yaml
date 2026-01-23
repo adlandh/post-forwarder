@@ -3,6 +3,9 @@ kind: Service
 metadata:
   name: redis
   namespace: post-forwarder
+  labels:
+    app.kubernetes.io/name: post-forwarder
+    app.kubernetes.io/component: redis
 spec:
   clusterIP: None
   ports:
@@ -11,23 +14,33 @@ spec:
       targetPort: 6379
   selector:
     app: redis
+    app.kubernetes.io/name: post-forwarder
+    app.kubernetes.io/component: redis
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: redis
   namespace: post-forwarder
+  labels:
+    app.kubernetes.io/name: post-forwarder
+    app.kubernetes.io/component: redis
 spec:
   selector:
     matchLabels:
       app: redis
+      app.kubernetes.io/name: post-forwarder
+      app.kubernetes.io/component: redis
   serviceName: redis
   replicas: 1
   template:
     metadata:
       labels:
         app: redis
+        app.kubernetes.io/name: post-forwarder
+        app.kubernetes.io/component: redis
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: redis
           image: redis
@@ -38,6 +51,7 @@ spec:
                 - redis-cli
                 - ping
             initialDelaySeconds: 30
+            periodSeconds: 10
             timeoutSeconds: 5
           readinessProbe:
             exec:
@@ -45,6 +59,7 @@ spec:
                 - redis-cli
                 - ping
             initialDelaySeconds: 30
+            periodSeconds: 10
             timeoutSeconds: 5
           ports:
             - containerPort: 6379
@@ -55,6 +70,13 @@ spec:
           env:
             - name: MASTER
               value: "true"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
   volumeClaimTemplates:
     - metadata:
         name: redis-volume

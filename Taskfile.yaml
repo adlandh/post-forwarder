@@ -55,6 +55,7 @@ tasks:
             - secrets
         cmds:
             - tilt up
+            - tilt down
     down:
         desc: stop app running locally
         cmds:

@@ -5,19 +5,33 @@ metadata:
   namespace: post-forwarder
   labels:
     app: chat-id-checker
+    app.kubernetes.io/name: post-forwarder
+    app.kubernetes.io/component: worker
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: chat-id-checker
+      app.kubernetes.io/name: post-forwarder
+      app.kubernetes.io/component: worker
   template:
     metadata:
       labels:
         app: chat-id-checker
+        app.kubernetes.io/name: post-forwarder
+        app.kubernetes.io/component: worker
     spec:
       containers:
         - name: chat-id-checker
           image: chat-id-checker
+          imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:
                 name: post-forwarder
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi
