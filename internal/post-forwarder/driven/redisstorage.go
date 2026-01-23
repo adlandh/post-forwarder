@@ -103,7 +103,7 @@ func (r RedisStorage) Read(ctx context.Context, id string) (msg string, createdA
 		return
 	}
 
-	if remainingTTL > 0 {
+	if remainingTTL >= 0 {
 		now := time.Now()
 		createdAt = now.Add(remainingTTL - ttl)
 	}
