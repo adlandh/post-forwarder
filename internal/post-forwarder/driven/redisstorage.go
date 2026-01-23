@@ -13,7 +13,11 @@ import (
 	"go.uber.org/fx"
 )
 
-const ttl = 24 * time.Hour
+const (
+	ttl = 24 * time.Hour
+
+	errReadRedis = "error reading from redis: %w"
+)
 
 var _ domain.MessageStorage = (*RedisStorage)(nil)
 
@@ -76,7 +80,7 @@ func (r RedisStorage) Read(ctx context.Context, id string) (msg string, createdA
 	_, execErr := pipe.Exec(ctx)
 
 	if execErr != nil && !errors.Is(execErr, redis.Nil) {
-		err = fmt.Errorf("error reading from redis: %w", execErr)
+		err = fmt.Errorf(errReadRedis, execErr)
 		return
 	}
 
@@ -88,14 +92,14 @@ func (r RedisStorage) Read(ctx context.Context, id string) (msg string, createdA
 			return
 		}
 
-		err = fmt.Errorf("error reading from redis: %w", err)
+		err = fmt.Errorf(errReadRedis, err)
 
 		return
 	}
 
 	remainingTTL, ttlErr := ttlCmd.Result()
 	if ttlErr != nil {
-		err = fmt.Errorf("error reading from redis: %w", ttlErr)
+		err = fmt.Errorf(errReadRedis, ttlErr)
 		return
 	}
 
