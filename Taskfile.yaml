@@ -121,5 +121,9 @@ tasks:
         cmds:
             - kubectl apply -f https://github.com/DopplerHQ/kubernetes-operator/releases/latest/download/recommended.yaml
             - kubectl create secret generic doppler-token-secret --namespace doppler-operator-system --from-literal=serviceToken=$(doppler configs tokens create doppler-kubernetes-operator --plain --config dev)
+    doppler-delete:
+        desc: Uninstall doppler
+        cmds:
+            - kubectl delete -f https://github.com/DopplerHQ/kubernetes-operator/releases/latest/download/recommended.yaml
 
 
