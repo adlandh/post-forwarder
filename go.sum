@@ -27,8 +27,8 @@ github.com/adlandh/find-interfaces v1.1.3 h1:if/eJYubFs/cTBC63pvJdW73oiJeFgNOhvC
 github.com/adlandh/find-interfaces v1.1.3/go.mod h1:QaaebvWg44faHVvS8OgyDzaHtdfTZ865/vzgXvkE6vE=
 github.com/adlandh/gowrap-templates/helpers v1.1.3 h1:k8Q4SrEkWgWBL4UCfN4ZrZE6wSxv3foCHbsSsCmF2tY=
 github.com/adlandh/gowrap-templates/helpers v1.1.3/go.mod h1:kCCaq641xHfuvKSjUU1KqOZFoeR5JEKIK+qxMhaHltA=
-github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26 h1:WXaz2YFJVpGQ7+9/9HC9lUIxs/horw0yvBivY+Fi59c=
-github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26/go.mod h1:3KRFocPxcY4nnu3nGmFL6oO5ip8+yezvOjvRP+Tpw3s=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.27 h1:afB65QTRIxb8/BgS1VILGX/Qrr5FHuZmqFmjHJMGV6M=
+github.com/adlandh/gowrap-templates/helpers/sentry v1.1.27/go.mod h1:Sd8J9/W5y78UTARv7pzld23fWoHrNLw8tiNwf4x0S8U=
 github.com/adlandh/response-dumper v1.2.0 h1:HXN9hL3nrWMmh7t+6c1Mgwrm+HuyeWPwbuq13K/h4QE=
 github.com/adlandh/response-dumper v1.2.0/go.mod h1:nBfsf9BR86Fqg1TOlpQHSJu5eZ/W6Il4ucs+20VsYMs=
 github.com/adlandh/sentry-zapcore v1.2.10 h1:45bVDCs0aRVojAyGUbRZiR7uGJ251gTcprtx1UfSMD4=
