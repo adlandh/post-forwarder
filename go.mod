@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	github.com/adlandh/context-logger v1.4.0
-	github.com/adlandh/context-logger/sentry-extractor v1.3.23
+	github.com/adlandh/context-logger/sentry-extractor v1.3.24
 	github.com/adlandh/echo-sentry-middleware v1.3.2
 	github.com/adlandh/echo-zap-middleware v1.9.1
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.26
