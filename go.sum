@@ -15,8 +15,8 @@ github.com/Microsoft/go-winio v0.6.2/go.mod h1:yd8OoFMLzJbo9gZq8j5qaps8bJ9aShtEA
 github.com/RaveNoX/go-jsoncommentstrip v1.0.0/go.mod h1:78ihd09MekBnJnxpICcwzCMzGrKSKYe4AqU6PDYYpjk=
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkHBuFDA6DUhhse0IGJ7T5bemHyNILUjvOq4=
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
-github.com/adlandh/context-logger v1.4.0 h1:hRTE3/jvlaBGMrJgnIZrFbmHuiHKAAac/pCKaIwFM5Q=
-github.com/adlandh/context-logger v1.4.0/go.mod h1:pbxIYUAE9rNSkMfvPhoCH/L/Vl6cfL3RP1ltsSfpVaM=
+github.com/adlandh/context-logger v1.5.2 h1:wZGzjCRAgoSd6w8ueL6SN52TWNXfEi3/G1uGZqMT5zI=
+github.com/adlandh/context-logger v1.5.2/go.mod h1:VMUbw9h9FshwhH243A58HyGKiv//tvw3fwgdjQLvYLI=
 github.com/adlandh/context-logger/sentry-extractor v1.3.24 h1:Hcik7Ge1NwdOviwVhrWLF261CQi/Tk2jHkq/naB0u+w=
 github.com/adlandh/context-logger/sentry-extractor v1.3.24/go.mod h1:tggHdZbGGClX6AZ9YLpKaY1MSovAS7fGfMY26DuY1sw=
 github.com/adlandh/echo-sentry-middleware v1.3.2 h1:6olKeX/gTjFx/jbQ7C17go6Vm4oJW17+DyYJOpxUnGE=
