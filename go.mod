@@ -10,7 +10,7 @@ require (
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.1.27
 	github.com/adlandh/sentry-zapcore v1.2.10
 	github.com/brianvoe/gofakeit/v7 v7.14.0
-	github.com/caarlos0/env/v11 v11.3.1
+	github.com/caarlos0/env/v11 v11.4.0
 	github.com/gavv/httpexpect/v2 v2.17.0
 	github.com/getsentry/sentry-go v0.42.0
 	github.com/getsentry/sentry-go/echo v0.42.0
