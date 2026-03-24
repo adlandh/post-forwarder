@@ -3,4 +3,4 @@ ko_build('post-forwarder', './internal/post-forwarder', deps=[ "internal/", "go.
 k8s_yaml('k8s/namespace.yaml')
 k8s_yaml('k8s/redis.yaml')
 k8s_yaml('k8s/post-forwarder.yaml')
-k8s_resource('post-forwarder', port_forwards=8080)
+k8s_resource('post-forwarder', port_forwards=8081)
