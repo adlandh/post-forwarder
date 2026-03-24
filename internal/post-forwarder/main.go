@@ -10,6 +10,7 @@ import (
 
 	contextlogger "github.com/adlandh/context-logger"
 	sentryExtractor "github.com/adlandh/context-logger/sentry-extractor"
+	echooapimiddleware "github.com/adlandh/echo-oapi-middleware"
 	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware"
 	echoZapMiddleware "github.com/adlandh/echo-zap-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
@@ -144,6 +145,10 @@ func configureMiddleware(e *echo.Echo, cfg *config.Config, logger *contextlogger
 	}
 
 	e.Use(echoZapMiddleware.MiddlewareWithContextLogger(logger))
+
+	if spec, err := driver.GetSwagger(); err == nil {
+		e.Use(echooapimiddleware.SwaggerUI(spec))
+	}
 }
 
 func main() {
