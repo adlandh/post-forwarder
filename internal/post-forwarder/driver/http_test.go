@@ -8,14 +8,14 @@ import (
 	"testing"
 	"time"
 
+	echooapimiddleware "github.com/adlandh/echo-oapi-middleware"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
-	"github.com/stretchr/testify/mock"
-
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/gavv/httpexpect/v2"
 	"github.com/labstack/echo/v4"
+	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -114,6 +114,19 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 			Expect().
 			Status(http.StatusInternalServerError).JSON().Object().HasValue("message", fakeError.Error())
 	})
+}
+
+func (s *HttpServerTestSuite) TestGetSwagger() {
+	swagger, err := GetSwagger()
+	s.Require().NoError(err)
+
+	s.e.Use(echooapimiddleware.SwaggerUI(swagger))
+	s.tester.GET("/swagger.yaml").
+		Expect().
+		Status(http.StatusOK).Text(httpexpect.ContentOpts{MediaType: "text/yaml", Charset: "utf-8"}).
+		Contains("title: Port Forwarder webhook").
+		Contains("/api/{token}/{service}:").
+		Contains("/api/message/{id}:")
 }
 
 func TestHttpServer(t *testing.T) {
