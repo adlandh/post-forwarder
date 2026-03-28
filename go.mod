@@ -8,7 +8,7 @@ require (
 	github.com/adlandh/echo-oapi-middleware v1.0.0
 	github.com/adlandh/echo-sentry-middleware v1.3.2
 	github.com/adlandh/echo-zap-middleware v1.9.1
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.1
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.2
 	github.com/adlandh/sentry-zapcore v1.2.10
 	github.com/brianvoe/gofakeit/v7 v7.14.1
 	github.com/caarlos0/env/v11 v11.4.0
@@ -77,7 +77,6 @@ require (
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/websocket v1.5.3 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.28.0 // indirect
 	github.com/hexdigest/gowrap v1.4.3 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/imkira/go-interpol v1.1.0 // indirect
