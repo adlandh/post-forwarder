@@ -11,7 +11,7 @@
 - Secondary binary: `internal/chat-id-checker/main.go`.
 - `inf/` is a separate Go module with its own `go.mod`; root app commands do not cover it.
 - HTTP API source of truth is `api/post-forwarder.yaml`; generated Echo server code lives under `internal/post-forwarder/driver`.
-- Runtime wiring in `internal/post-forwarder/main.go` uses Echo v4, Fx DI, optional Sentry setup, and generated Sentry decorators from `internal/post-forwarder/domain/wrappers`.
+- Runtime wiring in `internal/post-forwarder/main.go` uses Echo v5, Fx DI, optional Sentry setup, and generated Sentry decorators from `internal/post-forwarder/domain/wrappers`.
 
 ## Commands
 
@@ -41,6 +41,7 @@
 ## Gotchas
 
 - Do not edit `.golangci.yml` manually; `task lint` and CI both overwrite it from the shared config repo.
-- The service is still on Echo v4 (`github.com/labstack/echo/v4` plus `github.com/getsentry/sentry-go/echo v0.44.1`); do not assume Echo v5-compatible dependencies.
+- The service is on Echo v5 (`github.com/labstack/echo/v5` plus `github.com/getsentry/sentry-go/echo v0.45.1`); keep generated and handwritten HTTP code on the same Echo major version.
+- For local `task up` on Docker Desktop, prefer the `kubeadm` Kubernetes backend over `kind`; with `kind`, this repo hit image pull/storage issues (`unexpected EOF`, local `ko` images not visible to pods) that disappeared after switching to `kubeadm`.
 - Keep the existing sentinel name `domain.ErrorNotFound`; that spelling is used intentionally in the codebase.
 - `app-secrets.yaml`, `k8s/secrets.yaml`, and rendered Doppler output are sensitive; `app-secrets.yaml.gotmpl` is the safe template.
