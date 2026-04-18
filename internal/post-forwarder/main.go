@@ -10,9 +10,9 @@ import (
 
 	contextlogger "github.com/adlandh/context-logger"
 	sentryExtractor "github.com/adlandh/context-logger/sentry-extractor"
-	echooapimiddleware "github.com/adlandh/echo-oapi-middleware"
-	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware"
-	echoZapMiddleware "github.com/adlandh/echo-zap-middleware"
+	echooapimiddleware "github.com/adlandh/echo-oapi-middleware/v2"
+	echoSentryMiddleware "github.com/adlandh/echo-sentry-middleware/v2"
+	echoZapMiddleware "github.com/adlandh/echo-zap-middleware/v2"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/application"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
@@ -22,8 +22,8 @@ import (
 	sentryZapcore "github.com/adlandh/sentry-zapcore"
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"github.com/labstack/echo/v5"
+	"github.com/labstack/echo/v5/middleware"
 	_ "go.uber.org/automaxprocs"
 	"go.uber.org/fx"
 	"go.uber.org/fx/fxevent"
@@ -79,17 +79,20 @@ func newSentry(lc fx.Lifecycle, cfg *config.Config) error {
 
 func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config, logger *contextlogger.ContextLogger) *echo.Echo {
 	e := echo.New()
-	e.HideBanner = true
-	e.HidePort = true
 
 	configureMiddleware(e, cfg, logger)
+	httpServer := &http.Server{
+		Addr:              ":" + cfg.Port,
+		Handler:           e,
+		ReadHeaderTimeout: 10 * time.Second,
+	}
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) (err error) {
 			driver.RegisterHandlers(e, server)
 
 			go func() {
-				if err := e.Start(":" + cfg.Port); err != nil && !errors.Is(err, http.ErrServerClosed) {
+				if err := httpServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 					logger.Ctx(ctx).Error("error starting echo server", zap.Error(err))
 				}
 			}()
@@ -100,7 +103,7 @@ func newEcho(lc fx.Lifecycle, server driver.ServerInterface, cfg *config.Config,
 			ctx, cancel := context.WithTimeout(ctx, 10*time.Second)
 			defer cancel()
 
-			if err := e.Shutdown(ctx); err != nil {
+			if err := httpServer.Shutdown(ctx); err != nil {
 				return fmt.Errorf("error shutting down echo server: %w", err)
 			}
 
@@ -125,7 +128,7 @@ func configureMiddleware(e *echo.Echo, cfg *config.Config, logger *contextlogger
 		HSTSMaxAge:         31536000,
 		HSTSPreloadEnabled: true,
 	}))
-	e.Use(middleware.BodyLimit("1M"))
+	e.Use(middleware.BodyLimit(1 << 20))
 	e.Use(middleware.GzipWithConfig(middleware.GzipConfig{
 		Level:     5,
 		MinLength: 256,
