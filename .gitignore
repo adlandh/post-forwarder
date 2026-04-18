@@ -6,3 +6,7 @@
 **/mocks/**
 **/wrappers/**
 **/*.gen.go
+/.codex/
+/.opencode/
+/.cursor/
+/openspec/changes/

@@ -5,19 +5,20 @@ go 1.25.0
 require (
 	github.com/adlandh/context-logger v1.6.2
 	github.com/adlandh/context-logger/sentry-extractor v1.4.4
-	github.com/adlandh/echo-oapi-middleware v1.0.0
-	github.com/adlandh/echo-sentry-middleware v1.3.2
-	github.com/adlandh/echo-zap-middleware v1.9.1
+	github.com/adlandh/echo-oapi-middleware/v2 v2.0.3
+	github.com/adlandh/echo-sentry-middleware/v2 v2.0.8
+	github.com/adlandh/echo-zap-middleware/v2 v2.0.6
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.2
 	github.com/adlandh/sentry-zapcore v1.2.10
 	github.com/brianvoe/gofakeit/v7 v7.14.1
 	github.com/caarlos0/env/v11 v11.4.0
 	github.com/gavv/httpexpect/v2 v2.17.0
+	github.com/getkin/kin-openapi v0.135.0
 	github.com/getsentry/sentry-go v0.45.1
-	github.com/getsentry/sentry-go/echo v0.44.1
+	github.com/getsentry/sentry-go/echo v0.45.1
 	github.com/go-telegram/bot v1.20.0
 	github.com/gregdel/pushover v1.4.0
-	github.com/labstack/echo/v4 v4.15.1
+	github.com/labstack/echo/v5 v5.1.0
 	github.com/nikoksr/notify v1.5.0
 	github.com/oapi-codegen/runtime v1.4.0
 	github.com/redis/go-redis/v9 v9.18.0
@@ -63,7 +64,6 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/getkin/kin-openapi v0.133.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
@@ -90,7 +90,6 @@ require (
 	github.com/knadh/koanf/providers/posflag v1.0.1 // indirect
 	github.com/knadh/koanf/providers/structs v1.0.0 // indirect
 	github.com/knadh/koanf/v2 v2.3.4 // indirect
-	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/lufia/plan9stats v0.0.0-20251013123823-9fd1530e3ec3 // indirect
 	github.com/magiconair/properties v1.8.10 // indirect
 	github.com/mailru/easyjson v0.9.1 // indirect
@@ -111,9 +110,9 @@ require (
 	github.com/moby/sys/userns v0.1.0 // indirect
 	github.com/moby/term v0.5.2 // indirect
 	github.com/mohae/deepcopy v0.0.0-20170929034955-c48cc78d4826 // indirect
-	github.com/oapi-codegen/oapi-codegen/v2 v2.6.0 // indirect
-	github.com/oasdiff/yaml v0.0.0-20250309154309-f31be36b4037 // indirect
-	github.com/oasdiff/yaml3 v0.0.0-20250309153720-d2182401db90 // indirect
+	github.com/oapi-codegen/oapi-codegen/v2 v2.6.1-0.20260416143627-434cc16b427d // indirect
+	github.com/oasdiff/yaml v0.0.9 // indirect
+	github.com/oasdiff/yaml3 v0.0.9 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.1 // indirect
 	github.com/perimeterx/marshmallow v1.1.5 // indirect
@@ -127,8 +126,8 @@ require (
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/sirupsen/logrus v1.9.4 // indirect
 	github.com/slack-go/slack v0.20.0 // indirect
-	github.com/speakeasy-api/jsonpath v0.6.2 // indirect
-	github.com/speakeasy-api/openapi-overlay v0.10.2 // indirect
+	github.com/speakeasy-api/jsonpath v0.6.3 // indirect
+	github.com/speakeasy-api/openapi v1.19.2 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
@@ -139,7 +138,6 @@ require (
 	github.com/tklauser/numcpus v0.11.0 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.68.0 // indirect
-	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/vektra/mockery/v3 v3.7.0 // indirect
 	github.com/vmware-labs/yaml-jsonpath v0.3.2 // indirect
 	github.com/woodsbury/decimal128 v1.4.0 // indirect

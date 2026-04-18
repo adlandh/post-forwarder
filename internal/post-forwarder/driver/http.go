@@ -9,7 +9,7 @@ import (
 
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 )
 
 type HTTPServer struct {
@@ -26,19 +26,23 @@ func NewHTTPServer(cfg *config.Config, app domain.ApplicationInterface) *HTTPSer
 	}
 }
 
-func (h HTTPServer) HealthCheck(ctx echo.Context) error {
-	return ctx.String(http.StatusOK, "Ok")
+func (h HTTPServer) HealthCheck(ctx *echo.Context) error {
+	if err := ctx.String(http.StatusOK, "Ok"); err != nil {
+		return fmt.Errorf("write healthcheck response: %w", err)
+	}
+
+	return nil
 }
 
-func (h HTTPServer) PostWebhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) PostWebhook(ctx *echo.Context, token string, service string) error {
 	return h.webhook(ctx, token, service)
 }
 
-func (h HTTPServer) GetWebhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) GetWebhook(ctx *echo.Context, token string, service string) error {
 	return h.webhook(ctx, token, service)
 }
 
-func (h HTTPServer) webhook(ctx echo.Context, token string, service string) error {
+func (h HTTPServer) webhook(ctx *echo.Context, token string, service string) error {
 	// checking if the token is valid
 	if token != h.token {
 		return echo.NewHTTPError(http.StatusUnauthorized, "Invalid auth token")
@@ -69,7 +73,11 @@ func (h HTTPServer) webhook(ctx echo.Context, token string, service string) erro
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return ctx.NoContent(http.StatusOK)
+	if err := ctx.NoContent(http.StatusOK); err != nil {
+		return fmt.Errorf("write webhook response: %w", err)
+	}
+
+	return nil
 }
 
 func getURLFromRequest(request *http.Request) string {
@@ -81,7 +89,7 @@ func getURLFromRequest(request *http.Request) string {
 	return fmt.Sprintf("%s://%s", scheme, request.Host)
 }
 
-func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
+func (h HTTPServer) ShowMessage(ctx *echo.Context, id string) error {
 	msg, createdAt, err := h.app.GetMessage(ctx.Request().Context(), id)
 	if err != nil {
 		if errors.Is(err, domain.ErrorNotFound) {
@@ -91,9 +99,13 @@ func (h HTTPServer) ShowMessage(ctx echo.Context, id string) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error())
 	}
 
-	return ctx.JSON(http.StatusOK, Message{
+	if err := ctx.JSON(http.StatusOK, Message{
 		CreatedAt: createdAt,
 		Id:        id,
 		Message:   msg,
-	})
+	}); err != nil {
+		return fmt.Errorf("write message response: %w", err)
+	}
+
+	return nil
 }

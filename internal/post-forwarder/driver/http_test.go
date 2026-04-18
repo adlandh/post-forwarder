@@ -1,20 +1,19 @@
 package driver
 
 import (
-	"context"
 	"errors"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 	"time"
 
-	echooapimiddleware "github.com/adlandh/echo-oapi-middleware"
+	echooapimiddleware "github.com/adlandh/echo-oapi-middleware/v2"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/config"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/mocks"
 	"github.com/brianvoe/gofakeit/v7"
 	"github.com/gavv/httpexpect/v2"
-	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v5"
 	"github.com/stretchr/testify/mock"
 	"github.com/stretchr/testify/suite"
 )
@@ -29,6 +28,7 @@ const (
 type HttpServerTestSuite struct {
 	suite.Suite
 	e      *echo.Echo
+	server *httptest.Server
 	tester *httpexpect.Expect
 	token  string
 	app    *mocks.ApplicationInterface
@@ -43,14 +43,13 @@ func (s *HttpServerTestSuite) SetupSuite() {
 		AuthToken: s.token,
 	}, s.app))
 
-	server := httptest.NewServer(s.e)
-	s.url = server.URL
+	s.server = httptest.NewServer(s.e)
+	s.url = s.server.URL
 	s.tester = httpexpect.Default(s.T(), s.url)
 }
 
 func (s *HttpServerTestSuite) TearDownSuite() {
-	err := s.e.Shutdown(context.Background())
-	s.NoError(err)
+	s.server.Close()
 }
 
 func (s *HttpServerTestSuite) TestHealthCheck() {
