@@ -14,7 +14,7 @@ require (
 	github.com/caarlos0/env/v11 v11.4.0
 	github.com/gavv/httpexpect/v2 v2.17.0
 	github.com/getsentry/sentry-go v0.45.1
-	github.com/getsentry/sentry-go/echo v0.44.1
+	github.com/getsentry/sentry-go/echo v0.45.1
 	github.com/go-telegram/bot v1.20.0
 	github.com/gregdel/pushover v1.4.0
 	github.com/labstack/echo/v4 v4.15.1
@@ -90,6 +90,7 @@ require (
 	github.com/knadh/koanf/providers/posflag v1.0.1 // indirect
 	github.com/knadh/koanf/providers/structs v1.0.0 // indirect
 	github.com/knadh/koanf/v2 v2.3.4 // indirect
+	github.com/labstack/echo/v5 v5.0.0 // indirect
 	github.com/labstack/gommon v0.4.2 // indirect
 	github.com/lufia/plan9stats v0.0.0-20251013123823-9fd1530e3ec3 // indirect
 	github.com/magiconair/properties v1.8.10 // indirect
