@@ -19,7 +19,7 @@ import (
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/domain/wrappers"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driven"
 	"github.com/adlandh/post-forwarder/internal/post-forwarder/driver"
-	sentryZapcore "github.com/adlandh/sentry-zapcore"
+	sentryZapcore "github.com/adlandh/sentry-zapcore/v2"
 	"github.com/getsentry/sentry-go"
 	sentryecho "github.com/getsentry/sentry-go/echo"
 	"github.com/labstack/echo/v5"
