@@ -9,10 +9,11 @@ require (
 	github.com/adlandh/echo-sentry-middleware/v2 v2.0.8
 	github.com/adlandh/echo-zap-middleware/v2 v2.0.6
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.2
-	github.com/adlandh/sentry-zapcore v1.2.10
+	github.com/adlandh/sentry-zapcore/v2 v2.0.6
 	github.com/brianvoe/gofakeit/v7 v7.14.1
 	github.com/caarlos0/env/v11 v11.4.0
 	github.com/gavv/httpexpect/v2 v2.17.0
+	github.com/getkin/kin-openapi v0.135.0
 	github.com/getsentry/sentry-go v0.46.0
 	github.com/getsentry/sentry-go/echo v0.45.1
 	github.com/go-telegram/bot v1.20.0
@@ -63,7 +64,6 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/getkin/kin-openapi v0.135.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
@@ -164,9 +164,9 @@ require (
 	golang.org/x/mod v0.34.0 // indirect
 	golang.org/x/net v0.52.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.42.0 // indirect
+	golang.org/x/sys v0.43.0 // indirect
 	golang.org/x/term v0.41.0 // indirect
-	golang.org/x/text v0.35.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
