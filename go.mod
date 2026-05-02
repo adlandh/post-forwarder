@@ -3,7 +3,7 @@ module github.com/adlandh/post-forwarder
 go 1.25.0
 
 require (
-	github.com/adlandh/context-logger v1.6.2
+	github.com/adlandh/context-logger v1.6.3
 	github.com/adlandh/context-logger/sentry-extractor v1.4.4
 	github.com/adlandh/echo-oapi-middleware/v2 v2.0.3
 	github.com/adlandh/echo-sentry-middleware/v2 v2.0.8
@@ -26,7 +26,7 @@ require (
 	github.com/testcontainers/testcontainers-go/modules/redis v0.42.0
 	go.uber.org/automaxprocs v1.6.0
 	go.uber.org/fx v1.24.0
-	go.uber.org/zap v1.27.1
+	go.uber.org/zap v1.28.0
 )
 
 require (
