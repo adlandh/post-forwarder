@@ -17,8 +17,8 @@ github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 h1:ZBbLwSJqkH
 github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2/go.mod h1:VSw57q4QFiWDbRnjdX8Cb3Ow0SFncRw+bA/ofY6Q83w=
 github.com/adlandh/context-logger v1.6.3 h1:cNiu9hhmv/3+l4e1F03Qv/WMFV0fA747HZjMHV1ZhwU=
 github.com/adlandh/context-logger v1.6.3/go.mod h1:X6Ot3ksGjoPhMTVZe7nWZMjRR7F0YF5GmoAYOHjcPNI=
-github.com/adlandh/context-logger/sentry-extractor v1.4.4 h1:uDq932viK0nX+OeK2qJKNMOQEh2eAO4FlJBPQbWnM9E=
-github.com/adlandh/context-logger/sentry-extractor v1.4.4/go.mod h1:mNBQW5atSPs3bsKNm+yGsGGuXQKMOy2ejGNIRh2jwYk=
+github.com/adlandh/context-logger/sentry-extractor v1.4.6 h1:zGFwdpJLSrTtaggAmoC/M0vt6ymvj4Z9XLegZRPw4tw=
+github.com/adlandh/context-logger/sentry-extractor v1.4.6/go.mod h1:+RYFnQE6nqRt1ZV2kCT6c5wEx51Wljv8dTC4wSNG3rg=
 github.com/adlandh/echo-oapi-middleware/v2 v2.0.3 h1:0ChOgPsrVbKI3N5jNeC5zpTpfnx5RCreWxpWxgm/1ZY=
 github.com/adlandh/echo-oapi-middleware/v2 v2.0.3/go.mod h1:J31XmU18xCCyF7HRpn7T17PqZQUab0GoBrirxi6b6Ds=
 github.com/adlandh/echo-sentry-middleware/v2 v2.0.8 h1:0TVQamUtzDh2416h55gMoJJFtErhtjQ0nd/vbjeXXwM=
@@ -103,8 +103,8 @@ github.com/gavv/httpexpect/v2 v2.17.0 h1:nIJqt5v5e4P7/0jODpX2gtSw+pHXUqdP28Ycjqw
 github.com/gavv/httpexpect/v2 v2.17.0/go.mod h1:E8ENFlT9MZ3Si2sfM6c6ONdwXV2noBCGkhA+lkJgkP0=
 github.com/getkin/kin-openapi v0.135.0 h1:751SjYfbiwqukYuVjwYEIKNfrSwS5YpA7DZnKSwQgtg=
 github.com/getkin/kin-openapi v0.135.0/go.mod h1:6dd5FJl6RdX4usBtFBaQhk9q62Yb2J0Mk5IhUO/QqFI=
-github.com/getsentry/sentry-go v0.46.1 h1:mZyQFaQYkPxAdDG4HR8gDg6j4CnKYVWt4TF92N7i3XY=
-github.com/getsentry/sentry-go v0.46.1/go.mod h1:evVbw2qotNUdYG8KxXbAdjOQWWvWIwKxpjdZZIvcIPw=
+github.com/getsentry/sentry-go v0.46.2 h1:1jhYwrKGa3sIpo/y5iDNXS5wDoT7I1KNzMHrnK6ojns=
+github.com/getsentry/sentry-go v0.46.2/go.mod h1:evVbw2qotNUdYG8KxXbAdjOQWWvWIwKxpjdZZIvcIPw=
 github.com/getsentry/sentry-go/echo v0.46.0 h1:it6NDIZzCdJ6yjpvmpkME31yH8S3zg1IZwhk9mDQ01s=
 github.com/getsentry/sentry-go/echo v0.46.0/go.mod h1:jcssY6PMTNWQD/y3s/6kdaPxye2HYJXvozVFs3ZwvqM=
 github.com/go-errors/errors v1.4.2 h1:J6MZopCL4uSllY1OfXM374weqZFFItUbrImctkmUxIA=
