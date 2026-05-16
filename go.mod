@@ -8,7 +8,7 @@ require (
 	github.com/adlandh/echo-oapi-middleware/v2 v2.0.4
 	github.com/adlandh/echo-sentry-middleware/v2 v2.0.10
 	github.com/adlandh/echo-zap-middleware/v2 v2.0.7
-	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.3
+	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.4
 	github.com/adlandh/sentry-zapcore/v2 v2.0.6
 	github.com/brianvoe/gofakeit/v7 v7.14.1
 	github.com/caarlos0/env/v11 v11.4.1
