@@ -6,7 +6,7 @@ require (
 	github.com/adlandh/context-logger v1.6.3
 	github.com/adlandh/context-logger/sentry-extractor v1.4.6
 	github.com/adlandh/echo-oapi-middleware/v2 v2.1.0
-	github.com/adlandh/echo-sentry-middleware/v2 v2.0.10
+	github.com/adlandh/echo-sentry-middleware/v2 v2.1.0
 	github.com/adlandh/echo-zap-middleware/v2 v2.0.9
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.4
 	github.com/adlandh/sentry-zapcore/v2 v2.0.7
@@ -39,7 +39,7 @@ require (
 	github.com/TylerBrock/colorjson v0.0.0-20200706003622-8a50f05110d2 // indirect
 	github.com/adlandh/find-interfaces v1.4.0 // indirect
 	github.com/adlandh/gowrap-templates/helpers v1.1.3 // indirect
-	github.com/adlandh/response-dumper v1.2.1 // indirect
+	github.com/adlandh/response-dumper v1.3.0 // indirect
 	github.com/ajg/form v1.7.1 // indirect
 	github.com/andybalholm/brotli v1.2.0 // indirect
 	github.com/apapsch/go-jsonmerge/v2 v2.0.0 // indirect
@@ -159,16 +159,16 @@ require (
 	go.uber.org/dig v1.19.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
-	golang.org/x/crypto v0.49.0 // indirect
+	golang.org/x/crypto v0.50.0 // indirect
 	golang.org/x/exp v0.0.0-20260312153236-7ab1446f8b90 // indirect
-	golang.org/x/mod v0.34.0 // indirect
-	golang.org/x/net v0.52.0 // indirect
+	golang.org/x/mod v0.35.0 // indirect
+	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
-	golang.org/x/term v0.41.0 // indirect
-	golang.org/x/text v0.36.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
+	golang.org/x/term v0.42.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
-	golang.org/x/tools v0.43.0 // indirect
+	golang.org/x/tools v0.44.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	moul.io/http2curl/v2 v2.3.0 // indirect
