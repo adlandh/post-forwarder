@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/adlandh/context-logger v1.6.3
 	github.com/adlandh/context-logger/sentry-extractor v1.4.6
-	github.com/adlandh/echo-oapi-middleware/v2 v2.0.4
+	github.com/adlandh/echo-oapi-middleware/v2 v2.1.0
 	github.com/adlandh/echo-sentry-middleware/v2 v2.0.10
 	github.com/adlandh/echo-zap-middleware/v2 v2.0.7
 	github.com/adlandh/gowrap-templates/helpers/sentry v1.2.4
@@ -62,7 +62,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
-	github.com/getkin/kin-openapi v0.137.0 // indirect
+	github.com/getkin/kin-openapi v0.138.0 // indirect
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
