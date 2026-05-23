@@ -19,8 +19,8 @@ github.com/adlandh/context-logger v1.6.3 h1:cNiu9hhmv/3+l4e1F03Qv/WMFV0fA747HZjM
 github.com/adlandh/context-logger v1.6.3/go.mod h1:X6Ot3ksGjoPhMTVZe7nWZMjRR7F0YF5GmoAYOHjcPNI=
 github.com/adlandh/context-logger/sentry-extractor v1.4.6 h1:zGFwdpJLSrTtaggAmoC/M0vt6ymvj4Z9XLegZRPw4tw=
 github.com/adlandh/context-logger/sentry-extractor v1.4.6/go.mod h1:+RYFnQE6nqRt1ZV2kCT6c5wEx51Wljv8dTC4wSNG3rg=
-github.com/adlandh/echo-oapi-middleware/v2 v2.0.4 h1:kqtjsgtrndEtqxGGI2Ew3CZCexikhmwnmEtbU+NBX0c=
-github.com/adlandh/echo-oapi-middleware/v2 v2.0.4/go.mod h1:byo0YiHy9z6aWuqfpDc8uesOFOxPH3O+BCG/iAIJ7xE=
+github.com/adlandh/echo-oapi-middleware/v2 v2.1.0 h1:yKz2s/y08iOKBHfOmzXjPkCQ+g44v2JQBMvFUUzuZ4E=
+github.com/adlandh/echo-oapi-middleware/v2 v2.1.0/go.mod h1:2OAbrTS0l+AHfNOVkrdHSukdjF50t+RLhJYCxLU8oZo=
 github.com/adlandh/echo-sentry-middleware/v2 v2.0.10 h1:CqNFqi6C6dMIoA1OWjG7ScIq/NCj8aIOuy5S7bj7rAg=
 github.com/adlandh/echo-sentry-middleware/v2 v2.0.10/go.mod h1:0CzcXuhTNO7jGGVQiOhMRkjvIzhyoUd/g271yMr7hdo=
 github.com/adlandh/echo-zap-middleware/v2 v2.0.7 h1:ILGamL0ZgZKdEpg4rqAUSSYmYdSXU2PA4NSJMRZJLrk=
@@ -103,8 +103,8 @@ github.com/fsnotify/fsnotify v1.9.0 h1:2Ml+OJNzbYCTzsxtv8vKSFD9PbJjmhYF14k/jKC7S
 github.com/fsnotify/fsnotify v1.9.0/go.mod h1:8jBTzvmWwFyi3Pb8djgCCO5IBqzKJ/Jwo8TRcHyHii0=
 github.com/gavv/httpexpect/v2 v2.17.0 h1:nIJqt5v5e4P7/0jODpX2gtSw+pHXUqdP28YcjqwDZmE=
 github.com/gavv/httpexpect/v2 v2.17.0/go.mod h1:E8ENFlT9MZ3Si2sfM6c6ONdwXV2noBCGkhA+lkJgkP0=
-github.com/getkin/kin-openapi v0.137.0 h1:Q3HhawNQV0GfvO2mIYMUBUSEFrDsVlzcYz4VydL9YEo=
-github.com/getkin/kin-openapi v0.137.0/go.mod h1:vUYWaKyMqj7PfTybelXtLuLN9tReS12vxnzMRK+z2GY=
+github.com/getkin/kin-openapi v0.138.0 h1:ebfE0JAmF6AqHrNBy1KO3Fs68K9tPs48HalvLPo7Rv4=
+github.com/getkin/kin-openapi v0.138.0/go.mod h1:vUYWaKyMqj7PfTybelXtLuLN9tReS12vxnzMRK+z2GY=
 github.com/getsentry/sentry-go v0.46.2 h1:1jhYwrKGa3sIpo/y5iDNXS5wDoT7I1KNzMHrnK6ojns=
 github.com/getsentry/sentry-go v0.46.2/go.mod h1:evVbw2qotNUdYG8KxXbAdjOQWWvWIwKxpjdZZIvcIPw=
 github.com/getsentry/sentry-go/echo v0.46.2 h1:M1i9deyi7FXtYFRkVpLWy48sCYOI0pBruFP1a2xwX90=
