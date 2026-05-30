@@ -19,7 +19,7 @@ require (
 	github.com/gregdel/pushover v1.4.0
 	github.com/labstack/echo/v5 v5.1.1
 	github.com/nikoksr/notify v1.5.0
-	github.com/oapi-codegen/runtime v1.4.0
+	github.com/oapi-codegen/runtime v1.4.1
 	github.com/redis/go-redis/v9 v9.19.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/stretchr/testify v1.11.1
