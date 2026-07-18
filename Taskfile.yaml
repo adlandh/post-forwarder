@@ -64,21 +64,6 @@ tasks:
         desc: Show logs
         cmds:
             - gcloud app logs tail
-    inf:
-        desc: Pulumi Up
-        dir: "inf"
-        cmds:
-            - pulumi up
-    inf-y:
-        desc: Pulumi Up -y
-        dir: "inf"
-        cmds:
-            - pulumi up -y
-    inf-show:
-        desc: Show pulumi stack
-        dir: "inf"
-        cmds:
-            - pulumi stack output --show-secrets
     registry:
         desc: Run registry locally
         cmds:
@@ -106,16 +91,6 @@ tasks:
                 for version in $VERSIONS
                     do gcloud app versions delete "$version" --service default --quiet
                 done
-    list-buckets:
-        desc: List app engine buckets with lifecycle rules
-        dir: "inf"
-        cmds:
-            - |
-              filter="$(pulumi stack output "app id").appspot.com"  
-              for gs in $(gsutil ls | grep $filter); do
-                echo -n "${gs}: "
-                gsutil lifecycle get ${gs}
-              done
     doppler:
         desc: install and setup doppler
         cmds:
@@ -125,5 +100,4 @@ tasks:
         desc: Uninstall doppler
         cmds:
             - kubectl delete -f https://github.com/DopplerHQ/kubernetes-operator/releases/latest/download/recommended.yaml
-
 

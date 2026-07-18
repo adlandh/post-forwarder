@@ -149,7 +149,7 @@ func configureMiddleware(e *echo.Echo, cfg *config.Config, logger *contextlogger
 
 	e.Use(echoZapMiddleware.MiddlewareWithContextLogger(logger))
 
-	if spec, err := driver.GetSwagger(); err == nil {
+	if spec, err := driver.GetSpec(); err == nil {
 		e.Use(echooapimiddleware.SwaggerUI(spec))
 	}
 }

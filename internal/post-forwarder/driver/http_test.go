@@ -115,8 +115,8 @@ func (s *HttpServerTestSuite) TestShowMessage() {
 	})
 }
 
-func (s *HttpServerTestSuite) TestGetSwagger() {
-	swagger, err := GetSwagger()
+func (s *HttpServerTestSuite) TestGetSpec() {
+	swagger, err := GetSpec()
 	s.Require().NoError(err)
 
 	s.e.Use(echooapimiddleware.SwaggerUI(swagger))

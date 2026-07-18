@@ -1,4 +1,9 @@
-## ADDED Requirements
+# Echo v5 HTTP Runtime Specification
+
+## Purpose
+Define the repository's Echo v5 runtime, code-generation, middleware, and compatibility requirements.
+
+## Requirements
 
 ### Requirement: Echo v5 is the single HTTP runtime
 The service SHALL use Echo v5 as the only Echo runtime for generated code, handwritten HTTP server code, and HTTP-facing tests. The repository SHALL not retain direct Echo v4 runtime dependencies in the main application module after the migration is complete.
@@ -12,11 +17,11 @@ The service SHALL use Echo v5 as the only Echo runtime for generated code, handw
 - **THEN** the root module MUST depend on Echo v5-compatible runtime packages for the application path instead of Echo v4-specific equivalents
 
 ### Requirement: Code generation stays on Echo v5
-The repository SHALL pin `github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen` to the requested commit and SHALL configure `.codegen.yml` to generate Echo v5 server code so future `task generate` runs preserve the migrated runtime.
+The repository SHALL use a current `github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen` release compatible with the root Go toolchain and SHALL configure `.codegen.yml` to generate Echo v5 server code so future `task generate` runs preserve the migrated runtime.
 
-#### Scenario: Generation uses the requested tool pin
-- **WHEN** a developer inspects the root `go.mod` tool block after the migration
-- **THEN** the `oapi-codegen` tool entry MUST resolve to commit `434cc16b427dcc1d63fc3e7e6b9c2f5337418be1`
+#### Scenario: Generation uses a current compatible tool release
+- **WHEN** a developer inspects the root `go.mod` tool block after the dependency refresh
+- **THEN** the `oapi-codegen` tool entry MUST resolve to the latest release compatible with the declared Go toolchain
 
 #### Scenario: Generation emits Echo v5 handlers
 - **WHEN** `task generate` is run after the migration
@@ -45,8 +50,12 @@ The migration SHALL preserve the existing externally visible webhook and message
 - **THEN** the migrated service MUST continue to return the same HTTP status class and response semantics as before the migration
 
 ### Requirement: Repository verification passes after migration
-The migrated repository SHALL complete the standard repository verification flow successfully after regeneration.
+The migrated repository SHALL recreate all committed generated Go files from their source inputs under Go 1.26.0 and SHALL complete the standard repository verification flow successfully after regeneration.
+
+#### Scenario: Clean generation succeeds
+- **WHEN** `task rm-generated` removes all generated Go files and `task generate` is run immediately afterward
+- **THEN** every required generated file MUST be recreated without errors and MUST continue to target Echo v5 where applicable
 
 #### Scenario: Repository-native checks succeed
-- **WHEN** the migration implementation is finished
-- **THEN** `task generate`, `task test`, and `task lint` MUST succeed without requiring a fallback to Echo v4 code paths
+- **WHEN** clean regeneration is complete
+- **THEN** `task test` and `task lint` MUST succeed without requiring a fallback to Echo v4 code paths

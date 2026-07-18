@@ -9,7 +9,6 @@
 
 - Main service entrypoint: `internal/post-forwarder/main.go`.
 - Secondary binary: `internal/chat-id-checker/main.go`.
-- `inf/` is a separate Go module with its own `go.mod`; root app commands do not cover it.
 - HTTP API source of truth is `api/post-forwarder.yaml`; generated Echo server code lives under `internal/post-forwarder/driver`.
 - Runtime wiring in `internal/post-forwarder/main.go` uses Echo v5, Fx DI, optional Sentry setup, and generated Sentry decorators from `internal/post-forwarder/domain/wrappers`.
 
